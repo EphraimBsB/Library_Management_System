@@ -5,6 +5,7 @@ import 'package:library_magement_sys/views/pages/book.pages/home.page.dart';
 import 'package:library_magement_sys/views/pages/book.pages/searched.book.page.dart';
 import 'package:library_magement_sys/views/pages/book.pages/welcome.page.dart';
 import 'package:library_magement_sys/views/pages/loan.pages/loans.management.dart';
+import 'package:library_magement_sys/views/pages/loan.pages/single.loan.dart';
 import 'package:library_magement_sys/views/pages/loan.pages/student.loan.page.dart';
 import 'package:library_magement_sys/views/pages/user.pages/librarian.login.page.dart';
 import 'package:library_magement_sys/views/pages/user.pages/login.page.dart';
@@ -34,6 +35,7 @@ class LibraryManagementSystem extends StatelessWidget {
         GetPage(name: '/student_loans', page: () => StudentLoanPage()),
         GetPage(name: '/books_management', page: () => BooksManagement()),
         GetPage(name: '/loans_management', page: () => LoansManagement()),
+        GetPage(name: '/loans_management/loan/:id', page: () => SingleLoan()),
       ],
     );
   }

@@ -67,15 +67,15 @@ class StudentLoanWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Container(width: width*0.17,),
-                      const Center(
-                         child:  Text(
-                    'Loan Books',
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
-                  ),
-                       ),
+                  //     Container(width: width*0.17,),
+                  //     const Center(
+                  //        child:  Text(
+                  //   'Loan Books',
+                  //   style: TextStyle(
+                  //     fontSize: 30,
+                  //   ),
+                  // ),
+                  //      ),
                     ],
                   ),
                       const  SizedBox(
@@ -174,10 +174,20 @@ class StudentLoanWidget extends StatelessWidget {
                               loan.returnDate==null?'':DateFormat.yMMMd().format(loan.returnDate!),
                               style: const TextStyle(fontSize: 16),
                             )),
-                             DataCell(Text(
-                              loan.status,
-                              style: TextStyle(fontSize: 16),
-                            )),
+                             DataCell(Container(
+                             width: 90,
+                             height: 25,
+                             decoration: BoxDecoration(
+                             color: (loan.status == 'overdue')?Colors.red[700]:loan.status == 'returned'?Colors.yellow[700]:Colors.green[700],
+                             borderRadius: const BorderRadius.all(Radius.circular(5)),
+                      ),
+                             child: Center(
+                               child: Text(
+                                loan.status,
+                                style:const TextStyle(fontSize: 16, color: Colors.white),textAlign: TextAlign.center,
+                          ),
+                             ),
+                           )),
                           ],
                         ),).toList()
                     ),

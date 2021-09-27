@@ -15,11 +15,9 @@ class UserService{
     };
 
     var response = await client.post(Uri.parse("http://localhost:5000/users/login"),headers:{'Access-Control-Allow-Origin': '*'}, body: body);
-    print("Response: ${response.body}");
     if(response.statusCode == 200){
       var jsonData = jsonDecode(response.body);
       var token = sharedPreferences.setString("token", jsonData['token']);
-      print("Token: $token");
       Get.toNamed("/student_loans");
       return jsonData;
     }else{
@@ -35,11 +33,9 @@ class UserService{
     };
 
     var response = await client.post(Uri.parse("http://localhost:5000/users/login"),headers:{'Access-Control-Allow-Origin': '*'}, body: body);
-    print("Response: ${response.body}");
     if(response.statusCode == 200){
       var jsonData = jsonDecode(response.body);
       var token = sharedPreferences.setString("token", jsonData['token']);
-      print("Token: $token");
       Get.toNamed("/books_management");
       return jsonData;
     }else{
@@ -59,10 +55,8 @@ class UserService{
     };
 
     var response = await client.post(Uri.parse("http://localhost:5000/users/register"),headers:{'Access-Control-Allow-Origin': '*'}, body: body);
-    print("Response: ${response.body}");
     if(response.statusCode == 200){
       var jsonData = jsonDecode(response.body);
-      print("User: $jsonData");
       return jsonData;
     }else{
       return null;

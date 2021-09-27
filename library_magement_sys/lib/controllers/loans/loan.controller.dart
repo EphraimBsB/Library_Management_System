@@ -1,26 +1,37 @@
 import 'package:get/get.dart';
 import 'package:library_magement_sys/models/loan.model/all.loans.model.dart';
 import 'package:library_magement_sys/models/loan.model/loan.model.dart';
+import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
 import 'package:library_magement_sys/services/loan.service/loan.service.dart';
 
 class LoanController extends GetxController{
+  var isLoading = true.obs;
   var studentLoans = <Loans>[].obs;
   var loansList = <AllLoan>[].obs;
+  var singleLoanList = <SingleLoans>[].obs;
 
   get book => null;
 
    @override
   void onInit(){
     allLoansController();
+    singleLoanController();
     // studentLoanController(book);
     super.onInit();
   }
 
-  studentLoanController(book) async {
-    var studentloans = await LoanService.studentLoans(book);
+  createaLoan(bookId)async{
+    var loan = await LoanService.createLoan(bookId);
+  }
+
+  studentLoanController() async {
+    var studentloans = await LoanService.studentLoans();
     var stdloans = studentloans!.first.loans;
+    print("Student: $stdloans");
     if(studentloans != null){
       studentLoans.value = [stdloans];
+    }else{
+      return null;
     }
   }
 
@@ -31,6 +42,18 @@ class LoanController extends GetxController{
       loansList.value = loan;
     }
     
+  }
+
+   singleLoanController() async { 
+  var id = Get.parameters['id'];
+   try{
+    isLoading(true);
+   var loan = await LoanService.singleLoan(id);
+   var findloan = loan!.loans;
+    singleLoanList.value = [findloan];
+   }finally{
+     isLoading(false);
+   }
   }
 
 }

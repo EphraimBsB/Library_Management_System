@@ -6,10 +6,11 @@ import 'package:library_magement_sys/views/widgets/std.loan.widget.dart';
 
 class StudentLoanPage extends StatelessWidget {
    StudentLoanPage({ Key? key }) : super(key: key);
-   LoanController loanController = Get.put(LoanController());
+   final LoanController loanController = Get.put(LoanController());
 
   @override
   Widget build(BuildContext context) {
+    loanController.studentLoanController();
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -21,17 +22,17 @@ class StudentLoanPage extends StatelessWidget {
             const AppBarwidget(),
             Container(height: height*0.1,),
              const Text(
-                'Library',
+                'Loan Books',
                 style: TextStyle(
                   fontSize: 40,
                 ),
               ),
-             Container(height: height*0.1,),
+            //  Container(height: height*0.1,),
 
              ListView.builder(
                shrinkWrap: true,
-        itemCount:loanController.studentLoans.length ,
-        itemBuilder: (context, index){
+               itemCount:loanController.studentLoans.length ,
+               itemBuilder: (context, index){
                    return StudentLoanWidget(loanController.studentLoans[index]);
                  },   
         ),

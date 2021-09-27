@@ -27,19 +27,25 @@ class AppBarwidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 40),
                 child: TextButton(onPressed: (){
-                  Get.toNamed("/home");
+                  Get.toNamed("/");
                 }, child: const Text("Home"),),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 40),
+                child: TextButton(onPressed: (){
+                  Get.toNamed("/home");
+                }, child: const Text("Search"),),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 40),
                 child: TextButton(onPressed: (){}, child: const Text("All Books"),),
               ),
-              // Padding(
-              //   padding: const EdgeInsets.fromLTRB(0, 40, 30, 0),
-              //   child: TextButton(onPressed: (){
-              //     Get.toNamed('/librarian_login');
-              //   }, child: const Text("Librarian"),),
-              // )
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 40, 30, 0),
+                child: TextButton(onPressed: (){
+                  Get.toNamed('/login');
+                }, child: const Text("Student"),),
+              )
                
             ],
           );

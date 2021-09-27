@@ -36,6 +36,7 @@ class LoansManagement extends StatelessWidget {
             Obx(() => SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: DataTable(
+              showCheckboxColumn: false,
                     columns: const <DataColumn>[
                       DataColumn(
                         label: Text(
@@ -97,14 +98,20 @@ class LoansManagement extends StatelessWidget {
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
-                       DataColumn(
-                        label: Text(
-                          'Options',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
+                      //  DataColumn(
+                      //   label: Text(
+                      //     'Options',
+                      //     style: TextStyle(fontSize: 18),
+                      //   ),
+                      // ),
                     ],
                     rows: loanController.loansList.map((loan) => DataRow(
+                        onSelectChanged: (bool? selected) {
+                        if (selected!) {
+                          Get.toNamed("/loans_management/loan/${loan.id}");
+                          loanController.singleLoanController();
+                        }
+                         },
                         cells: <DataCell>[
                            DataCell(Text(
                             loan.book.title,
@@ -147,17 +154,19 @@ class LoansManagement extends StatelessWidget {
                              width: 90,
                              height: 25,
                              decoration: BoxDecoration(
-                             color: (loan.status != 'overdue')?Colors.green[700]:Colors.red[700],
+                             color: (loan.status == 'overdue')?Colors.red[700]:loan.status == 'returned'?Colors.yellow[700]:Colors.green[700],
                              borderRadius: const BorderRadius.all(Radius.circular(5)),
                       ),
-                             child: Text(
-                              loan.status,
-                              style:const TextStyle(fontSize: 16),textAlign: TextAlign.center,
+                             child: Center(
+                               child: Text(
+                                loan.status,
+                                style:const TextStyle(fontSize: 16, color: Colors.white),textAlign: TextAlign.center,
                           ),
+                             ),
                            )),
-                           DataCell(
-                             TextButton(onPressed: (){}, child: const Text("Return"),)
-                           ),
+                          //  DataCell(
+                          //    TextButton(onPressed: (){}, child: const Text("Return"),)
+                          //  ),
                         ],
                       ),).toList()
                   

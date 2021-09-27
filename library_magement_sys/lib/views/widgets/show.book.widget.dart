@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:library_magement_sys/controllers/books/book.controller.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/models/book.model/single.book.model.dart';
-import 'package:library_magement_sys/views/pages/user.pages/login.page.dart';
 import 'package:library_magement_sys/views/widgets/app.bar.dart';
 
 class ShowBookWidget extends StatelessWidget {
@@ -70,20 +68,24 @@ class ShowBookWidget extends StatelessWidget {
                         const SizedBox(
                      height: 20,
                    ),
-                   Container(
-               alignment: Alignment.center,
+                   book.status == 'borrowed'? Text(
+                         'Status: ${book.status}',
+                         style: const TextStyle(
+                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
+                       ): Container(
+                   alignment: Alignment.center,
                       width: 100,
                       height: 40,
                       decoration: const BoxDecoration(
                         color: Color.fromRGBO(5, 38, 154, 5),
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
-               child: TextButton(
+                   child: TextButton(
                       onPressed: (){
                         Get.toNamed("/login");
-                        loanController.studentLoanController(book.id);
+                        loanController.createaLoan(book.id);
                       }, 
-                      child: const Text('Borrrow',
+                      child: const Text('Borrow',
                       style: TextStyle(
                               color: Colors.white
                             ),)
