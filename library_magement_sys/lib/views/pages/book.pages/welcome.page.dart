@@ -53,7 +53,7 @@ class WelcomePage extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,),
                  FadeAnimatedText(
-                   'Welcome to ISBAT Univerty Library Management System',
+                   'Welcome to ISBAT University Library Management System',
                 textStyle: const TextStyle(
                   color: Color.fromRGBO(5, 38, 154, 5),
                   fontSize: 70,

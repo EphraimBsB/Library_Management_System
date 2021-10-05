@@ -31,6 +31,7 @@ class BookManagementController extends GetxController{
   @override
   void onInit(){
    createdBooks(titleTx, authorTx, ddcTx, accNumberTx, categoryTx, imageUrl, block, column, row);
+   allCreatedBooks();
     super.onInit();
   }
 

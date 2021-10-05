@@ -16,10 +16,26 @@ class BookController extends GetxController{
   void onInit(){
     bookSearch(searchText);
     findOneBook();
+    search();
     super.onInit();
   }
 
   bookSearch(searchText) async { 
+   try{
+    isLoading(true);
+   var book = await BookService.search(searchText);
+   var books = book!.first.books;
+   print("Book: $book");
+   if(book != null){
+     bookslist.value = books;
+   }
+   }finally{
+     isLoading(false);
+   }
+  }
+
+  search() async { 
+    var searchText = Get.arguments;
    try{
     isLoading(true);
    var book = await BookService.search(searchText);

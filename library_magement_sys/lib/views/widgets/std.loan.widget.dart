@@ -25,7 +25,6 @@ class StudentLoanWidget extends StatelessWidget {
                         height: 100,
                         margin: const EdgeInsets.only(left: 30),
                         decoration: const BoxDecoration(
-                            // border: Border.all(color: Colors.black, width: 2),
                             shape: BoxShape.circle,
                             image: DecorationImage(
                               image: AssetImage('assets/ephraim.png'),
@@ -67,15 +66,6 @@ class StudentLoanWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                  //     Container(width: width*0.17,),
-                  //     const Center(
-                  //        child:  Text(
-                  //   'Loan Books',
-                  //   style: TextStyle(
-                  //     fontSize: 30,
-                  //   ),
-                  // ),
-                  //      ),
                     ],
                   ),
                       const  SizedBox(

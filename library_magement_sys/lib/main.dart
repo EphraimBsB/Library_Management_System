@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/views/pages/book.pages/book.management.dart';
 import 'package:library_magement_sys/views/pages/book.pages/home.page.dart';
+import 'package:library_magement_sys/views/pages/book.pages/search.book.dart';
 import 'package:library_magement_sys/views/pages/book.pages/searched.book.page.dart';
 import 'package:library_magement_sys/views/pages/book.pages/welcome.page.dart';
 import 'package:library_magement_sys/views/pages/loan.pages/loans.management.dart';
@@ -28,6 +29,7 @@ class LibraryManagementSystem extends StatelessWidget {
       getPages: [
         GetPage(name: '/', page: () => WelcomePage()),
         GetPage(name: '/home', page: () => HomePage()),
+        GetPage(name: '/search', page: () => SearchPage()),
         GetPage(name: '/books/book/:id', page: () => SearchedBook()),
         GetPage(name: '/login', page: () => LoginPage()),
         GetPage(name: '/admin', page: () => LibrarianLoginPage()),
