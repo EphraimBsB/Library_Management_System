@@ -9,6 +9,7 @@ class BookController extends GetxController{
   var bookslist = <Book>[].obs;
   var showBook = <SingleBook>[].obs;
   var allbookslist = <Book>[].obs;
+  var searchTextBook;
 
   get searchText => null;
 
@@ -25,7 +26,6 @@ class BookController extends GetxController{
     isLoading(true);
    var book = await BookService.search(searchText);
    var books = book!.first.books;
-   print("Book: $book");
    if(book != null){
      bookslist.value = books;
    }
@@ -36,11 +36,11 @@ class BookController extends GetxController{
 
   search() async { 
     var searchText = Get.arguments;
+    searchTextBook = searchText;
    try{
     isLoading(true);
    var book = await BookService.search(searchText);
    var books = book!.first.books;
-   print("Book: $book");
    if(book != null){
      bookslist.value = books;
    }

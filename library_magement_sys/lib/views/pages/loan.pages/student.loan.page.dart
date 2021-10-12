@@ -14,32 +14,35 @@ class StudentLoanPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Obx(() => Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const AppBarwidget(),
-            Container(height: height*0.1,),
-             const Text(
-                'Loan Books',
-                style: TextStyle(
-                  fontSize: 40,
+      body: Container(
+        padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+        child: SingleChildScrollView(
+          child: Obx(() => Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const AppBarwidget(),
+              Container(height: height*0.1,),
+               const Text(
+                  'Loan Books',
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
-              ),
-            //  Container(height: height*0.1,),
+              //  Container(height: height*0.1,),
 
-             ListView.builder(
-               shrinkWrap: true,
-               itemCount:loanController.studentLoans.length ,
-               itemBuilder: (context, index){
-                   return StudentLoanWidget(loanController.studentLoans[index]);
-                 },   
+               ListView.builder(
+                 shrinkWrap: true,
+                 itemCount:loanController.studentLoans.length ,
+                 itemBuilder: (context, index){
+                     return StudentLoanWidget(loanController.studentLoans[index]);
+                   },   
+          ),
+            ]    
+          ), )
+          
+         
         ),
-          ]    
-        ), )
-        
-       
       ),
     );
   }

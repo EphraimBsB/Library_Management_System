@@ -58,6 +58,9 @@ class StudentLoanWidget extends StatelessWidget {
                               fontSize: 18,
                             ),
                           ),
+                          const SizedBox(
+                            height: 5,
+                          ),
                           const Text(
                             'Course: Bsc.CE',
                             style: TextStyle(

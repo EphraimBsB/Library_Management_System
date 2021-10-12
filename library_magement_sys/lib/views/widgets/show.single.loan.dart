@@ -6,11 +6,17 @@ import 'package:library_magement_sys/models/book.model/single.book.model.dart';
 import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
 import 'package:library_magement_sys/views/widgets/app.bar.dart';
 
-class ShowSingleLoanWidget extends StatelessWidget {
+class ShowSingleLoanWidget extends StatefulWidget {
 
   final SingleLoans loan;
   
    ShowSingleLoanWidget(this.loan);
+
+  @override
+  State<ShowSingleLoanWidget> createState() => _ShowSingleLoanWidgetState();
+}
+
+class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
     LoanController? loanController;
 
   @override
@@ -37,7 +43,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 330,
                          width: 250,
                          child: Image.network(
-                         loan.book.image,
+                         widget.loan.book.image,
                          fit: BoxFit.cover,
                        ),
                        ),
@@ -45,7 +51,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 10,
                        ),
                          Text(
-                         'Title: ${loan.book.title}',
+                         'Title: ${widget.loan.book.title}',
                          maxLines: 2,
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
@@ -55,7 +61,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 5,
                        ),
                          Text(
-                         'Author: ${loan.book.author}',
+                         'Author: ${widget.loan.book.author}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -63,7 +69,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 5,
                        ),
                          Text(
-                         'DDC: ${loan.book.ddc}',
+                         'DDC: ${widget.loan.book.ddc}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -71,7 +77,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 5,
                        ),
                          Text(
-                         'Loan Status: ${loan.status}',
+                         'Loan Status: ${widget.loan.status}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -79,7 +85,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 5,
                        ),
                          Text(
-                         'Book Status: ${loan.book.status}',
+                         'Book Status: ${widget.loan.book.status}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -87,7 +93,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 10,
                        ),
                         Text(
-                         'Student: ${loan.user.name}'' ${loan.user.lastName}',
+                         'Student: ${widget.loan.user.name}'' ${widget.loan.user.lastName}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -95,7 +101,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          height: 5,
                        ),
                         Text(
-                         'Roll Number: ${loan.user.rollNumber}',
+                         'Roll Number: ${widget.loan.user.rollNumber}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -135,6 +141,10 @@ class ShowSingleLoanWidget extends StatelessWidget {
                         loanController =  Get.put(LoanController());
                         loanController!.singleLoanController();
                         loanController!.singleLoanList.refresh();
+                        setState(() {
+                          loanController;
+                        });
+                        
                       }, 
                       child: const Text('Return',
                       style: TextStyle(

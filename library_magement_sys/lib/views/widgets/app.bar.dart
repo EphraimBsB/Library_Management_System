@@ -23,7 +23,7 @@ class AppBarwidget extends StatelessWidget {
                   fit: BoxFit.contain,
                 )),
               ),
-              Container(width: MediaQuery.of(context).size.width*0.5,),
+              Container(width: MediaQuery.of(context).size.width*0.6,),
               Padding(
                 padding: const EdgeInsets.only(top: 40),
                 child: TextButton(onPressed: (){
@@ -41,7 +41,7 @@ class AppBarwidget extends StatelessWidget {
               //   child: TextButton(onPressed: (){}, child: const Text("All Books"),),
               // ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(0, 40, 30, 0),
+                padding: const EdgeInsets.only(top: 40),
                 child: TextButton(onPressed: (){
                   Get.toNamed('/login');
                 }, child: const Text("Student"),),

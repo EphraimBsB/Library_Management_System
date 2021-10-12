@@ -52,8 +52,19 @@ class _SearchPageState extends State<SearchPage> {
                             fontStyle: FontStyle.italic,
                             fontSize: 14
                           ),
-                       border: OutlineInputBorder()
+                       border: OutlineInputBorder(),
                      ),
+                     onSubmitted: (text) {
+                      if(text.isEmpty) {
+                        Get.snackbar("Error", "Please input a wright word",snackPosition: SnackPosition.TOP);
+                      }else {
+                        bookController!.bookSearch(text);
+                      }
+                       setState(() {
+                         bookController;
+                         bookController!.searchTextBook = text;
+                       });
+                        },
                    ),
                  ),
                  
@@ -63,11 +74,11 @@ class _SearchPageState extends State<SearchPage> {
                       if(searchText.isEmpty) {
                         Get.snackbar("Error", "Please input a wright word",snackPosition: SnackPosition.TOP);
                       }else {
-                        // bookController = Get.put(BookController());
                         bookController!.bookSearch(searchText);
                       }
                        setState(() {
                          bookController;
+                         bookController!.searchTextBook = searchText;
                        });
                     }, 
                     child: Container(
@@ -87,7 +98,24 @@ class _SearchPageState extends State<SearchPage> {
       
                 ],
               ),
-              if(bookController != null) 
+              const  SizedBox(
+                  height: 100,
+                ),
+                   Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left:20),
+                    child: Text(
+                    'Results for : ${bookController!.searchTextBook}',
+                    style: const TextStyle(
+                    fontSize: 30,
+                ),
+              ),
+                  ),
+                ),
+                       const  SizedBox(
+                  height: 20,
+                ),
                Obx(() {
                 if(bookController!.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
