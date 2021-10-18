@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:library_magement_sys/controllers/users.controller/user.controller.dart';
 import 'package:library_magement_sys/views/pages/book.pages/searched.book.page.dart';
 import 'package:library_magement_sys/views/pages/user.pages/signup.page.dart';
-import 'package:library_magement_sys/views/widgets/app.bar.dart';
-import 'package:library_magement_sys/views/widgets/text.field.dart';
+import 'package:library_magement_sys/constants/app.bar.dart';
+import 'package:library_magement_sys/constants/text.field.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({ Key? key }) : super(key: key);

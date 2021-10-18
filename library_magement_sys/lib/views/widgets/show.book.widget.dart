@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/models/book.model/single.book.model.dart';
-import 'package:library_magement_sys/views/widgets/app.bar.dart';
+import 'package:library_magement_sys/constants/app.bar.dart';
 
 class ShowBookWidget extends StatelessWidget {
 
@@ -97,13 +97,13 @@ class ShowBookWidget extends StatelessWidget {
                   const SizedBox(
                    width: 20,
                  ),
-                 const SizedBox(
+                  SizedBox(
                    //margin: EdgeInsets.only(top: 110),
                    width: 700,
                    height: 450,
                    child: Text(
-                     'Electrical technology, as a subject, covers various divisions of electrical engineering like basic electrical engineering, electronics, control systems, instrumentation and communication systems. For close to 60 years, A Textbook of Electrical Technology: Volume III {Transmission, Distribution and Utilization} discusses and explains various theories related to Transmission, Distribution and Utilization aspects of Electrical technology. Coverage of topics such as Rating & Service Capacity and Distribution Automation as full chapters illustrate the depth provided within the text in a succinct manner.',
-                     style: TextStyle(
+                     book.description,
+                     style: const TextStyle(
                        fontSize: 18,
                      ),
                    ),

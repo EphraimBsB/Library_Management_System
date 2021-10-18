@@ -4,8 +4,8 @@ import 'package:library_magement_sys/controllers/users.controller/user.controlle
 import 'package:library_magement_sys/models/user.model/user.model.dart';
 import 'package:library_magement_sys/views/pages/loan.pages/student.loan.page.dart';
 import 'package:library_magement_sys/views/pages/user.pages/login.page.dart';
-import 'package:library_magement_sys/views/widgets/app.bar.dart';
-import 'package:library_magement_sys/views/widgets/text.field.dart';
+import 'package:library_magement_sys/constants/app.bar.dart';
+import 'package:library_magement_sys/constants/text.field.dart';
 
 class SignupPage extends StatelessWidget {
   SignupPage({ Key? key }) : super(key: key);

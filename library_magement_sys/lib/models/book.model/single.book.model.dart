@@ -26,12 +26,14 @@ class SingleBookModel {
 
 class SingleBook {
     SingleBook({
-        required this.id,
+       required this.id,
         required this.title,
         required this.author,
+        required this.description,
         required this.ddc,
         required this.accNumber,
         required this.category,
+        required this.copies,
         required this.status,
         required this.image,
         required this.updatedAt,
@@ -43,8 +45,10 @@ class SingleBook {
     String title;
     String author;
     String ddc;
+    String description;
     int accNumber;
     String category;
+    int copies;
     String status;
     String image;
     DateTime updatedAt;
@@ -55,9 +59,11 @@ class SingleBook {
         id: json["id"],
         title: json["title"],
         author: json["author"],
+        description: json["description"],
         ddc: json["ddc"],
         accNumber: json["acc_number"],
         category: json["category"],
+        copies: json["copies"],
         status: json["status"],
         image: json["image"],
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -66,12 +72,14 @@ class SingleBook {
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
+         "id": id,
         "title": title,
         "author": author,
+        "description": description,
         "ddc": ddc,
         "acc_number": accNumber,
         "category": category,
+        "copies": copies,
         "status": status,
         "image": image,
         "updatedAt": updatedAt.toIso8601String(),

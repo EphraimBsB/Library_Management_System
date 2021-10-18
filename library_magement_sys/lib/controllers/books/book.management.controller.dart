@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/models/book.model/book.model.dart';
@@ -28,21 +29,37 @@ class BookManagementController extends GetxController{
 
   get titleTx => null;
 
+  get copiesTx => null;
+
+  get descriptionText => null;
+
   @override
   void onInit(){
-   createdBooks(titleTx, authorTx, ddcTx, accNumberTx, categoryTx, imageUrl, block, column, row);
    allCreatedBooks();
     super.onInit();
   }
 
-
-
-  createdBooks(titleTx, authorTx, ddcTx, accNumberTx, categoryTx, imageUrl, block, column, row) async { 
+  createdBooks(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row) async { 
    try{
     isLoading(true);
-   var books = await BookService.allBooks(titleTx, authorTx, ddcTx, accNumberTx, categoryTx, imageUrl, block, column, row);
-   var allBook = books!.first.books;
-    allbookslist.value = allBook;
+   var book = await BookService.create(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row);
+   print("created book: $book");
+   Get.snackbar(
+      "", "Book Created Sucecessfully",
+      messageText:  Text(
+            'Book ${book!.message}',
+            style: const TextStyle(
+              fontSize: 26,
+              color: Colors.green
+              ),
+            textAlign: TextAlign.center,
+          ),
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.fromLTRB(50, 100, 50, 0),
+          maxWidth: 500,
+          colorText: Colors.red,
+          animationDuration: const Duration(milliseconds: 2000)
+          );
    }finally{
      isLoading(false);
    }

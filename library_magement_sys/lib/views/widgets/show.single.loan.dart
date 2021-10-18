@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/models/book.model/single.book.model.dart';
 import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
-import 'package:library_magement_sys/views/widgets/app.bar.dart';
+import 'package:library_magement_sys/constants/app.bar.dart';
 
 class ShowSingleLoanWidget extends StatefulWidget {
 
@@ -146,7 +146,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                         });
                         
                       }, 
-                      child: const Text('Return',
+                      child: const Text('Return Book',
                       style: TextStyle(
                               color: Colors.white
                             ),)
