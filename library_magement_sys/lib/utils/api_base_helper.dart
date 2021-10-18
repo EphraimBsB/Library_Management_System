@@ -82,7 +82,7 @@ dynamic _returnResponse(http.Response response) {
             'Already Exist',
             style: TextStyle(
               fontSize: 26,
-              color: Colors.green
+              color: Colors.red
               ),
             textAlign: TextAlign.center,
           ),

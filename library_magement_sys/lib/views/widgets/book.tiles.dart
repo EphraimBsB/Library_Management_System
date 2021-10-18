@@ -2,21 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/controllers/books/book.controller.dart';
 import 'package:library_magement_sys/models/book.model/book.model.dart';
-import 'package:library_magement_sys/views/pages/book.pages/searched.book.page.dart';
 
 class BookTile extends StatelessWidget {
 
   final Book bookModel;
-  // final FindSingleBook bookController = Get.put(FindSingleBook());
+  final BookController bookController = Get.put(BookController());
   BookTile(this.bookModel);
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: (){
-        // bookController.findOneBook(bookModel.id);
         Get.toNamed("/books/book/${bookModel.id}");
-
+        bookController.findOneBook();
       },
       child: Card(
         elevation: 2,

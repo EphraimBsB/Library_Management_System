@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
+import 'package:library_magement_sys/constants/app.bar.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/models/book.model/single.book.model.dart';
 import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
-import 'package:library_magement_sys/constants/app.bar.dart';
 
-class ShowSingleLoanWidget extends StatefulWidget {
-
+class ShowSingleLoanWidget extends StatelessWidget {
   final SingleLoans loan;
-  
-   ShowSingleLoanWidget(this.loan);
-
-  @override
-  State<ShowSingleLoanWidget> createState() => _ShowSingleLoanWidgetState();
-}
-
-class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
-    LoanController? loanController;
+  Function callback;
+    LoanController loanController =  Get.put(LoanController());
+   ShowSingleLoanWidget(
+     this.loan,
+     this.callback,
+  ) ;
 
   @override
   Widget build(BuildContext context) {
+    var action = '';
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Column(
@@ -43,7 +39,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 330,
                          width: 250,
                          child: Image.network(
-                         widget.loan.book.image,
+                         loan.book.image,
                          fit: BoxFit.cover,
                        ),
                        ),
@@ -51,7 +47,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 10,
                        ),
                          Text(
-                         'Title: ${widget.loan.book.title}',
+                         'Title: ${loan.book.title}',
                          maxLines: 2,
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
@@ -61,7 +57,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 5,
                        ),
                          Text(
-                         'Author: ${widget.loan.book.author}',
+                         'Author: ${loan.book.author}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -69,7 +65,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 5,
                        ),
                          Text(
-                         'DDC: ${widget.loan.book.ddc}',
+                         'DDC: ${loan.book.ddc}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -77,7 +73,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 5,
                        ),
                          Text(
-                         'Loan Status: ${widget.loan.status}',
+                         'Loan Status: ${loan.status}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -85,7 +81,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 5,
                        ),
                          Text(
-                         'Book Status: ${widget.loan.book.status}',
+                         'Book Status: ${loan.book.status}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -93,7 +89,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 10,
                        ),
                         Text(
-                         'Student: ${widget.loan.user.name}'' ${widget.loan.user.lastName}',
+                         'Student: ${loan.user.name}'' ${loan.user.lastName}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -101,7 +97,7 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                          height: 5,
                        ),
                         Text(
-                         'Roll Number: ${widget.loan.user.rollNumber}',
+                         'Roll Number: ${loan.user.rollNumber}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
@@ -137,14 +133,9 @@ class _ShowSingleLoanWidgetState extends State<ShowSingleLoanWidget> {
                       ),
                    child: TextButton(
                       onPressed: (){
-                        var action = true;
-                        loanController =  Get.put(LoanController());
-                        loanController!.singleLoanController();
-                        loanController!.singleLoanList.refresh();
-                        setState(() {
-                          loanController;
-                        });
-                        
+                        action = 'return';
+                        loanController.singleLoanController(action);
+                        callback();
                       }, 
                       child: const Text('Return Book',
                       style: TextStyle(

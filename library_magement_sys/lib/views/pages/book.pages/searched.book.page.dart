@@ -6,10 +6,11 @@ import 'package:library_magement_sys/views/widgets/show.book.widget.dart';
 class SearchedBook extends StatelessWidget {
     SearchedBook({ Key? key, }) : super(key: key);
 
-   final BookController bookController = Get.put(BookController());
+  final BookController bookController = Get.put(BookController());
 
   @override
   Widget build(BuildContext context) {
+    // bookController.findOneBook();
     return Scaffold(
       body: Obx(() => ListView.builder(
         itemCount:bookController.showBook.length ,

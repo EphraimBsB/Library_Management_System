@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:http/http.dart' as http;
@@ -17,7 +16,6 @@ class LoanService{
     var token = sharedPreferences.getString("token");
     Map<String, dynamic> payload = Jwt.parseJwt(token!);
     var userId = payload['id'];
-   print("bookId: $bookId");
    Map  body = {
       'userId':'$userId',
       'bookId':'$bookId',
@@ -67,11 +65,11 @@ class LoanService{
 
   }
 
-  static Future<SingleLoanModel?> singleLoan(id)async{
+  static Future<SingleLoanModel?> singleLoan(id, act)async{
      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     Map  body = {
-      'action': 'true',
+      'action': act,
     };
     var response = await client.patch(Uri.parse("http://localhost:5000/loan/loans/$id"), headers: {'Access-Control-Allow-Origin': '*', HttpHeaders.authorizationHeader:"Bearer $token"}, body: body);
 
@@ -80,7 +78,6 @@ class LoanService{
      
     
     var loan = singleLoanModelFromJson(jsonString);
-    print("Loan: $loan");
     return loan;
       
     }else{

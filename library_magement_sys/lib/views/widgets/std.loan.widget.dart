@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import 'package:library_magement_sys/models/loan.model/loan.model.dart';
@@ -171,7 +170,7 @@ class StudentLoanWidget extends StatelessWidget {
                              width: 90,
                              height: 25,
                              decoration: BoxDecoration(
-                             color: (loan.status == 'overdue')?Colors.red[700]:loan.status == 'returned'?Colors.yellow[700]:Colors.green[700],
+                             color: (loan.status == 'Overdue')?Colors.red[700]:loan.status == 'Returned'?Colors.yellow[700]:Colors.green[700],
                              borderRadius: const BorderRadius.all(Radius.circular(5)),
                       ),
                              child: Center(

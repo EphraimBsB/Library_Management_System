@@ -98,7 +98,6 @@ class ShowBookWidget extends StatelessWidget {
                    width: 20,
                  ),
                   SizedBox(
-                   //margin: EdgeInsets.only(top: 110),
                    width: 700,
                    height: 450,
                    child: Text(

@@ -133,6 +133,7 @@ class _HomePageState extends State<HomePage> {
                  ButtonWidget('General', fourthButtonState, fourthButtonFunct),
                  ButtonWidget('Indians', fithButtonState, fithButtonFunct),
                  ButtonWidget('Projects', sixthButtonState, sixthButtonFunct),
+                 
                 ],
               ),
                        const  SizedBox(
@@ -247,7 +248,7 @@ class _HomePageState extends State<HomePage> {
     fithButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('Projects')){
+                          if(book.category.contains('Indian')){
                             filterBooks.add(book)
                           }
                         });
@@ -263,7 +264,7 @@ class _HomePageState extends State<HomePage> {
     sixthButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('Indian')){
+                          if(book.category.contains('Projects')){
                             filterBooks.add(book)
                           }
                         });

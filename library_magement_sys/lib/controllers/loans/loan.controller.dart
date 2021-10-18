@@ -12,10 +12,12 @@ class LoanController extends GetxController{
 
   get book => null;
 
+  get act => null;
+
    @override
   void onInit(){
     allLoansController();
-    singleLoanController();
+    singleLoanController(act);
     // studentLoanController(book);
     super.onInit();
   }
@@ -44,11 +46,11 @@ class LoanController extends GetxController{
     
   }
 
-   singleLoanController() async { 
+   singleLoanController(act) async { 
   var id = Get.parameters['id'];
    try{
     isLoading(true);
-   var loan = await LoanService.singleLoan(id);
+   var loan = await LoanService.singleLoan(id, act);
    var findloan = loan!.loans;
     singleLoanList.value = [findloan];
    }finally{

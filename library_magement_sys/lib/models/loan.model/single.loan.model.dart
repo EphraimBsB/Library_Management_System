@@ -33,6 +33,7 @@ class SingleLoans {
         required this.dueDate,
         this.returnDate,
         required this.status,
+        required this.updatedAt,
         required this.book,
         required this.user,
     });
@@ -43,6 +44,7 @@ class SingleLoans {
     DateTime issueDate;
     DateTime dueDate;
     dynamic returnDate;
+    DateTime updatedAt;
     String status;
     Book book;
     User user;
@@ -55,6 +57,7 @@ class SingleLoans {
         dueDate: DateTime.parse(json["dueDate"]),
         returnDate: json["returnDate"],
         status: json["status"],
+        updatedAt: DateTime.parse(json["updatedAt"]),
         book: Book.fromJson(json["Book"]),
         user: User.fromJson(json["User"]),
     );
@@ -67,6 +70,7 @@ class SingleLoans {
         "dueDate": dueDate.toIso8601String(),
         "returnDate": returnDate,
         "status": status,
+        "updatedAt": updatedAt.toIso8601String(),
         "Book": book.toJson(),
         "User": user.toJson(),
     };
