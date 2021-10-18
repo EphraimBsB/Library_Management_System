@@ -1,111 +1,185 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:library_magement_sys/controllers/books/book.management.controller.dart';
-import 'package:library_magement_sys/views/widgets/app.bar.dart';
-import 'package:library_magement_sys/views/widgets/text.field.dart';
+import 'package:library_magement_sys/constants/app.bar.dart';
+import 'package:library_magement_sys/constants/text.field.dart';
 
-class BooksManagement extends StatelessWidget {
+class BooksManagement extends StatefulWidget {
    BooksManagement({ Key? key }) : super(key: key);
+
+  @override
+  State<BooksManagement> createState() => _BooksManagementState();
+}
+
+class _BooksManagementState extends State<BooksManagement> {
   final BookManagementController? bookController = Get.put(BookManagementController());
+
   TextEditingController title = TextEditingController();
   TextEditingController author = TextEditingController();
+  TextEditingController description = TextEditingController();
   TextEditingController ddc = TextEditingController();
   TextEditingController accNumber = TextEditingController();
   TextEditingController category = TextEditingController();
+  TextEditingController copies = TextEditingController();
   TextEditingController imageUrl = TextEditingController();
   TextEditingController block = TextEditingController();
   TextEditingController column = TextEditingController();
   TextEditingController row = TextEditingController();
-
+  var _currentSelectedValue;
+  final _currencies = [
+    "Computer",
+    "Engineering",
+    "Business",
+    "General",
+    "Projects",
+    "Indian"
+  ];
   @override
   Widget build(BuildContext context) {
-    bookController!.allCreatedBooks();
-     double width = MediaQuery.of(context).size.width;
+    double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    return Container(
-      padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-      child: Scaffold(
-        appBar: AppBar(
-        title: const AppBarwidget(),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 0,
-        toolbarHeight: 70,
-        titleSpacing: 0,
-        ),
-        body: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // const AppBarwidget(),
-              Column(
-                 mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(height: 30,),
-              const Text(
-                  'Create a Book',
-                  style: TextStyle(
-                    fontSize: 30,
-                  ),
-                ),
-                const  SizedBox(
-                    height: 20,
-                  ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextFieldWidget(label: 'Title', controller: title,),
-                  TextFieldWidget(label: 'Author', controller: author,),
-                ],
-              ),
-                
-                const  SizedBox(
-                    height: 20,
-                  ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextFieldWidget(label: 'DDC Number', controller: ddc,),
-                  TextFieldWidget(label: 'AC Number', controller: accNumber,),
-                ],
-              ),
-                const  SizedBox(
-                    height: 20,
-                  ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  TextFieldWidget(label: 'Category', controller: category,),
-                 TextFieldWidget(label: 'Image Url', controller: imageUrl,),
-                ],
-              ),   
-                const  SizedBox(
-                    height: 10,
-                  ),
-              const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left:45),
-                    child: Text(
-                    'Book Location',
+    
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+        child: Scaffold(
+          appBar: AppBar(
+          title: const AppBarwidget(),
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 0,
+          toolbarHeight: 70,
+          titleSpacing: 0,
+          ),
+          body: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // const AppBarwidget(),
+                Column(
+                   mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(height: 30,),
+                const Text(
+                    'Add a Book',
                     style: TextStyle(
-                    fontSize: 20,
-                ),
-              ),
+                      fontSize: 30,
+                    ),
                   ),
-                ),
-                const  SizedBox(
-                    height: 10,
-                  ),
-               Padding(
-                 padding: const EdgeInsets.fromLTRB(15, 0, 60, 0),
-                 child: Row(
+                  const  SizedBox(
+                      height: 20,
+                    ),
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                     SizedBox(
+                    TextFieldWidget(label: 'Title', controller: title,),
+                    TextFieldWidget(label: 'DDC Number', controller: ddc,),
+                  ],
+                ),
+                  
+                  const  SizedBox(
+                      height: 20,
+                    ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextFieldWidget(label: 'Author', controller: author,),
+                    TextFieldWidget(label: 'AC Number', controller: accNumber,),
+                  ],
+                ),
+                  const  SizedBox(
+                      height: 20,
+                    ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                SizedBox(
+                  width: 0.4*width,
+                  height: 50,
+                  child: FormField<String>(
+                  builder: (FormFieldState<String> state) {
+                  return InputDecorator(
+                  decoration: InputDecoration(
+                  labelText: 'Category',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                  isEmpty: _currentSelectedValue == '',
+                  child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                  value: _currentSelectedValue,
+                  isDense: true,
+                  onChanged: ( newValue) {
+                    setState(() {
+                      _currentSelectedValue = newValue;
+                      state.didChange(newValue);
+                    });
+                  },
+                  items: _currencies.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                  }).toList(),
+                ),
+              ),
+            );
+          },
+        ),
+                ),
+
+                    // TextFieldWidget(label: 'Category', controller: category,),
+                   TextFieldWidget(label: 'Copies', controller: copies,),
+                  ],
+                ),
+                 const  SizedBox(
+                      height: 20,
+                    ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    SizedBox(
+                      width: 0.4*width,
+                      height: 200,
+                      child: TextField(
+                        controller: description,
+                         keyboardType: TextInputType.multiline,
+                          maxLines: 20,
+                        decoration: const InputDecoration(
+                            label: Text('Description'),
+                            border: OutlineInputBorder()
+                        ),
+                      ),
+                    ),
+                   Column(
+                     mainAxisAlignment: MainAxisAlignment.start,
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                     children: [
+                       TextFieldWidget(label: 'Image Url', controller: imageUrl,),
+                       const  SizedBox(
+                      height: 10,
+                    ),
+                const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Padding(
+                      padding: EdgeInsets.only(left:45),
+                      child: Text(
+                      'Book Location',
+                      style: TextStyle(
+                      fontSize: 20,
+                  ),
+                ),
+                    ),
+                  ),
+                  const  SizedBox(
+                      height: 10,
+                    ),
+                 Row(
+                  children: [
+                    SizedBox(
                          width: 0.1*width,
                          height: 40,
                          child:  TextField(
@@ -116,6 +190,9 @@ class BooksManagement extends StatelessWidget {
                            ),
                          ),
                        ),
+                       const  SizedBox(
+                      width: 20,
+                    ),
                        SizedBox(
                          width: 0.1*width,
                          height: 40,
@@ -127,6 +204,9 @@ class BooksManagement extends StatelessWidget {
                            ),
                          ),
                        ),
+                       const  SizedBox(
+                      width: 20,
+                    ),
                        SizedBox(
                          width: 0.1*width,
                          height: 40,
@@ -138,22 +218,56 @@ class BooksManagement extends StatelessWidget {
                            ),
                          ),
                        ),
-                         SizedBox(
-                      width: 0.15*width,
+                  ]
+                  ),
+                  const  SizedBox(
+                      height: 20,
                     ),
+                 Row(
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
                        TextButton(
                         onPressed: (){
+                          // _currentSelectedValue = '';
                           String titleText = title.text;
                           String authorText = author.text;
+                          String descriptionText = description.text;
                           String ddcText = ddc.text;
                           String accNumberText = accNumber.text;
-                          String categoryText = category.text;
+                          String categoryText = _currentSelectedValue;
+                          String copiesText = copies.text;
                           String imageUrlText = imageUrl.text;
                           String blockText = block.text;
                           String columnText = column.text;
                           String rowText = row.text;
-                          bookController!.createdBooks(titleText, authorText, ddcText, accNumberText, categoryText, imageUrlText,blockText,columnText,rowText);
-                        }, 
+                          if(
+                            titleText.isEmpty || authorText.isEmpty || descriptionText.isEmpty || 
+                            ddcText.isEmpty || accNumberText.isEmpty|| categoryText == '' ||
+                            copiesText.isEmpty|| imageUrlText.isEmpty|| 
+                            blockText.isEmpty || columnText.isEmpty ||rowText.isEmpty){
+                             Get.snackbar(
+                                "", "Please fill all the inputs ",
+                                messageText: const Text(
+                                  "Please fill out all the inputs ",
+                                  style: TextStyle(
+                                    fontSize: 26,
+                                    color: Colors.red
+                                  ),
+                                  textAlign: TextAlign.center,
+                                  ),
+                                snackPosition: SnackPosition.TOP,
+                                margin: const EdgeInsets.fromLTRB(50, 100, 50, 0),
+                                maxWidth: 500,
+                                colorText: Colors.red,
+                                animationDuration: const Duration(milliseconds: 3000)
+                                );
+                          }else{
+                          bookController!.createdBooks(titleText, authorText, descriptionText, ddcText, accNumberText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
+                          setState(() {
+                            bookController!.allbookslist;
+                          });
+                         }
+                        },
                         child: Container(
                         alignment: Alignment.center,
                         width: 90,
@@ -183,6 +297,9 @@ class BooksManagement extends StatelessWidget {
                         ),
                         )
                      ),
+                     const  SizedBox(
+                    width: 60,
+                  ),
                      TextButton(
                         onPressed: (){}, 
                         child: Container(
@@ -214,6 +331,9 @@ class BooksManagement extends StatelessWidget {
                         ),
                         ),
                      ),
+                     const  SizedBox(
+                    width: 60,
+                  ),
                      TextButton(
                         onPressed: (){
                           Get.toNamed("/loans_management");
@@ -248,169 +368,192 @@ class BooksManagement extends StatelessWidget {
                         )
                      ),
                   ],
-              ),
-               ), 
-               const SizedBox(
-                     height: 40,
-                    ),
-              const Text(
-                    'BOOKS',
-                    style: TextStyle(
-                      fontSize: 24,
-                    ),
-                  ),
-                  const SizedBox(
-                     height: 15,
-                    ),
-                Obx(() => SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: DataTable(
-                          columns: const <DataColumn>[
-                            DataColumn(
-                              label: Text(
-                                'Image',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Title',
-                                style: TextStyle(fontSize:18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Author',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'DDC Number',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'ACC Number',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Category',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Status',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Created At',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                'Options',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            ),
-                          ],
-                          rows: bookController!.allbookslist.map((book) =>  DataRow(
-                              cells: <DataCell>[
-                                DataCell(
-                                  Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: SizedBox(
-                                height: 90,
-                                width: 50,
-                                child: Image.network(
-                                book.image,
-                                fit: BoxFit.cover,
-                              ),
-                              ),
-                                  ),),
-                                 DataCell(Text(
-                                  book.title,
-                                  style: const TextStyle(fontSize: 16),
-                                )),
-                                 DataCell(Text(
-                                  book.author,
-                                  style: const TextStyle(fontSize: 16),
-                                )),
-                                 DataCell(Text(
-                                  book.ddc,
-                                  style: const TextStyle(fontSize: 16),
-                                )),
-                                 DataCell(Text(
-                                  '${book.accNumber}',
-                                  style:const TextStyle(fontSize: 16),
-                                )),
-                                 DataCell(Text(
-                                  book.category,
-                                  style: const TextStyle(fontSize: 16),
-                                )),
-                                 DataCell(
-                                   Text(
-                                  book.status,
-                                  style: const TextStyle(fontSize: 16),
-                                )),
-                                const DataCell(
-                                   Text(
-                                  '20101010',
-                                  style: TextStyle(fontSize: 16),
-                                )),
-                                  DataCell(
-                                    Row(
-                                      children: [
-                                        IconButton(
-                                   icon: const Icon(Icons.edit),
-                                   color: Colors.blue[700],
-                                   onPressed: () {},
-                                ),
-                                IconButton(
-                                   icon: const Icon(Icons.delete),
-                                   color: Colors.red[700],
-                                   onPressed: () {},
-                                ),
-                                      ],
-                                    )),
-                              ],
-                            ),).toList()
-                        ),
                 ), 
-                )
-                ],
-              ),
+                     ],
+                   ),
+                  ],
+                ),   
+                  
+                 const SizedBox(
+                       height: 50,
+                      ),
                 
-            ]
-          ),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  // color: Colors.blue,
+                  Obx(() => SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: DataTable(
+                            columns: const <DataColumn>[
+                              DataColumn(
+                                label: Text(
+                                  'Image',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Title',
+                                  style: TextStyle(fontSize:18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Author',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                               DataColumn(
+                                label: Text(
+                                  'Description',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'DDC No',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'ACC No',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Category',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                               DataColumn(
+                                label: Text(
+                                  'Copies',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Status',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Added',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Options',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                            ],
+                            rows: bookController!.allbookslist.map((book) =>  DataRow(
+                                cells: <DataCell>[
+                                  DataCell(
+                                    Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: SizedBox(
+                                  height: 90,
+                                  width: 50,
+                                  child: Image.network(
+                                  book.image,
+                                  fit: BoxFit.cover,
+                                ),
+                                ),
+                                    ),),
+                                   DataCell(Text(
+                                    book.title,
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                   DataCell(Text(
+                                    book.author,
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                  DataCell(Container(
+                                    height: 50,
+                                    width: 200,
+                                    child: Text(
+                                      book.description,
+                                      style: const TextStyle(fontSize: 16),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  )),
+                                   DataCell(Text(
+                                    book.ddc,
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                   DataCell(Text(
+                                    '${book.accNumber}',
+                                    style:const TextStyle(fontSize: 16),
+                                  )),
+                                   DataCell(Text(
+                                    book.category,
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                  DataCell(Text(
+                                    '${book.copies}',
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                   DataCell(
+                                     Text(
+                                    book.status,
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                   DataCell(
+                                     Text(
+                                    DateFormat.yMMMd().format(book.createdAt),
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                    DataCell(
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                     icon: const Icon(Icons.edit),
+                                     color: Colors.blue[700],
+                                     onPressed: () {},
+                                  ),
+                                  IconButton(
+                                     icon: const Icon(Icons.delete),
+                                     color: Colors.red[700],
+                                     onPressed: () {},
+                                  ),
+                                        ],
+                                      )),
+                                ],
+                              ),).toList()
+                          ),
+                  ), 
+                  )
+                  ],
                 ),
-                child: Text('Settings'),
-              ),
-              ListTile(
-                title: const Text('Register Student'),
-                onTap: () {
-                  },
-              ),
-              ListTile(
-                title: const Text('Item 2'),
-                onTap: () {},
-              ),
-            ],
+                  
+              ]
+            ),
+          ),
+          drawer: Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    // color: Colors.blue,
+                  ),
+                  child: Text('Settings'),
+                ),
+                ListTile(
+                  title: const Text('Register Student'),
+                  onTap: () {
+                    },
+                ),
+                ListTile(
+                  title: const Text('Item 2'),
+                  onTap: () {},
+                ),
+              ],
+            ),
           ),
         ),
       ),

@@ -4,8 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:library_magement_sys/controllers/books/book.controller.dart';
 import 'package:library_magement_sys/controllers/books/book.management.controller.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
-import 'package:library_magement_sys/views/widgets/app.bar.dart';
-import 'package:library_magement_sys/views/widgets/text.field.dart';
+import 'package:library_magement_sys/constants/app.bar.dart';
+import 'package:library_magement_sys/constants/text.field.dart';
 
 class LoansManagement extends StatelessWidget {
    LoansManagement({ Key? key }) : super(key: key);
@@ -54,25 +54,19 @@ class LoansManagement extends StatelessWidget {
                         ),
                         DataColumn(
                           label: Text(
-                            'DDC Number',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        DataColumn(
-                          label: Text(
                             'Student',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
                         DataColumn(
                           label: Text(
-                            'Email Address',
+                            'Email',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
                         DataColumn(
                           label: Text(
-                            'Phone Number',
+                            'Phone No',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
@@ -90,7 +84,7 @@ class LoansManagement extends StatelessWidget {
                           ),
                           DataColumn(
                             label: Text(
-                              'Return Date',
+                              'Return',
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
@@ -100,12 +94,6 @@ class LoansManagement extends StatelessWidget {
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
-                        //  DataColumn(
-                        //   label: Text(
-                        //     'Options',
-                        //     style: TextStyle(fontSize: 18),
-                        //   ),
-                        // ),
                       ],
                       rows: loanController.loansList.map((loan) => DataRow(
                           onSelectChanged: (bool? selected) {
@@ -121,10 +109,6 @@ class LoansManagement extends StatelessWidget {
                             )),
                              DataCell(Text(
                               loan.book.author,
-                              style: const TextStyle(fontSize: 16),
-                            )),
-                             DataCell(Text(
-                              loan.book.ddc,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
@@ -156,7 +140,7 @@ class LoansManagement extends StatelessWidget {
                                width: 90,
                                height: 25,
                                decoration: BoxDecoration(
-                               color: (loan.status == 'overdue')?Colors.red[700]:loan.status == 'returned'?Colors.yellow[700]:Colors.green[700],
+                               color: (loan.status == 'Overdue')?Colors.red[700]:loan.status == 'Returned'?Colors.yellow[700]:Colors.green[700],
                                borderRadius: const BorderRadius.all(Radius.circular(5)),
                         ),
                                child: Center(
@@ -166,9 +150,6 @@ class LoansManagement extends StatelessWidget {
                             ),
                                ),
                              )),
-                            //  DataCell(
-                            //    TextButton(onPressed: (){}, child: const Text("Return"),)
-                            //  ),
                           ],
                         ),).toList()
                     

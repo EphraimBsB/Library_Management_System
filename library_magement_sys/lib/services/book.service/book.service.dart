@@ -5,11 +5,12 @@ import 'package:http/http.dart' as http;
 import 'package:library_magement_sys/models/book.model/book.model.dart';
 import 'package:library_magement_sys/models/book.model/create.book.model.dart';
 import 'package:library_magement_sys/models/book.model/single.book.model.dart';
+import 'package:library_magement_sys/utils/api_base_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BookService {
  static var client = http.Client();
-  
+ static final ApiBaseHelper _helper = ApiBaseHelper();
   static Future<List<BookModel>?> search(searchText)async{
     var response = await client.get(Uri.parse("http://localhost:5000/book/search?keyword=$searchText"), headers: {'Access-Control-Allow-Origin': '*'});
 
@@ -38,33 +39,26 @@ class BookService {
     }
   }
 
-   static Future<CreateBookModel?> create(titleTx, authorTx, ddcTx, accNumberTx, categoryTx, imageUrl,block, column, row) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
+   static Future<CreateBookModel?> create(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row) async {
      Map  body = {
       'title': titleTx,
       'author':authorTx,
+      'description':descriptionTx,
       'ddc': ddcTx,
       'acc_number': accNumberTx,
       'category': categoryTx,
-      'status': 'available',
+      'copies': copiesTx,
+      'status': 'Available',
       'image': imageUrl,
     };
-
-    var response = await client.post(Uri.parse("http://localhost:5000/book"),headers:{'Access-Control-Allow-Origin': '*', HttpHeaders.authorizationHeader:"Bearer $token"}, body: body);
-    print("create Response: ${response.body}");
-    if(response.statusCode == 201){
-      String jsonString = response.body;
-      var book = createBookModelFromJson(jsonString);
+    var response = await _helper.post("book",body);
+      var book = createBookModelFromJson(response);
       var bookId = book.book.id;
-      createLocation(bookId, block, column, row);
-      print("CreatedBook:${book}");
+     await createLocation(bookId, block, column, row);
+      print("CreatedBook:$book");
 
       return book;
       
-    }else{
-      return null;
-    }
   }
   
   static Future createLocation(bookId,block, column, row) async {
@@ -74,48 +68,33 @@ class BookService {
       'column': column,
       'row': row,
     };
-
-    var response = await client.post(Uri.parse("http://localhost:5000/book/location"),headers:{'Access-Control-Allow-Origin': '*',}, body: body);
-    if(response.statusCode == 201){
-      String jsonString = response.body;
-      print("locationResponse: $jsonString");
-      return jsonString;
+    var response = await _helper.post("book/location",body);
+      print("locationResponse: $response");
+      return response;
       
-    }else{
-      return null;
-    }
   }
-  static Future<List<BookModel>?> allBooks(titleTx, authorTx, ddcTx, accNumberTx, categoryTx, imageUrl, block, column, row)async{
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    await create(titleTx, authorTx, ddcTx, accNumberTx, categoryTx, imageUrl, block, column, row);
-    var response = await client.get(Uri.parse("http://localhost:5000/book/books"), headers: {'Access-Control-Allow-Origin': '*', HttpHeaders.authorizationHeader:"Bearer $token"});
-    if(response.statusCode == 200){
-      String jsonString = response.body;
-     
-    var books =  bookModelFromJson(jsonString);
-    print('All Books: ${books.books.first}');
-    return [books];
+  // static Future<List<BookModel>?> allBooks(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row)async{
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   var token = sharedPreferences.getString("token");
+  //   await create(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row);
+  //   var response = await _helper.get("book/books");
+  //   var books =  bookModelFromJson(response);
+  //   print('All Books: ${books.books.first}');
+  //   return [books];
       
-    }else{
-      return null;
-    }
-  }
+  // }
 
   static Future<List<BookModel>?> listAllBooks()async{
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString("token");
-    var response = await client.get(Uri.parse("http://localhost:5000/book/books"), headers: {'Access-Control-Allow-Origin': '*',  HttpHeaders.authorizationHeader:"Bearer $token"});
-    if(response.statusCode == 200){
-      String jsonString = response.body;
+    // SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    // var token = sharedPreferences.getString("token");
+      var response = await _helper.get("book/books");
+      // print('ServiceRespose: $response');
      
-    var books =  bookModelFromJson(jsonString);
+    var books =  bookModelFromJson(response);
     print('All Books: ${books.books.first}');
     return [books];
       
-    }else{
-      return null;
-    }
+    
   }
 
 }

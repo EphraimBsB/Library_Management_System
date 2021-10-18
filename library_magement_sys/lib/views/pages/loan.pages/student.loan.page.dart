@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
-import 'package:library_magement_sys/views/widgets/app.bar.dart';
+import 'package:library_magement_sys/constants/app.bar.dart';
 import 'package:library_magement_sys/views/widgets/std.loan.widget.dart';
 
 class StudentLoanPage extends StatelessWidget {
