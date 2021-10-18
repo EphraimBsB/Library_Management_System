@@ -14,7 +14,7 @@ class BooksManagement extends StatefulWidget {
 }
 
 class _BooksManagementState extends State<BooksManagement> {
-  final BookManagementController? bookController = Get.put(BookManagementController());
+  final BookManagementController bookController = Get.put(BookManagementController());
 
   TextEditingController title = TextEditingController();
   TextEditingController author = TextEditingController();
@@ -27,6 +27,8 @@ class _BooksManagementState extends State<BooksManagement> {
   TextEditingController block = TextEditingController();
   TextEditingController column = TextEditingController();
   TextEditingController row = TextEditingController();
+  var buttonState = false;
+  var loanbuttonState = false;
   var _currentSelectedValue;
   final _currencies = [
     "Computer",
@@ -40,6 +42,7 @@ class _BooksManagementState extends State<BooksManagement> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    
     
     return Center(
       child: Container(
@@ -228,7 +231,6 @@ class _BooksManagementState extends State<BooksManagement> {
                   children: [
                        TextButton(
                         onPressed: (){
-                          // _currentSelectedValue = '';
                           String titleText = title.text;
                           String authorText = author.text;
                           String descriptionText = description.text;
@@ -262,10 +264,8 @@ class _BooksManagementState extends State<BooksManagement> {
                                 animationDuration: const Duration(milliseconds: 3000)
                                 );
                           }else{
-                          bookController!.createdBooks(titleText, authorText, descriptionText, ddcText, accNumberText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
-                          setState(() {
-                            bookController!.allbookslist;
-                          });
+                          bookController.createdBooks(titleText, authorText, descriptionText, ddcText, accNumberText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
+                          setState(() {});
                          }
                         },
                         child: Container(
@@ -301,32 +301,40 @@ class _BooksManagementState extends State<BooksManagement> {
                     width: 60,
                   ),
                      TextButton(
-                        onPressed: (){}, 
+                        onPressed: (){
+                          bookController.exportExcel();
+                          setState(() {
+                            buttonState = true;
+                          });
+                        }, 
                         child: Container(
                         alignment: Alignment.center,
                         width: 150,
                         height: 40,
-                        decoration: const BoxDecoration(
-                          color: Color.fromRGBO(5, 38, 154, 5),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        decoration:  BoxDecoration(
+                          color: buttonState ? Colors.green.shade400 : Colors.white,
+                          borderRadius: const BorderRadius.all(Radius.circular(5)),
+                          border: Border.all(
+                            color: Colors.green.shade400,
+                              width: 2,
+                         ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Icon(
+                          children:  [
+                             Icon(
                               Icons.arrow_upward,
-                              color: Colors.white,
+                              color: buttonState ? Colors.white : Colors.black,
                               size: 20,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
                               'Export to Excel',
                               style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
+                                color: buttonState ? Colors.white : Colors.black,
+                               ),),
                           ],
                         ),
                         ),
@@ -337,30 +345,37 @@ class _BooksManagementState extends State<BooksManagement> {
                      TextButton(
                         onPressed: (){
                           Get.toNamed("/loans_management");
+                          setState(() {
+                            loanbuttonState = true;
+                          });
                         }, 
                         child: Container(
                         alignment: Alignment.center,
                         width: 100,
                         height: 40,
-                        decoration: const BoxDecoration(
-                          color: Color.fromRGBO(5, 38, 154, 5),
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                        decoration:  BoxDecoration(
+                          color: loanbuttonState ? const Color.fromRGBO(5, 38, 154, 5) : Colors.white,
+                          borderRadius:  const BorderRadius.all(Radius.circular(5)),
+                          border: Border.all(
+                            color: const Color.fromRGBO(5, 38, 154, 5),
+                              width: 2,
+                         ),
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children:  [
                             Icon(
                               Icons.menu_book,
-                              color: Colors.white,
+                              color: loanbuttonState ? Colors.white : Colors.black,
                               size: 20,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
                             Text(
                               'Loans',
                               style: TextStyle(
-                                color: Colors.white,
+                                color: loanbuttonState ? Colors.white : Colors.black,
                               ),
                             ),
                           ],
@@ -449,7 +464,7 @@ class _BooksManagementState extends State<BooksManagement> {
                                 ),
                               ),
                             ],
-                            rows: bookController!.allbookslist.map((book) =>  DataRow(
+                            rows: bookController.allbookslist.map((book) =>  DataRow(
                                 cells: <DataCell>[
                                   DataCell(
                                     Padding(

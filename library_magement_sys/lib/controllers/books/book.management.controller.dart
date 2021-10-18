@@ -75,5 +75,27 @@ class BookManagementController extends GetxController{
      isLoading(false);
    }
   }
+
+  exportExcel()async{
+    var file = await BookService.export();
+    var message = file.toString().split(':');
+    print(file);
+    Get.snackbar(
+      "", "file exported Sucecessfully",
+      messageText:  Text(
+            message.elementAt(1),
+            style: const TextStyle(
+              fontSize: 26,
+              color: Colors.green
+              ),
+            textAlign: TextAlign.center,
+          ),
+          snackPosition: SnackPosition.TOP,
+          margin: const EdgeInsets.fromLTRB(50, 100, 50, 0),
+          maxWidth: 500,
+          colorText: Colors.red,
+          animationDuration: const Duration(milliseconds: 2000)
+          );
+  }
    
 }

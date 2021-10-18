@@ -16,7 +16,7 @@ class BookController extends GetxController{
   @override
   void onInit(){
     bookSearch(searchText);
-    findOneBook();
+    // findOneBook();
     search();
     super.onInit();
   }

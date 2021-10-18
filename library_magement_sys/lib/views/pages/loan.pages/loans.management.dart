@@ -5,7 +5,6 @@ import 'package:library_magement_sys/controllers/books/book.controller.dart';
 import 'package:library_magement_sys/controllers/books/book.management.controller.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
-import 'package:library_magement_sys/constants/text.field.dart';
 
 class LoansManagement extends StatelessWidget {
    LoansManagement({ Key? key }) : super(key: key);
@@ -99,7 +98,7 @@ class LoansManagement extends StatelessWidget {
                           onSelectChanged: (bool? selected) {
                           if (selected!) {
                             Get.toNamed("/loans_management/loan/${loan.id}");
-                            loanController.singleLoanController();
+                            loanController.singleLoanController('');
                           }
                            },
                           cells: <DataCell>[

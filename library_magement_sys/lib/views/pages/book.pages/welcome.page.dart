@@ -30,49 +30,24 @@ class WelcomePage extends StatelessWidget {
              Center(
               child: AnimatedTextKit(
                 animatedTexts: [
-                 TyperAnimatedText( 'Welcome to ISBAT University Library Management System',
-                textStyle: const TextStyle(
-                  color: Color.fromRGBO(5, 38, 154, 5),
-                  fontSize: 70,
-                ),
-                textAlign: TextAlign.center,
-                speed: const Duration(milliseconds: 300),
-                ),
                   FadeAnimatedText(
                    'Welcome to ISBAT University Library Management System',
                 textStyle: const TextStyle(
                   color: Color.fromRGBO(5, 38, 154, 5),
                   fontSize: 70,
                 ),
-                textAlign: TextAlign.center,),
-                 FadeAnimatedText(
-                   'Welcome to ISBAT University Library Management System',
-                textStyle: const TextStyle(
-                  color: Color.fromRGBO(5, 38, 154, 5),
-                  fontSize: 70,
-                ),
-                textAlign: TextAlign.center,),
-                 FadeAnimatedText(
-                   'Welcome to ISBAT University Library Management System',
-                textStyle: const TextStyle(
-                  color: Color.fromRGBO(5, 38, 154, 5),
-                  fontSize: 70,
-                ),
+                duration :const Duration(milliseconds: 20000),
                 textAlign: TextAlign.center,),
     
-  ],
-  // totalRepeatCount: 4,
-  repeatForever: true,
-  pause: const Duration(milliseconds: 1000),
-  displayFullTextOnTap: true,
-  stopPauseOnTap: true,
-  onTap: () {
-       Get.toNamed("/home");
-      },
-),
+            ],
+            repeatForever: true,
+            displayFullTextOnTap: true,
+            stopPauseOnTap: true,
+            onTap: () {
+                Get.toNamed("/home");
+                },
+          ),
             ),
-
-            
           ],
         ),
       ),
