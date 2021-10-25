@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final AllLoansModel = AllLoansModelFromJson(jsonString);
+//     final allLoansModel = allLoansModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -31,18 +31,18 @@ class AllLoan {
         required this.bookId,
         required this.issueDate,
         required this.dueDate,
-        required this.returnDate,
+        this.returnDate,
         required this.status,
         required this.book,
         required this.user,
     });
 
     int id;
-    int bookId;
     int userId;
+    int bookId;
     DateTime issueDate;
     DateTime dueDate;
-    DateTime? returnDate;
+    dynamic returnDate;
     String status;
     Book book;
     User user;
@@ -53,7 +53,7 @@ class AllLoan {
         bookId: json["bookId"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
-        returnDate: json["returnDate"] == null ? null : DateTime.parse(json["returnDate"]),
+        returnDate: json["returnDate"],
         status: json["status"],
         book: Book.fromJson(json["Book"]),
         user: User.fromJson(json["User"]),
@@ -65,7 +65,7 @@ class AllLoan {
         "bookId": bookId,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
-         "returnDate": returnDate == null ? null : returnDate!.toIso8601String(),
+        "returnDate": returnDate,
         "status": status,
         "Book": book.toJson(),
         "User": user.toJson(),
@@ -77,9 +77,11 @@ class Book {
         required this.id,
         required this.title,
         required this.author,
+        required this.description,
         required this.ddc,
         required this.accNumber,
         required this.category,
+        required this.copies,
         required this.status,
         required this.image,
     });
@@ -87,9 +89,11 @@ class Book {
     int id;
     String title;
     String author;
+    String description;
     String ddc;
-    int accNumber;
+    String accNumber;
     String category;
+    String copies;
     String status;
     String image;
 
@@ -97,9 +101,11 @@ class Book {
         id: json["id"],
         title: json["title"],
         author: json["author"],
+        description: json["description"],
         ddc: json["ddc"],
         accNumber: json["acc_number"],
         category: json["category"],
+        copies: json["copies"],
         status: json["status"],
         image: json["image"],
     );
@@ -108,9 +114,11 @@ class Book {
         "id": id,
         "title": title,
         "author": author,
+        "description": description,
         "ddc": ddc,
         "acc_number": accNumber,
         "category": category,
+        "copies": copies,
         "status": status,
         "image": image,
     };

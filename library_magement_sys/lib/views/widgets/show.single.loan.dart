@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
-import 'package:library_magement_sys/models/book.model/single.book.model.dart';
 import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
 
 class ShowSingleLoanWidget extends StatelessWidget {
@@ -72,22 +71,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
                        const SizedBox(
                          height: 5,
                        ),
-                         Text(
-                         'Loan Status: ${loan.status}',
-                         style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                       ),
-                       const SizedBox(
-                         height: 5,
-                       ),
-                         Text(
-                         'Book Status: ${loan.book.status}',
-                         style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                       ),
-                       const SizedBox(
-                         height: 10,
-                       ),
+                         
                         Text(
                          'Student: ${loan.user.name}'' ${loan.user.lastName}',
                          style: const TextStyle(
@@ -101,6 +85,23 @@ class ShowSingleLoanWidget extends StatelessWidget {
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
+                       const SizedBox(
+                         height: 10,
+                       ),
+                       Text(
+                         'Loan Status: ${loan.status}',
+                         style: const TextStyle(
+                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
+                       ),
+                       const SizedBox(
+                         height: 5,
+                       ),
+                         Text(
+                         'Book Status: ${loan.book.status}',
+                         style: const TextStyle(
+                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
+                       ),
+                       
                      ],
                    ),
                  ),
@@ -110,12 +111,12 @@ class ShowSingleLoanWidget extends StatelessWidget {
                  Column(
                    mainAxisAlignment: MainAxisAlignment.start,
                    children: [
-                     const SizedBox(
+                      SizedBox(
                        width: 700,
                        height: 250,
                        child: Text(
-                         'Electrical technology, as a subject, covers various divisions of electrical engineering like basic electrical engineering, electronics, control systems, instrumentation and communication systems. For close to 60 years, A Textbook of Electrical Technology: Volume III {Transmission, Distribution and Utilization} discusses and explains various theories related to Transmission, Distribution and Utilization aspects of Electrical technology. Coverage of topics such as Rating & Service Capacity and Distribution Automation as full chapters illustrate the depth provided within the text in a succinct manner.',
-                         style: TextStyle(
+                         loan.book.description,
+                         style: const TextStyle(
                            fontSize: 18,
                          ),
                        ),

@@ -19,8 +19,8 @@ class UserController extends GetxController{
       return user;
   }
 
-   userSignupController(name, lastName, rollNumber, email, phoneNumber, password, role)async{
-    var user = UserService.userSignupService(name, lastName, rollNumber, email, phoneNumber, password, role);
+   userSignupController(name, lastName, rollNumber, course, email, phoneNumber, password, role)async{
+    var user = UserService.userSignupService(name, lastName, rollNumber, course, email, phoneNumber, password, role);
       return user;
   }
 }

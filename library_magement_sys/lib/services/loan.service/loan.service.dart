@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:library_magement_sys/models/loan.model/all.loans.model.dart';
-import 'package:library_magement_sys/models/loan.model/loan.model.dart';
+import 'package:library_magement_sys/models/loan.model/student.loan.model.dart';
 import 'package:library_magement_sys/models/loan.model/model.dart';
 import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,7 +32,7 @@ class LoanService{
 
   }
 
-  static Future<List<LoansModel>?>studentLoans() async {
+  static Future<List<StudentLoanns>?>studentLoans() async {
      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     Map<String, dynamic> payload = Jwt.parseJwt(token!);
@@ -42,7 +42,7 @@ class LoanService{
 });
    if(response.statusCode == 200){
      String jsonString = response.body;
-    var stdloans = loansModelFromJson(jsonString);
+    var stdloans = studentLoannsFromJson(jsonString);
     return [stdloans];
    }else{
      return null;

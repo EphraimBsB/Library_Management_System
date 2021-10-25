@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final singleBookModel = singleBookModelFromJson(jsonString);
+//     final singleSingleBookModel = singleBookModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -26,7 +26,7 @@ class SingleBookModel {
 
 class SingleBook {
     SingleBook({
-       required this.id,
+        required this.id,
         required this.title,
         required this.author,
         required this.description,
@@ -36,23 +36,19 @@ class SingleBook {
         required this.copies,
         required this.status,
         required this.image,
-        required this.updatedAt,
-        required this.createdAt,
         required this.location,
     });
 
     int id;
     String title;
     String author;
-    String ddc;
     String description;
-    int accNumber;
+    String ddc;
+    String accNumber;
     String category;
-    int copies;
+    String copies;
     String status;
     String image;
-    DateTime updatedAt;
-    DateTime createdAt;
     Location location;
 
     factory SingleBook.fromJson(Map<String, dynamic> json) => SingleBook(
@@ -66,13 +62,11 @@ class SingleBook {
         copies: json["copies"],
         status: json["status"],
         image: json["image"],
-        updatedAt: DateTime.parse(json["updatedAt"]),
-        createdAt: DateTime.parse(json["createdAt"]),
         location: Location.fromJson(json["Location"]),
     );
 
     Map<String, dynamic> toJson() => {
-         "id": id,
+        "id": id,
         "title": title,
         "author": author,
         "description": description,
@@ -82,8 +76,6 @@ class SingleBook {
         "copies": copies,
         "status": status,
         "image": image,
-        "updatedAt": updatedAt.toIso8601String(),
-        "createdAt": createdAt.toIso8601String(),
         "Location": location.toJson(),
     };
 }

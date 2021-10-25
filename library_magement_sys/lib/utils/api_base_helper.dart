@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:library_magement_sys/utils/app_exceptions.dart';
 import 'package:get/get.dart';
+import 'package:library_magement_sys/views/dialogs/snack.bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiBaseHelper {
   
 final String _baseUrl = "http://localhost:5000/";
  var client = http.Client(); 
+ var Snackbar = SnackBarDialog();
 Future<dynamic> get(String url) async {
   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
@@ -76,25 +78,11 @@ dynamic _returnResponse(http.Response response) {
     case 400:
       throw BadRequestException(response.body.toString());
     case 409:
-      Get.snackbar(
-      "", "Already Exist",
-      messageText:  const Text(
-            'Already Exist',
-            style: TextStyle(
-              fontSize: 26,
-              color: Colors.red
-              ),
-            textAlign: TextAlign.center,
-          ),
-          snackPosition: SnackPosition.TOP,
-          margin: const EdgeInsets.fromLTRB(50, 100, 50, 0),
-          maxWidth: 500,
-          colorText: Colors.red,
-          animationDuration: const Duration(milliseconds: 2000)
-          );
+      Snackbar.dialog('Already Exist', Colors.red);
       throw ConflictsException(response.body.toString()); 
     case 401:
     case 403:
+      Snackbar.dialog('Invalid Credentials', Colors.red);
       throw UnauthorisedException(response.body.toString());
     case 500:
     default:

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'package:library_magement_sys/models/loan.model/loan.model.dart';
+import 'package:library_magement_sys/models/loan.model/student.loan.model.dart';
 
 class StudentLoanWidget extends StatelessWidget {
 
@@ -26,7 +26,7 @@ class StudentLoanWidget extends StatelessWidget {
                         decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             image: DecorationImage(
-                              image: AssetImage('assets/ephraim.png'),
+                              image: AssetImage('assets/person.png'),
                               fit: BoxFit.contain,
                             )),
                       ),
@@ -60,12 +60,12 @@ class StudentLoanWidget extends StatelessWidget {
                           const SizedBox(
                             height: 5,
                           ),
-                          const Text(
-                            'Course: Bsc.CE',
-                            style: TextStyle(
-                              fontSize: 18,
-                            ),
-                          ),
+                          //  const Text(
+                          //   'Course: BAIT',
+                          //   style: TextStyle(
+                          //     fontSize: 18,
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],

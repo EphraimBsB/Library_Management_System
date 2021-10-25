@@ -68,7 +68,7 @@ class ShowBookWidget extends StatelessWidget {
                         const SizedBox(
                      height: 20,
                    ),
-                   book.status == 'borrowed'? Text(
+                   book.status == 'Borrowed'? Text(
                          'Status: ${book.status}',
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),

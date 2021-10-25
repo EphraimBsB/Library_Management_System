@@ -58,7 +58,7 @@ class _SearchPageState extends State<SearchPage> {
                        ),
                        onSubmitted: (text) {
                         if(text.isEmpty) {
-                          Get.snackbar("Error", "Please input a wright word",snackPosition: SnackPosition.TOP);
+                          Get.snackbar("Error", "Wrong Input",snackPosition: SnackPosition.TOP);
                         }else {
                           bookController!.bookSearch(text);
                         }
@@ -74,7 +74,7 @@ class _SearchPageState extends State<SearchPage> {
                       onPressed: (){
                         String searchText = searchTextController.text;
                         if(searchText.isEmpty) {
-                          Get.snackbar("Error", "Please input a wright word",snackPosition: SnackPosition.TOP);
+                          Get.snackbar("Error", "Wrong Input",snackPosition: SnackPosition.TOP);
                         }else {
                           bookController!.bookSearch(searchText);
                         }

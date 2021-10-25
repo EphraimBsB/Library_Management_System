@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:library_magement_sys/models/loan.model/all.loans.model.dart';
-import 'package:library_magement_sys/models/loan.model/loan.model.dart';
+import 'package:library_magement_sys/models/loan.model/student.loan.model.dart';
 import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
 import 'package:library_magement_sys/services/loan.service/loan.service.dart';
 
@@ -29,7 +29,7 @@ class LoanController extends GetxController{
   studentLoanController() async {
     var studentloans = await LoanService.studentLoans();
     var stdloans = studentloans!.first.loans;
-    print("Student: $stdloans");
+    print(stdloans);
     if(studentloans != null){
       studentLoans.value = [stdloans];
     }else{
@@ -43,7 +43,6 @@ class LoanController extends GetxController{
     if(loans != null){
       loansList.value = loan;
     }
-    
   }
 
    singleLoanController(act) async { 

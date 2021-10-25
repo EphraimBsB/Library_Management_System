@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final loansModel = loansModelFromJson(jsonString);
+//     final studentLoanns = studentLoannsFromJson(jsonString);
 
 import 'dart:convert';
 
-LoansModel loansModelFromJson(String str) => LoansModel.fromJson(json.decode(str));
+StudentLoanns studentLoannsFromJson(String str) => StudentLoanns.fromJson(json.decode(str));
 
-String loansModelToJson(LoansModel data) => json.encode(data.toJson());
+String studentLoannsToJson(StudentLoanns data) => json.encode(data.toJson());
 
-class LoansModel {
-    LoansModel({
+class StudentLoanns {
+    StudentLoanns({
         required this.loans,
     });
 
     Loans loans;
 
-    factory LoansModel.fromJson(Map<String, dynamic> json) => LoansModel(
+    factory StudentLoanns.fromJson(Map<String, dynamic> json) => StudentLoanns(
         loans: Loans.fromJson(json["loans"]),
     );
 
@@ -51,7 +51,7 @@ class Loan {
         required this.bookId,
         required this.issueDate,
         required this.dueDate,
-        required this.returnDate,
+        this.returnDate,
         required this.status,
         required this.book,
     });
@@ -61,7 +61,7 @@ class Loan {
     int bookId;
     DateTime issueDate;
     DateTime dueDate;
-    DateTime? returnDate;
+    dynamic returnDate;
     String status;
     Book book;
 
@@ -71,7 +71,7 @@ class Loan {
         bookId: json["bookId"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
-        returnDate: json["returnDate"] == null ? null : DateTime.parse(json["returnDate"]),
+        returnDate: json["returnDate"],
         status: json["status"],
         book: Book.fromJson(json["Book"]),
     );
@@ -82,7 +82,7 @@ class Loan {
         "bookId": bookId,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
-        "returnDate": returnDate == null ? null : returnDate!.toIso8601String(),
+        "returnDate": returnDate,
         "status": status,
         "Book": book.toJson(),
     };
@@ -104,7 +104,7 @@ class Book {
     String title;
     String author;
     String ddc;
-    int accNumber;
+    String accNumber;
     String category;
     String status;
     String image;
@@ -137,6 +137,7 @@ class User {
         required this.id,
         required this.name,
         required this.lastName,
+        this.course,
         required this.rollNumber,
         required this.email,
         required this.phoneNumber,
@@ -145,6 +146,7 @@ class User {
     int id;
     String name;
     String lastName;
+    dynamic course;
     String rollNumber;
     String email;
     String phoneNumber;
@@ -153,6 +155,7 @@ class User {
         id: json["id"],
         name: json["name"],
         lastName: json["last_name"],
+        course: json["course"],
         rollNumber: json["roll_number"],
         email: json["email"],
         phoneNumber: json["phone_number"],
@@ -162,6 +165,7 @@ class User {
         "id": id,
         "name": name,
         "last_name": lastName,
+        "course": course,
         "roll_number": rollNumber,
         "email": email,
         "phone_number": phoneNumber,

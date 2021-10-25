@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/controllers/users.controller/user.controller.dart';
-import 'package:library_magement_sys/views/pages/book.pages/searched.book.page.dart';
-import 'package:library_magement_sys/views/pages/user.pages/signup.page.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
 import 'package:library_magement_sys/constants/text.field.dart';
 
@@ -37,26 +35,8 @@ class LibrarianLoginPage extends StatelessWidget {
                 height: 20,
               ),
            TextFieldWidget(label: 'Password', controller: password,),
-                 const  SizedBox(
-                height: 3,
-              ),     
-            Container(
-              alignment: Alignment.centerRight,
-              width: 0.4*width,
-              child: TextButton(
-                onPressed: (){
-                  Get.toNamed("/register");
-                }, 
-                child:const Text(
-                  "Create Account",
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                  ),
-                  ),
-                  )
-              ), 
           const  SizedBox(
-                height: 7,
+                height: 20,
               ),
            TextButton(
                     onPressed: (){

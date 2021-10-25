@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:library_magement_sys/controllers/books/book.management.controller.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
 import 'package:library_magement_sys/constants/text.field.dart';
+import 'package:library_magement_sys/views/dialogs/snack.bar.dart';
 
 class BooksManagement extends StatefulWidget {
    BooksManagement({ Key? key }) : super(key: key);
@@ -42,7 +43,7 @@ class _BooksManagementState extends State<BooksManagement> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    
+    var Snackbar = SnackBarDialog();
     
     return Center(
       child: Container(
@@ -247,22 +248,7 @@ class _BooksManagementState extends State<BooksManagement> {
                             ddcText.isEmpty || accNumberText.isEmpty|| categoryText == '' ||
                             copiesText.isEmpty|| imageUrlText.isEmpty|| 
                             blockText.isEmpty || columnText.isEmpty ||rowText.isEmpty){
-                             Get.snackbar(
-                                "", "Please fill all the inputs ",
-                                messageText: const Text(
-                                  "Please fill out all the inputs ",
-                                  style: TextStyle(
-                                    fontSize: 26,
-                                    color: Colors.red
-                                  ),
-                                  textAlign: TextAlign.center,
-                                  ),
-                                snackPosition: SnackPosition.TOP,
-                                margin: const EdgeInsets.fromLTRB(50, 100, 50, 0),
-                                maxWidth: 500,
-                                colorText: Colors.red,
-                                animationDuration: const Duration(milliseconds: 3000)
-                                );
+                              Snackbar.dialog('Please fill out all the inputs ', Colors.red);
                           }else{
                           bookController.createdBooks(titleText, authorText, descriptionText, ddcText, accNumberText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
                           setState(() {});
@@ -478,15 +464,21 @@ class _BooksManagementState extends State<BooksManagement> {
                                 ),
                                 ),
                                     ),),
-                                   DataCell(Text(
-                                    book.title,
-                                    style: const TextStyle(fontSize: 16),
+                                   DataCell(SizedBox(
+                                    height: 50,
+                                    width: 200,
+                                    child: Text(
+                                      book.title,
+                                      style: const TextStyle(fontSize: 16),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
                                   )),
                                    DataCell(Text(
                                     book.author,
                                     style: const TextStyle(fontSize: 16),
                                   )),
-                                  DataCell(Container(
+                                  DataCell(SizedBox(
                                     height: 50,
                                     width: 200,
                                     child: Text(
@@ -561,10 +553,11 @@ class _BooksManagementState extends State<BooksManagement> {
                 ListTile(
                   title: const Text('Register Student'),
                   onTap: () {
-                    },
+                    Get.toNamed("/register");
+                  },
                 ),
                 ListTile(
-                  title: const Text('Item 2'),
+                  title: const Text('All Users'),
                   onTap: () {},
                 ),
               ],

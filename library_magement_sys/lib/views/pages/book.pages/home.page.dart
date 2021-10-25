@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                        ),
                        onSubmitted: (text) {
                          if(text.isEmpty) {
-                          Get.snackbar("Error", "Please input a wright word",snackPosition: SnackPosition.TOP);
+                          Get.snackbar("", "Wrong Input",snackPosition: SnackPosition.TOP);
                         }else {
                           Get.toNamed("/search", arguments: text);
                         }
@@ -114,16 +114,31 @@ class _HomePageState extends State<HomePage> {
                 ),
                   Row(
                     children: [
-                      const Align(
+                       Align(
                       alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: EdgeInsets.only(left:20),
-                        child: Text(
-                        'All Books',
-                        style: TextStyle(
-                        fontSize: 30,
-                ),
-              ),
+                        padding: const EdgeInsets.only(left:20),
+                        child: TextButton(
+                          onPressed: (){
+                            filterBooks.clear();
+                            setState(() {
+                            firstButtonState = false;
+                            secondButtonState = false;
+                            thirdButtonState = false;
+                            fourthButtonState = false;
+                            fithButtonState = false;
+                            sixthButtonState = false;
+                            });
+                            
+                          },
+                          child: const Text(
+                          'All Books',
+                          style: TextStyle(
+                          fontSize: 30,
+                          color: Colors.black
+                         ),
+                        ),
+                        ),
                       ),
                 ),
                 const SizedBox(width: 20,),
@@ -175,7 +190,7 @@ class _HomePageState extends State<HomePage> {
   searchButtonFunct(){
     String searchText = searchTextController.text;
     if(searchText.isEmpty) {
-     Get.snackbar("Error", "Please input a wright word",snackPosition: SnackPosition.TOP);
+     Get.snackbar("Error", "Wrong Input",snackPosition: SnackPosition.TOP);
     }else {
     Get.toNamed("/search", arguments: searchText);
     }

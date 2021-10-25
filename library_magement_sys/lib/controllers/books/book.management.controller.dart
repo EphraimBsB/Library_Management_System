@@ -4,10 +4,12 @@ import 'package:get/get.dart';
 import 'package:library_magement_sys/models/book.model/book.model.dart';
 import 'package:library_magement_sys/models/book.model/single.book.model.dart';
 import 'package:library_magement_sys/services/book.service/book.service.dart';
+import 'package:library_magement_sys/views/dialogs/snack.bar.dart';
 
 class BookManagementController extends GetxController{
   var isLoading = true.obs;
   var allbookslist = <Book>[].obs;
+  var Snackbar = SnackBarDialog();
 
   get searchText => null;
 
@@ -43,23 +45,7 @@ class BookManagementController extends GetxController{
    try{
     isLoading(true);
    var book = await BookService.create(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row);
-   print("created book: $book");
-   Get.snackbar(
-      "", "Book Created Sucecessfully",
-      messageText:  Text(
-            'Book ${book!.message}',
-            style: const TextStyle(
-              fontSize: 26,
-              color: Colors.green
-              ),
-            textAlign: TextAlign.center,
-          ),
-          snackPosition: SnackPosition.TOP,
-          margin: const EdgeInsets.fromLTRB(50, 100, 50, 0),
-          maxWidth: 500,
-          colorText: Colors.red,
-          animationDuration: const Duration(milliseconds: 2000)
-          );
+   Snackbar.dialog('Book ${book!.message}', Colors.green);
    }finally{
      isLoading(false);
    }
@@ -79,23 +65,7 @@ class BookManagementController extends GetxController{
   exportExcel()async{
     var file = await BookService.export();
     var message = file.toString().split(':');
-    print(file);
-    Get.snackbar(
-      "", "file exported Sucecessfully",
-      messageText:  Text(
-            message.elementAt(1),
-            style: const TextStyle(
-              fontSize: 26,
-              color: Colors.green
-              ),
-            textAlign: TextAlign.center,
-          ),
-          snackPosition: SnackPosition.TOP,
-          margin: const EdgeInsets.fromLTRB(50, 100, 50, 0),
-          maxWidth: 500,
-          colorText: Colors.red,
-          animationDuration: const Duration(milliseconds: 2000)
-          );
+    Snackbar.dialog(message.elementAt(1), Colors.green);
   }
    
 }

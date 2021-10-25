@@ -4,10 +4,7 @@
 
 import 'dart:convert';
 
-BookModel bookModelFromJson(String str) {
-
- return BookModel.fromJson(json.decode(str));
-  }
+BookModel bookModelFromJson(String str) => BookModel.fromJson(json.decode(str));
 
 String bookModelToJson(BookModel data) => json.encode(data.toJson());
 
@@ -46,19 +43,17 @@ class Book {
     int id;
     String title;
     String author;
-    String ddc;
     String description;
-    int accNumber;
+    String ddc;
+    String accNumber;
     String category;
-    int copies;
+    String copies;
     String status;
     String image;
     DateTime createdAt;
     Location location;
 
-    factory Book.fromJson(Map<String, dynamic> json)  {
-      // print('BookModel: $json');
-      return Book(
+    factory Book.fromJson(Map<String, dynamic> json) => Book(
         id: json["id"],
         title: json["title"],
         author: json["author"],
@@ -68,10 +63,10 @@ class Book {
         category: json["category"],
         copies: json["copies"],
         status: json["status"],
-        image: json["image"] == null ? null : json["image"],
+        image: json["image"],
         createdAt: DateTime.parse(json["createdAt"]),
         location: Location.fromJson(json["Location"]),
-    );}
+    );
 
     Map<String, dynamic> toJson() => {
         "id": id,
@@ -83,7 +78,7 @@ class Book {
         "category": category,
         "copies": copies,
         "status": status,
-        "image": image == null ? null : image,
+        "image": image,
         "createdAt": createdAt.toIso8601String(),
         "Location": location.toJson(),
     };

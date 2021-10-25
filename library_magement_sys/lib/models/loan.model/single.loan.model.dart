@@ -44,8 +44,8 @@ class SingleLoans {
     DateTime issueDate;
     DateTime dueDate;
     dynamic returnDate;
-    DateTime updatedAt;
     String status;
+    DateTime updatedAt;
     Book book;
     User user;
 
@@ -81,6 +81,7 @@ class Book {
         required this.id,
         required this.title,
         required this.author,
+        required this.description,
         required this.ddc,
         required this.accNumber,
         required this.category,
@@ -91,8 +92,9 @@ class Book {
     int id;
     String title;
     String author;
+    String description;
     String ddc;
-    int accNumber;
+    String accNumber;
     String category;
     String status;
     String image;
@@ -101,6 +103,7 @@ class Book {
         id: json["id"],
         title: json["title"],
         author: json["author"],
+        description: json["description"],
         ddc: json["ddc"],
         accNumber: json["acc_number"],
         category: json["category"],
@@ -112,6 +115,7 @@ class Book {
         "id": id,
         "title": title,
         "author": author,
+        "description": description,
         "ddc": ddc,
         "acc_number": accNumber,
         "category": category,
@@ -126,6 +130,7 @@ class User {
         required this.name,
         required this.lastName,
         required this.rollNumber,
+        required this.course,
         required this.email,
         required this.phoneNumber,
     });
@@ -134,6 +139,7 @@ class User {
     String name;
     String lastName;
     String rollNumber;
+    String course;
     String email;
     String phoneNumber;
 
@@ -142,6 +148,7 @@ class User {
         name: json["name"],
         lastName: json["last_name"],
         rollNumber: json["roll_number"],
+        course: json["course"],
         email: json["email"],
         phoneNumber: json["phone_number"],
     );
@@ -151,6 +158,7 @@ class User {
         "name": name,
         "last_name": lastName,
         "roll_number": rollNumber,
+        "course": course,
         "email": email,
         "phone_number": phoneNumber,
     };
