@@ -20,12 +20,15 @@ class _SingleLoanState extends State<SingleLoan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Obx(() => ListView.builder(
-        itemCount:loanController.singleLoanList.length ,
-        itemBuilder: (context, index){
-                   return ShowSingleLoanWidget(loanController.singleLoanList[index], callback);
-                 },   
-        )
+      body: Container(
+      padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+        child: Obx(() => ListView.builder(
+          itemCount:loanController.singleLoanList.length ,
+          itemBuilder: (context, index){
+                     return ShowSingleLoanWidget(loanController.singleLoanList[index], callback);
+                   },   
+          )
+        ),
       ) 
     );
   }

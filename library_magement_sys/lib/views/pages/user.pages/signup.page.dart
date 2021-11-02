@@ -24,10 +24,10 @@ class SignupPage extends StatelessWidget {
     double height = MediaQuery.of(context).size.height;
     var Snackbar = SnackBarDialog();
 
-    return  Container(
+    return  Scaffold(
+      body: Container(
       padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-      child: Scaffold(
-        body: Column(
+        child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [

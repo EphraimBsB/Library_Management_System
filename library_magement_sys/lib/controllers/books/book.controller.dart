@@ -8,7 +8,6 @@ class BookController extends GetxController{
   var isLoading = true.obs;
   var bookslist = <Book>[].obs;
   var showBook = <SingleBook>[].obs;
-  // var allbookslist = <Book>[].obs;
   var searchTextBook;
 
   get searchText => null;
@@ -16,7 +15,6 @@ class BookController extends GetxController{
   @override
   void onInit(){
     bookSearch(searchText);
-    // findOneBook();
     search();
     super.onInit();
   }
@@ -60,17 +58,5 @@ class BookController extends GetxController{
      isLoading(false);
    }
   }
-
-  // allCreatedBooks(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row) async { 
-  // var id = Get.parameters['id'];
-  //  try{
-  //   isLoading(true);
-  //  var books = await BookService.allBooks(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row);
-  //  var allBook = books!.first.books;
-  //   allbookslist.value = allBook;
-  //  }finally{
-  //    isLoading(false);
-  //  }
-  // }
    
 }

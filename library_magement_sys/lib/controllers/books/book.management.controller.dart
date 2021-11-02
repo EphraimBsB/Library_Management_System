@@ -68,4 +68,9 @@ class BookManagementController extends GetxController{
     Snackbar.dialog(message.elementAt(1), Colors.green);
   }
    
+  deleteABook(id) async{
+    var res = await BookService.deleteBook(id);
+    var message = res.toString().split(':');
+    Snackbar.dialog(message.elementAt(1), Colors.green);
+  }
 }

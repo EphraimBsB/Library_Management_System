@@ -9,7 +9,7 @@ class WelcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
         child: Column(
           children: [
             Center(

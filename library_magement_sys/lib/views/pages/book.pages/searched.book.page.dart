@@ -12,12 +12,15 @@ class SearchedBook extends StatelessWidget {
   Widget build(BuildContext context) {
     // bookController.findOneBook();
     return Scaffold(
-      body: Obx(() => ListView.builder(
-        itemCount:bookController.showBook.length ,
-        itemBuilder: (context, index){
-                   return ShowBookWidget(bookController.showBook[index]);
-                 },   
-        ), )
+      body: Container(
+      padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+        child: Obx(() => ListView.builder(
+          itemCount:bookController.showBook.length ,
+          itemBuilder: (context, index){
+                     return ShowBookWidget(bookController.showBook[index]);
+                   },   
+          ), ),
+      )
       
       
     );

@@ -69,11 +69,9 @@ dynamic _returnResponse(http.Response response) {
   switch (response.statusCode) {
     case 200:
       var responseJson = response.body;
-      // print('Response: $responseJson');
       return responseJson;
     case 201:
       var responseJson = response.body;
-      // print('Response: $responseJson');
       return responseJson;
     case 400:
       throw BadRequestException(response.body.toString());
@@ -84,6 +82,12 @@ dynamic _returnResponse(http.Response response) {
     case 403:
       Snackbar.dialog('Invalid Credentials', Colors.red);
       throw UnauthorisedException(response.body.toString());
+    case 404:
+      Get.defaultDialog(
+         title: "Error",
+         middleText: ' The Resource was Deleted',
+       );
+      throw BadRequestException('Deleted');
     case 500:
     default:
        Get.defaultDialog(

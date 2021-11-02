@@ -34,8 +34,6 @@ class BookService {
       var book = createBookModelFromJson(response);
       var bookId = book.book.id;
      await createLocation(bookId, block, column, row);
-      print("CreatedBook:$book");
-
       return book;
       
   }
@@ -48,15 +46,12 @@ class BookService {
       'row': row,
     };
     var response = await _helper.post("book/location",body);
-      print("locationResponse: $response");
       return response;
       
   }
   static Future<List<BookModel>?> listAllBooks()async{
-      var response = await _helper.get("book/books");
-     
+    var response = await _helper.get("book/books");
     var books =  bookModelFromJson(response);
-    print('All Books: ${books.books.first}');
     return [books];
   }
 
@@ -64,6 +59,11 @@ class BookService {
     var response = await _helper.get("book/export");
       return response;
       
+  }
+
+  static Future deleteBook(id)async{
+     var response = await _helper.delete("book/$id");
+    return response;
   }
 
 }

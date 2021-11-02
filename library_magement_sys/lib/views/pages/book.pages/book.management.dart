@@ -251,7 +251,9 @@ class _BooksManagementState extends State<BooksManagement> {
                               Snackbar.dialog('Please fill out all the inputs ', Colors.red);
                           }else{
                           bookController.createdBooks(titleText, authorText, descriptionText, ddcText, accNumberText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
-                          setState(() {});
+                          setState(() {
+                            bookController;
+                          });
                          }
                         },
                         child: Container(
@@ -493,7 +495,7 @@ class _BooksManagementState extends State<BooksManagement> {
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                    DataCell(Text(
-                                    '${book.accNumber}',
+                                    book.accNumber,
                                     style:const TextStyle(fontSize: 16),
                                   )),
                                    DataCell(Text(
@@ -501,7 +503,7 @@ class _BooksManagementState extends State<BooksManagement> {
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                   DataCell(Text(
-                                    '${book.copies}',
+                                    book.copies,
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                    DataCell(
@@ -525,7 +527,21 @@ class _BooksManagementState extends State<BooksManagement> {
                                   IconButton(
                                      icon: const Icon(Icons.delete),
                                      color: Colors.red[700],
-                                     onPressed: () {},
+                                     onPressed: () {
+                                       Get.defaultDialog(
+                                          middleText: 'Are you sure you want to delete',
+                                          textConfirm: 'Delete',
+                                          confirmTextColor: Colors.white,
+                                          onConfirm: (){
+                                             bookController.deleteABook(book.id);
+                                            setState(() {
+                                              bookController;
+                                            });
+                                          },
+                                          buttonColor: Colors.red
+                                        );
+                                      
+                                     },
                                   ),
                                         ],
                                       )),
@@ -558,7 +574,9 @@ class _BooksManagementState extends State<BooksManagement> {
                 ),
                 ListTile(
                   title: const Text('All Users'),
-                  onTap: () {},
+                  onTap: () {
+                    Get.toNamed("/users_management");
+                  },
                 ),
               ],
             ),

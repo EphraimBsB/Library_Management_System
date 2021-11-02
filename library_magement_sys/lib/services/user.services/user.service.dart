@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:jwt_decode/jwt_decode.dart';
+import 'package:library_magement_sys/models/user.model/user.model.dart';
 import 'package:library_magement_sys/utils/api_base_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,7 +19,7 @@ class UserService{
       'password':password,
     };
 
-    var response = await _helper.post("users/login",body);
+    var response = await _helper.post("user/login",body);
     var responseBody = jsonDecode(response);
       var token = sharedPreferences.setString("token", responseBody['token']);
       Get.offNamed("/student_loans");
@@ -32,7 +33,7 @@ class UserService{
       'password':password,
     };
 
-    var response = await _helper.post("users/login",body);
+    var response = await _helper.post("user/login",body);
     var responseBody = jsonDecode(response);
       var token = sharedPreferences.setString("token", responseBody['token']);
       var user = sharedPreferences.getString("token");
@@ -63,8 +64,13 @@ class UserService{
       'role': role,
     };
 
-    var response = await _helper.post("users/register",body);
+    var response = await _helper.post("user/register",body);
       return response;
+  }
+
+  static Future<List<UserModel>> listAllUsers()async{
+    var response = await _helper.get("user/users");
+    return [userModelFromJson(response)]; 
   }
 
 }

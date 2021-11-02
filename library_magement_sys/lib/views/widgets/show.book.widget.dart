@@ -24,9 +24,10 @@ class ShowBookWidget extends StatelessWidget {
            Container(height: height*0.1,),
             Row(
                mainAxisAlignment: MainAxisAlignment.center,
+               crossAxisAlignment: CrossAxisAlignment.start,
                children: [
                  SizedBox(
-                   height: 500,
+                   height: 550,
                    width: 250,
                    child: Column(
                      crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,8 +55,10 @@ class ShowBookWidget extends StatelessWidget {
                        ),
                         Text(
                          'Author: ${book.author}',
+                         maxLines: 2,
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
+                             overflow: TextOverflow.ellipsis,
                        ),
                        const SizedBox(
                          height: 5,
@@ -97,28 +100,32 @@ class ShowBookWidget extends StatelessWidget {
                   const SizedBox(
                    width: 20,
                  ),
-                  SizedBox(
-                   width: 700,
-                   height: 450,
-                   child: Text(
-                     book.description,
-                     style: const TextStyle(
-                       fontSize: 18,
-                     ),
-                   ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                       width: 700,
+                       height: 430,
+                       child: Text(
+                         book.description,
+                         style: const TextStyle(
+                           fontSize: 18,
+                         ),
+                       ),
                  ),
+                  const SizedBox(
+                   height: 30,
+                 ),
+               Text(
+                    'To : Block ${book.location.block},  Column : ${book.location.column},  Section: ${book.location.section},  Row : ${book.location.row},  DDC : ${book.location.ddc}',
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                    ],
+                  ),
                ],
              ),
              
-              const SizedBox(
-                   height: 20,
-                 ),
-              Center(
-               child: Text(
-                     'To : Block ${book.location.block},  Column : ${book.location.column},  Section: ${book.location.section},  Row : ${book.location.row},  DDC : ${book.location.ddc}',
-                     style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                   ),
-             ),
+              
          ],
          );
   }

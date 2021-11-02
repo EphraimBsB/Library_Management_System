@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:library_magement_sys/controllers/books/book.controller.dart';
-import 'package:library_magement_sys/controllers/books/book.management.controller.dart';
-import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
+import 'package:library_magement_sys/controllers/users.controller/user.controller.dart';
 
-class LoansManagement extends StatelessWidget {
-   LoansManagement({ Key? key }) : super(key: key);
-   LoanController loanController = Get.put(LoanController());
+class UserManagement extends StatelessWidget {
+   UserManagement({ Key? key }) : super(key: key);
+   UserController userController = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +23,7 @@ class LoansManagement extends StatelessWidget {
               const AppBarwidget(),
               Container(height: 30,),
               const Text(
-              'Students Loans Management',
+              'Library Users Management',
               style: TextStyle(
                 fontSize: 24,
               ),
@@ -41,19 +38,25 @@ class LoansManagement extends StatelessWidget {
                       columns: const <DataColumn>[
                         DataColumn(
                           label: Text(
-                            'Book Title',
+                            'Name',
                             style: TextStyle(fontSize:18),
                           ),
                         ),
                         DataColumn(
                           label: Text(
-                            'Author',
+                            'Last Name',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
                         DataColumn(
                           label: Text(
-                            'Student',
+                            'Roll No',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
+                            'Course',
                             style: TextStyle(fontSize: 18),
                           ),
                         ),
@@ -64,91 +67,83 @@ class LoansManagement extends StatelessWidget {
                           ),
                         ),
                         DataColumn(
-                          label: Text(
-                            'Phone No',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
-                        DataColumn(
                             label: Text(
-                              'Issue Date',
+                              'Phone No',
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
                           DataColumn(
                             label: Text(
-                              'Due Date',
+                              'Role',
                               style: TextStyle(fontSize: 20),
                             ),
                           ),
                           DataColumn(
-                            label: Text(
-                              'Return',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                          ),
-                        DataColumn(
-                          label: Text(
-                            'Status',
-                            style: TextStyle(fontSize: 18),
-                          ),
-                        ),
+                                label: Text(
+                                  '',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
                       ],
-                      rows: loanController.loansList.map((loan) => DataRow(
-                          onSelectChanged: (bool? selected) {
-                          if (selected!) {
-                            Get.toNamed("/loans_management/loan/${loan.id}");
-                            loanController.singleLoanController('');
-                          }
-                           },
+                      rows: userController.allUserslist.map((user) => DataRow(
                           cells: <DataCell>[
                              DataCell(Text(
-                              loan.book.title,
+                              user.name,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
-                              loan.book.author,
+                              user.lastName,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
-                              loan.user.name +' ${loan.user.lastName}',
+                              user.rollNumber,
                               style:const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
-                              loan.user.email,
+                              user.course,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(
                                Text(
-                              loan.user.phoneNumber,
+                              user.email,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
-                              DateFormat.yMMMd().format(loan.issueDate),
+                              user.phoneNumber,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
-                              DateFormat.yMMMd().format(loan.dueDate),
+                              user.role,
                               style: const TextStyle(fontSize: 16),
                             )),
-                             DataCell(Text(
-                              loan.returnDate==null?'':DateFormat.yMMMd().format(loan.returnDate!),
-                              style: const TextStyle(fontSize: 16),
-                            )),
-                             DataCell(Container(
-                               width: 90,
-                               height: 25,
-                               decoration: BoxDecoration(
-                               color: (loan.status == 'Overdue')?Colors.red[700]:loan.status == 'Returned'?Colors.yellow[700]:Colors.green[700],
-                               borderRadius: const BorderRadius.all(Radius.circular(5)),
-                        ),
-                               child: Center(
-                                 child: Text(
-                                  loan.status,
-                                  style:const TextStyle(fontSize: 16, color: Colors.white),textAlign: TextAlign.center,
-                            ),
-                               ),
-                             )),
+                             DataCell(
+                                      Row(
+                                        children: [
+                                  //         IconButton(
+                                  //    icon: const Icon(Icons.edit),
+                                  //    color: Colors.blue[700],
+                                  //    onPressed: () {},
+                                  // ),
+                                  IconButton(
+                                     icon: const Icon(Icons.delete),
+                                     color: Colors.red[700],
+                                     onPressed: () {
+                                      //  Get.defaultDialog(
+                                      //     middleText: 'Are you sure you want to delete',
+                                      //     textConfirm: 'Delete',
+                                      //     confirmTextColor: Colors.white,
+                                      //     onConfirm: (){
+                                      //        bookController.deleteABook(book.id);
+                                      //       setState(() {
+                                      //         bookController;
+                                      //       });
+                                      //     },
+                                      //     buttonColor: Colors.red
+                                      //   );
+                                     },
+                                  ),
+                                        ],
+                                      )),
                           ],
                         ),).toList()
                     
