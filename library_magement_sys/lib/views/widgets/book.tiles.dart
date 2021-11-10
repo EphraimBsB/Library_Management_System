@@ -51,14 +51,6 @@ class BookTile extends StatelessWidget {
                 const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
                 overflow: TextOverflow.ellipsis,
               ),
-               const SizedBox(height: 8),
-               Text(
-                'Category: ${bookModel.category}',
-                maxLines: 2,
-                style:
-                const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
-                overflow: TextOverflow.ellipsis,
-              ),
               const SizedBox(height: 8),
                Text(
                 'Status: ${bookModel.status}',

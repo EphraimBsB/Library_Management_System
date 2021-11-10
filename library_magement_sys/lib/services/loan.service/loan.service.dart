@@ -36,7 +36,6 @@ class LoanService{
      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     Map<String, dynamic> payload = Jwt.parseJwt(token!);
-    // var loan = await createLoan(book);
     var id = payload['id'];
    var response = await client.get(Uri.parse("http://localhost:5000/loan/userloans/$id"), headers: {'Access-Control-Allow-Origin': '*', HttpHeaders.authorizationHeader:"Bearer $token"
 });

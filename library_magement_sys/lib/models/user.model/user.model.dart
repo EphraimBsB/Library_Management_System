@@ -31,6 +31,7 @@ class User {
         required this.lastName,
         required this.rollNumber,
         required this.course,
+        required this.degree,
         required this.email,
         required this.phoneNumber,
         required this.password,
@@ -44,6 +45,7 @@ class User {
     String lastName;
     String rollNumber;
     String course;
+    String degree;
     String email;
     String phoneNumber;
     String password;
@@ -57,6 +59,7 @@ class User {
         lastName: json["last_name"],
         rollNumber: json["roll_number"],
         course: json["course"],
+        degree: json["degree"],
         email: json["email"],
         phoneNumber: json["phone_number"],
         password: json["password"],
@@ -71,6 +74,7 @@ class User {
         "last_name": lastName,
         "roll_number": rollNumber,
         "course": course,
+        "degree": degree,
         "email": email,
         "phone_number": phoneNumber,
         "password": password,

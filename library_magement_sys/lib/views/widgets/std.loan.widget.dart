@@ -60,12 +60,12 @@ class StudentLoanWidget extends StatelessWidget {
                           const SizedBox(
                             height: 5,
                           ),
-                          //  const Text(
-                          //   'Course: BAIT',
-                          //   style: TextStyle(
-                          //     fontSize: 18,
-                          //   ),
-                          // ),
+                            Text(
+                            'Course: ${student.user.course}',
+                            style: const TextStyle(
+                              fontSize: 18,
+                            ),
+                          ),
                         ],
                       ),
                     ],

@@ -71,7 +71,7 @@ class Loan {
         bookId: json["bookId"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
-        returnDate: json["returnDate"],
+        returnDate: json["returnDate"] == null ? null : DateTime.parse(json["returnDate"]),
         status: json["status"],
         book: Book.fromJson(json["Book"]),
     );
@@ -82,7 +82,7 @@ class Loan {
         "bookId": bookId,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
-        "returnDate": returnDate,
+        "returnDate": returnDate == null ? null : returnDate.toIso8601String(),
         "status": status,
         "Book": book.toJson(),
     };
@@ -94,7 +94,6 @@ class Book {
         required this.title,
         required this.author,
         required this.ddc,
-        required this.accNumber,
         required this.category,
         required this.status,
         required this.image,
@@ -104,7 +103,6 @@ class Book {
     String title;
     String author;
     String ddc;
-    String accNumber;
     String category;
     String status;
     String image;
@@ -114,7 +112,6 @@ class Book {
         title: json["title"],
         author: json["author"],
         ddc: json["ddc"],
-        accNumber: json["acc_number"],
         category: json["category"],
         status: json["status"],
         image: json["image"],
@@ -125,7 +122,6 @@ class Book {
         "title": title,
         "author": author,
         "ddc": ddc,
-        "acc_number": accNumber,
         "category": category,
         "status": status,
         "image": image,
@@ -137,7 +133,7 @@ class User {
         required this.id,
         required this.name,
         required this.lastName,
-        this.course,
+        required this.course,
         required this.rollNumber,
         required this.email,
         required this.phoneNumber,
@@ -146,7 +142,7 @@ class User {
     int id;
     String name;
     String lastName;
-    dynamic course;
+    String course;
     String rollNumber;
     String email;
     String phoneNumber;

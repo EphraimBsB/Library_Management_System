@@ -52,12 +52,13 @@ class UserService{
       }
   }
 
-  static Future userSignupService(name, lastName, rollNumber, course, email, phoneNumber, password, role) async {
+  static Future userSignupService(name, lastName, rollNumber, course, degree, email, phoneNumber, password, role) async {
      Map  body = {
       'name': name,
       'last_name':lastName,
       'roll_number': rollNumber,
       'course': course,
+      'degree': degree,
       'email': email,
       'phone_number': phoneNumber,
       'password': password,

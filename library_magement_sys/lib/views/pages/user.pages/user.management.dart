@@ -62,6 +62,12 @@ class UserManagement extends StatelessWidget {
                         ),
                         DataColumn(
                           label: Text(
+                            'Degree',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
                             'Email',
                             style: TextStyle(fontSize: 18),
                           ),
@@ -101,6 +107,10 @@ class UserManagement extends StatelessWidget {
                             )),
                              DataCell(Text(
                               user.course,
+                              style: const TextStyle(fontSize: 16),
+                            )),
+                            DataCell(Text(
+                              user.degree,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(

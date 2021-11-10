@@ -35,7 +35,6 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.accNumber,
         required this.category,
         required this.copies,
         required this.status,
@@ -49,7 +48,6 @@ class Book {
     String author;
     String ddc;
     String description;
-    String accNumber;
     String category;
     String copies;
     String status;
@@ -63,7 +61,6 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        accNumber: json["acc_number"],
         category: json["category"],
         copies: json["copies"],
         status: json["status"],
@@ -78,7 +75,6 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "acc_number": accNumber,
         "category": category,
         "copies": copies,
         "status": status,

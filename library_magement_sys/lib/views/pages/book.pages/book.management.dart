@@ -21,7 +21,6 @@ class _BooksManagementState extends State<BooksManagement> {
   TextEditingController author = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController ddc = TextEditingController();
-  TextEditingController accNumber = TextEditingController();
   TextEditingController category = TextEditingController();
   TextEditingController copies = TextEditingController();
   TextEditingController imageUrl = TextEditingController();
@@ -63,7 +62,6 @@ class _BooksManagementState extends State<BooksManagement> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // const AppBarwidget(),
                 Column(
                    mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,7 +91,7 @@ class _BooksManagementState extends State<BooksManagement> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextFieldWidget(label: 'Author', controller: author,),
-                    TextFieldWidget(label: 'AC Number', controller: accNumber,),
+                    TextFieldWidget(label: 'Copies', controller: copies,),
                   ],
                 ),
                   const  SizedBox(
@@ -127,16 +125,14 @@ class _BooksManagementState extends State<BooksManagement> {
                       value: value,
                       child: Text(value),
                     );
-                  }).toList(),
+                      }).toList(),
+                    ),
+                    ),
+                   );
+                  },
+                 ),
                 ),
-              ),
-            );
-          },
-        ),
-                ),
-
-                    // TextFieldWidget(label: 'Category', controller: category,),
-                   TextFieldWidget(label: 'Copies', controller: copies,),
+                    TextFieldWidget(label: 'Image Url', controller: imageUrl,),
                   ],
                 ),
                  const  SizedBox(
@@ -162,11 +158,11 @@ class _BooksManagementState extends State<BooksManagement> {
                      mainAxisAlignment: MainAxisAlignment.start,
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: [
-                       TextFieldWidget(label: 'Image Url', controller: imageUrl,),
-                       const  SizedBox(
-                      height: 10,
-                    ),
-                const Align(
+                       SizedBox(
+                      width: 0.4*width,
+                      height: 40,
+                      ),
+                    const Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
                       padding: EdgeInsets.only(left:45),
@@ -228,7 +224,6 @@ class _BooksManagementState extends State<BooksManagement> {
                       height: 20,
                     ),
                  Row(
-                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                        TextButton(
                         onPressed: (){
@@ -236,7 +231,6 @@ class _BooksManagementState extends State<BooksManagement> {
                           String authorText = author.text;
                           String descriptionText = description.text;
                           String ddcText = ddc.text;
-                          String accNumberText = accNumber.text;
                           String categoryText = _currentSelectedValue;
                           String copiesText = copies.text;
                           String imageUrlText = imageUrl.text;
@@ -245,12 +239,12 @@ class _BooksManagementState extends State<BooksManagement> {
                           String rowText = row.text;
                           if(
                             titleText.isEmpty || authorText.isEmpty || descriptionText.isEmpty || 
-                            ddcText.isEmpty || accNumberText.isEmpty|| categoryText == '' ||
+                            ddcText.isEmpty || categoryText == '' ||
                             copiesText.isEmpty|| imageUrlText.isEmpty|| 
                             blockText.isEmpty || columnText.isEmpty ||rowText.isEmpty){
                               Snackbar.dialog('Please fill out all the inputs ', Colors.red);
                           }else{
-                          bookController.createdBooks(titleText, authorText, descriptionText, ddcText, accNumberText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
+                          bookController.createdBooks(titleText, authorText, descriptionText, ddcText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
                           setState(() {
                             bookController;
                           });
@@ -417,12 +411,6 @@ class _BooksManagementState extends State<BooksManagement> {
                               ),
                               DataColumn(
                                 label: Text(
-                                  'ACC No',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
                                   'Category',
                                   style: TextStyle(fontSize: 18),
                                 ),
@@ -430,6 +418,12 @@ class _BooksManagementState extends State<BooksManagement> {
                                DataColumn(
                                 label: Text(
                                   'Copies',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Stock',
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ),
@@ -495,15 +489,15 @@ class _BooksManagementState extends State<BooksManagement> {
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                    DataCell(Text(
-                                    book.accNumber,
-                                    style:const TextStyle(fontSize: 16),
-                                  )),
-                                   DataCell(Text(
                                     book.category,
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                   DataCell(Text(
                                     book.copies,
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
+                                  DataCell(Text(
+                                    book.stock,
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                    DataCell(

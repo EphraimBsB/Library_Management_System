@@ -1,10 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/models/user.model/user.model.dart';
 import 'package:library_magement_sys/services/user.services/user.service.dart';
+import 'package:library_magement_sys/views/dialogs/snack.bar.dart';
 
 class UserController extends GetxController{
   var isLoading = true.obs;
  var allUserslist = <User>[].obs;
+ var Snackbar = SnackBarDialog();
   @override
   void onInit(){
     allusers();
@@ -21,8 +24,9 @@ class UserController extends GetxController{
       return user;
   }
 
-   userSignupController(name, lastName, rollNumber, course, email, phoneNumber, password, role)async{
-    var user = UserService.userSignupService(name, lastName, rollNumber, course, email, phoneNumber, password, role);
+   userSignupController(name, lastName, rollNumber, course, degree, email, phoneNumber, password, role)async{
+    var user = UserService.userSignupService(name, lastName, rollNumber, course, degree, email, phoneNumber, password, role);
+    Snackbar.dialog('Register Sucefully, Login', Colors.green);
       return user;
   }
 

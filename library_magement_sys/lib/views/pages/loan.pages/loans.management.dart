@@ -59,6 +59,12 @@ class LoansManagement extends StatelessWidget {
                         ),
                         DataColumn(
                           label: Text(
+                            'Roll No',
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
                             'Email',
                             style: TextStyle(fontSize: 18),
                           ),
@@ -113,6 +119,10 @@ class LoansManagement extends StatelessWidget {
                              DataCell(Text(
                               loan.user.name +' ${loan.user.lastName}',
                               style:const TextStyle(fontSize: 16),
+                            )),
+                            DataCell(Text(
+                              loan.user.rollNumber,
+                              style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
                               loan.user.email,

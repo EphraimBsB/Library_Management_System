@@ -10,7 +10,6 @@ class LoanController extends GetxController{
   var loansList = <AllLoan>[].obs;
   var singleLoanList = <SingleLoans>[].obs;
 
-  get book => null;
 
   get act => null;
 
@@ -18,7 +17,6 @@ class LoanController extends GetxController{
   void onInit(){
     allLoansController();
     singleLoanController(act);
-    // studentLoanController(book);
     super.onInit();
   }
 
@@ -29,7 +27,6 @@ class LoanController extends GetxController{
   studentLoanController() async {
     var studentloans = await LoanService.studentLoans();
     var stdloans = studentloans!.first.loans;
-    print(stdloans);
     if(studentloans != null){
       studentLoans.value = [stdloans];
     }else{

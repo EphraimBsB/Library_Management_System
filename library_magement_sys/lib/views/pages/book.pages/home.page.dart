@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                  ButtonWidget('Computer', secondButtonState, secondButtonFunct),
                  ButtonWidget('Engineering', thirdButtonState, thirdButtonFunct),
                  ButtonWidget('General', fourthButtonState, fourthButtonFunct),
-                 ButtonWidget('Indians', fithButtonState, fithButtonFunct),
+                 ButtonWidget('Asia', fithButtonState, fithButtonFunct),
                  ButtonWidget('Projects', sixthButtonState, sixthButtonFunct),
                  
                 ],

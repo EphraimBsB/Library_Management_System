@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/models/book.model/book.model.dart';
-import 'package:library_magement_sys/models/book.model/single.book.model.dart';
 import 'package:library_magement_sys/services/book.service/book.service.dart';
 import 'package:library_magement_sys/views/dialogs/snack.bar.dart';
 
@@ -11,40 +10,16 @@ class BookManagementController extends GetxController{
   var allbookslist = <Book>[].obs;
   var Snackbar = SnackBarDialog();
 
-  get searchText => null;
-
-  get accNumberTx => null;
-
-  get authorTx => null;
-
-  get block => null;
-
-  get categoryTx => null;
-
-  get column => null;
-
-  get ddcTx => null;
-
-  get imageUrl => null;
-
-  get row => null;
-
-  get titleTx => null;
-
-  get copiesTx => null;
-
-  get descriptionText => null;
-
   @override
   void onInit(){
    allCreatedBooks();
     super.onInit();
   }
 
-  createdBooks(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row) async { 
+  createdBooks(titleTx, authorTx, descriptionTx, ddcTx, categoryTx, copiesTx, imageUrl, block, column, row) async { 
    try{
     isLoading(true);
-   var book = await BookService.create(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row);
+   var book = await BookService.create(titleTx, authorTx, descriptionTx, ddcTx, categoryTx, copiesTx, imageUrl, block, column, row);
    Snackbar.dialog('Book ${book!.message}', Colors.green);
    }finally{
      isLoading(false);

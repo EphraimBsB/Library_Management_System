@@ -83,7 +83,6 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.accNumber,
         required this.category,
         required this.status,
         required this.image,
@@ -94,7 +93,6 @@ class Book {
     String author;
     String description;
     String ddc;
-    String accNumber;
     String category;
     String status;
     String image;
@@ -105,7 +103,6 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        accNumber: json["acc_number"],
         category: json["category"],
         status: json["status"],
         image: json["image"],
@@ -117,7 +114,6 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "acc_number": accNumber,
         "category": category,
         "status": status,
         "image": image,

@@ -18,13 +18,12 @@ class BookService {
     return book;
   }
 
-   static Future<CreateBookModel?> create(titleTx, authorTx, descriptionTx, ddcTx, accNumberTx, categoryTx, copiesTx, imageUrl, block, column, row) async {
+   static Future<CreateBookModel?> create(titleTx, authorTx, descriptionTx, ddcTx, categoryTx, copiesTx, imageUrl, block, column, row) async {
      Map  body = {
       'title': titleTx,
       'author':authorTx,
       'description':descriptionTx,
       'ddc': ddcTx,
-      'acc_number': accNumberTx,
       'category': categoryTx,
       'copies': copiesTx,
       'status': 'Available',

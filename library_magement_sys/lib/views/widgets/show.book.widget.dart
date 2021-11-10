@@ -10,7 +10,7 @@ class ShowBookWidget extends StatelessWidget {
   final SingleBook book;
   
    ShowBookWidget(this.book);
-   LoanController loanController = Get.put(LoanController());
+   
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +68,20 @@ class ShowBookWidget extends StatelessWidget {
                          style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
                        ),
+                       const SizedBox(height: 5),
+                      Text(
+                        'Category: ${book.category}',
+                        maxLines: 2,
+                        style: const TextStyle(
+                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
+                      ),
+                      const SizedBox(height: 5),
+                      Text(
+                        'Copies: ${book.stock}',
+                        maxLines: 2,
+                        style: const TextStyle(
+                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
+                      ),
                         const SizedBox(
                      height: 20,
                    ),
@@ -85,6 +99,7 @@ class ShowBookWidget extends StatelessWidget {
                       ),
                    child: TextButton(
                       onPressed: (){
+                        LoanController loanController = Get.put(LoanController());
                         Get.toNamed("/login");
                         loanController.createaLoan(book.id);
                       }, 
@@ -118,7 +133,7 @@ class ShowBookWidget extends StatelessWidget {
                  ),
                Text(
                     'To : Block ${book.location.block},  Column : ${book.location.column},  Section: ${book.location.section},  Row : ${book.location.row},  DDC : ${book.location.ddc}',
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red),
                   ),
                     ],
                   ),

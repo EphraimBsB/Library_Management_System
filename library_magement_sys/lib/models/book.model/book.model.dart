@@ -31,9 +31,9 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.accNumber,
         required this.category,
         required this.copies,
+        required this.stock,
         required this.status,
         required this.image,
         required this.createdAt,
@@ -45,9 +45,9 @@ class Book {
     String author;
     String description;
     String ddc;
-    String accNumber;
     String category;
     String copies;
+    String stock;
     String status;
     String image;
     DateTime createdAt;
@@ -59,9 +59,9 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        accNumber: json["acc_number"],
         category: json["category"],
         copies: json["copies"],
+        stock: json["stock"],
         status: json["status"],
         image: json["image"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -74,9 +74,9 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "acc_number": accNumber,
         "category": category,
         "copies": copies,
+        "stock": stock,
         "status": status,
         "image": image,
         "createdAt": createdAt.toIso8601String(),

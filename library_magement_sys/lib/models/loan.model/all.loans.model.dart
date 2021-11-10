@@ -31,7 +31,7 @@ class AllLoan {
         required this.bookId,
         required this.issueDate,
         required this.dueDate,
-        this.returnDate,
+        required this.returnDate,
         required this.status,
         required this.book,
         required this.user,
@@ -42,7 +42,8 @@ class AllLoan {
     int bookId;
     DateTime issueDate;
     DateTime dueDate;
-    dynamic returnDate;
+    dynamic
+     returnDate;
     String status;
     Book book;
     User user;
@@ -53,7 +54,7 @@ class AllLoan {
         bookId: json["bookId"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
-        returnDate: json["returnDate"],
+        returnDate: json["returnDate"] == null ? null : DateTime.parse(json["returnDate"]),
         status: json["status"],
         book: Book.fromJson(json["Book"]),
         user: User.fromJson(json["User"]),
@@ -65,7 +66,7 @@ class AllLoan {
         "bookId": bookId,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
-        "returnDate": returnDate,
+        "returnDate": returnDate == null ? null : returnDate.toIso8601String(),
         "status": status,
         "Book": book.toJson(),
         "User": user.toJson(),
@@ -79,7 +80,6 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.accNumber,
         required this.category,
         required this.copies,
         required this.status,
@@ -91,7 +91,6 @@ class Book {
     String author;
     String description;
     String ddc;
-    String accNumber;
     String category;
     String copies;
     String status;
@@ -103,7 +102,6 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        accNumber: json["acc_number"],
         category: json["category"],
         copies: json["copies"],
         status: json["status"],
@@ -116,7 +114,6 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "acc_number": accNumber,
         "category": category,
         "copies": copies,
         "status": status,
