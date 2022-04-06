@@ -21,31 +21,38 @@ class _BooksManagementState extends State<BooksManagement> {
   TextEditingController author = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController ddc = TextEditingController();
-  TextEditingController category = TextEditingController();
+  TextEditingController acc = TextEditingController();
   TextEditingController copies = TextEditingController();
+  TextEditingController pubyear = TextEditingController();
   TextEditingController imageUrl = TextEditingController();
   TextEditingController block = TextEditingController();
+  TextEditingController side = TextEditingController();
   TextEditingController column = TextEditingController();
   TextEditingController row = TextEditingController();
   var buttonState = false;
   var loanbuttonState = false;
   var _currentSelectedValue;
-  final _currencies = [
+  var  selectedSide;
+  final _categories = [
     "Computer",
     "Engineering",
     "Business",
+    "Health"
     "General",
     "Projects",
-    "Indian"
+    "Asian"
   ];
+  final _sides = ["Front", "Back"];
   @override
   Widget build(BuildContext context) {
+    bookController;
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     var Snackbar = SnackBarDialog();
     
     return Center(
       child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 100),
         padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
         child: Scaffold(
           appBar: AppBar(
@@ -80,7 +87,7 @@ class _BooksManagementState extends State<BooksManagement> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextFieldWidget(label: 'Title', controller: title,),
-                    TextFieldWidget(label: 'DDC Number', controller: ddc,),
+                    TextFieldWidget(label: 'ACC Number', controller: acc,),
                   ],
                 ),
                   
@@ -97,6 +104,16 @@ class _BooksManagementState extends State<BooksManagement> {
                   const  SizedBox(
                       height: 20,
                     ),
+                    Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextFieldWidget(label: 'DDC Number', controller: ddc,),
+                    TextFieldWidget(label: 'Published Year', controller: pubyear,),
+                  ],
+                ),
+                const  SizedBox(
+                      height: 20,
+                    ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -107,7 +124,7 @@ class _BooksManagementState extends State<BooksManagement> {
                   builder: (FormFieldState<String> state) {
                   return InputDecorator(
                   decoration: InputDecoration(
-                  labelText: 'Category',
+                  labelText: 'Subjects',
                   border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
                   isEmpty: _currentSelectedValue == '',
                   child: DropdownButtonHideUnderline(
@@ -120,7 +137,7 @@ class _BooksManagementState extends State<BooksManagement> {
                       state.didChange(newValue);
                     });
                   },
-                  items: _currencies.map((String value) {
+                  items: _categories.map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
                       child: Text(value),
@@ -180,8 +197,8 @@ class _BooksManagementState extends State<BooksManagement> {
                  Row(
                   children: [
                     SizedBox(
-                         width: 0.1*width,
-                         height: 40,
+                        width: 110,
+                        height: 40,
                          child:  TextField(
                            controller: block,
                            decoration: const InputDecoration(
@@ -193,8 +210,43 @@ class _BooksManagementState extends State<BooksManagement> {
                        const  SizedBox(
                       width: 20,
                     ),
+                    SizedBox(
+                  width: 0.1*width,
+                  height: 45,
+                  child: FormField<String>(
+                  builder: (FormFieldState<String> state) {
+                  return InputDecorator(
+                  decoration: InputDecoration(
+                  labelText: 'Side',
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                  isEmpty: selectedSide == '',
+                  child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                  value: selectedSide,
+                  isDense: true,
+                  onChanged: ( newValue) {
+                    setState(() {
+                      selectedSide = newValue;
+                      state.didChange(newValue);
+                    });
+                  },
+                  items: _sides.map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(value),
+                    );
+                      }).toList(),
+                    ),
+                    ),
+                   );
+                  },
+                 ),
+                ),
+                       const  SizedBox(
+                      width: 20,
+                    ),
                        SizedBox(
-                         width: 0.1*width,
+                         width: 110,
                          height: 40,
                          child:  TextField(
                            controller: column,
@@ -208,7 +260,7 @@ class _BooksManagementState extends State<BooksManagement> {
                       width: 20,
                     ),
                        SizedBox(
-                         width: 0.1*width,
+                         width: 110,
                          height: 40,
                          child:  TextField(
                            controller: row,
@@ -231,20 +283,23 @@ class _BooksManagementState extends State<BooksManagement> {
                           String authorText = author.text;
                           String descriptionText = description.text;
                           String ddcText = ddc.text;
-                          String categoryText = _currentSelectedValue;
+                          String accText = acc.text;
+                          String subjectsText = _currentSelectedValue;
                           String copiesText = copies.text;
+                          String pubyearText = pubyear.text;
                           String imageUrlText = imageUrl.text;
+                          String sideText = selectedSide;
                           String blockText = block.text;
                           String columnText = column.text;
                           String rowText = row.text;
                           if(
                             titleText.isEmpty || authorText.isEmpty || descriptionText.isEmpty || 
-                            ddcText.isEmpty || categoryText == '' ||
-                            copiesText.isEmpty|| imageUrlText.isEmpty|| 
+                            ddcText.isEmpty || accText.isEmpty || subjectsText == '' ||
+                            copiesText.isEmpty|| pubyearText.isEmpty || imageUrlText.isEmpty|| 
                             blockText.isEmpty || columnText.isEmpty ||rowText.isEmpty){
                               Snackbar.dialog('Please fill out all the inputs ', Colors.red);
                           }else{
-                          bookController.createdBooks(titleText, authorText, descriptionText, ddcText, categoryText, copiesText, imageUrlText,blockText, columnText,rowText);
+                          bookController.createdBooks(titleText, authorText, descriptionText, ddcText, accText, subjectsText, copiesText, pubyearText,imageUrlText,blockText, sideText, columnText, rowText);
                           setState(() {
                             bookController;
                           });
@@ -411,7 +466,13 @@ class _BooksManagementState extends State<BooksManagement> {
                               ),
                               DataColumn(
                                 label: Text(
-                                  'Category',
+                                  'ACC No',
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                              ),
+                              DataColumn(
+                                label: Text(
+                                  'Subjects',
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ),
@@ -423,19 +484,13 @@ class _BooksManagementState extends State<BooksManagement> {
                               ),
                               DataColumn(
                                 label: Text(
-                                  'Stock',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
                                   'Status',
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ),
                               DataColumn(
                                 label: Text(
-                                  'Added',
+                                  'Pub Year',
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ),
@@ -470,9 +525,15 @@ class _BooksManagementState extends State<BooksManagement> {
                                       maxLines: 1,
                                     ),
                                   )),
-                                   DataCell(Text(
-                                    book.author,
-                                    style: const TextStyle(fontSize: 16),
+                                   DataCell(SizedBox(
+                                    height: 50,
+                                    width: 200,
+                                    child: Text(
+                                      book.author,
+                                      style: const TextStyle(fontSize: 16),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
                                   )),
                                   DataCell(SizedBox(
                                     height: 50,
@@ -488,21 +549,20 @@ class _BooksManagementState extends State<BooksManagement> {
                                     book.ddc,
                                     style: const TextStyle(fontSize: 16),
                                   )),
+                                  DataCell(Text(
+                                    book.acc_num,
+                                    style: const TextStyle(fontSize: 16),
+                                  )),
                                    DataCell(Text(
-                                    book.category,
+                                    book.subjects,
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                   DataCell(Text(
                                     book.copies,
                                     style: const TextStyle(fontSize: 16),
                                   )),
-                                  DataCell(Text(
-                                    book.stock,
-                                    style: const TextStyle(fontSize: 16),
-                                  )),
-                                   DataCell(
-                                     Text(
-                                    book.status,
+                                   DataCell(Text(
+                                    book.pub_year,
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                    DataCell(

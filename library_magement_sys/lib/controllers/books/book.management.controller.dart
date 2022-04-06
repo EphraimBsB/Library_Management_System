@@ -16,10 +16,10 @@ class BookManagementController extends GetxController{
     super.onInit();
   }
 
-  createdBooks(titleTx, authorTx, descriptionTx, ddcTx, categoryTx, copiesTx, imageUrl, block, column, row) async { 
+  createdBooks(titleTx, authorTx, descriptionTx, ddcTx, accTxt, subjectsTx, copiesTx, pubyearTxt, imageUrl, block, side, column, row) async { 
    try{
     isLoading(true);
-   var book = await BookService.create(titleTx, authorTx, descriptionTx, ddcTx, categoryTx, copiesTx, imageUrl, block, column, row);
+   var book = await BookService.create(titleTx, authorTx, descriptionTx, ddcTx, accTxt, subjectsTx, copiesTx, pubyearTxt, imageUrl, block, side, column, row);
    Snackbar.dialog('Book ${book!.message}', Colors.green);
    }finally{
      isLoading(false);

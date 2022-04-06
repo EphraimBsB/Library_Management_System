@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/controllers/users.controller/user.controller.dart';
-import 'package:library_magement_sys/views/pages/book.pages/searched.book.page.dart';
-import 'package:library_magement_sys/views/pages/user.pages/signup.page.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
 import 'package:library_magement_sys/constants/text.field.dart';
 
@@ -38,7 +36,19 @@ class LoginPage extends StatelessWidget {
               const  SizedBox(
                   height: 20,
                 ),
-             TextFieldWidget(label: 'Password', controller: password,),
+              SizedBox(
+                   width: 0.4*width,
+                   height: 40,
+                   child:  TextField(
+                     controller: password,
+                     obscureText: true,
+                     decoration: const InputDecoration(
+                       label: Text('Password'),
+                       border: OutlineInputBorder()
+                     ),
+                   ),
+                 ),
+            //  TextFieldWidget(label: 'Password', controller: password,),
             const  SizedBox(
                   height: 20,
                 ),

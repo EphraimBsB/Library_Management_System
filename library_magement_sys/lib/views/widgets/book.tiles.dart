@@ -52,8 +52,16 @@ class BookTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 8),
+              bookModel.status == 'Available'?
+              Text(
+                'Status: ${bookModel.status}(${bookModel.stock})',
+                maxLines: 2,
+                style:
+                const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
+                overflow: TextOverflow.ellipsis,
+              ):
                Text(
-                'Status: ${bookModel.status}',
+                'Status: ${bookModel.status}(${bookModel.stock})',
                 maxLines: 2,
                 style:
                 const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),

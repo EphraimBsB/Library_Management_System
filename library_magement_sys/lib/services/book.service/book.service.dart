@@ -18,29 +18,32 @@ class BookService {
     return book;
   }
 
-   static Future<CreateBookModel?> create(titleTx, authorTx, descriptionTx, ddcTx, categoryTx, copiesTx, imageUrl, block, column, row) async {
+   static Future<CreateBookModel?> create(titleTx, authorTx, descriptionTx, ddcTx, accTx, subjectsTx, copiesTx, pubyearTx, imageUrl, block, side, column, row) async {
      Map  body = {
       'title': titleTx,
       'author':authorTx,
       'description':descriptionTx,
       'ddc': ddcTx,
-      'category': categoryTx,
+      'acc_num': accTx,
+      'subjects': subjectsTx,
       'copies': copiesTx,
       'status': 'Available',
+      'pub_year': pubyearTx,
       'image': imageUrl,
     };
     var response = await _helper.post("book",body);
       var book = createBookModelFromJson(response);
       var bookId = book.book.id;
-     await createLocation(bookId, block, column, row);
+     await createLocation(bookId, side, block, column, row);
       return book;
       
   }
   
-  static Future createLocation(bookId,block, column, row) async {
+  static Future createLocation(bookId,side, block, column, row) async {
      Map  body = {
       'bookId': '$bookId',
       'block':block,
+      'side': side,
       'column': column,
       'row': row,
     };

@@ -36,7 +36,19 @@ class LibrarianLoginPage extends StatelessWidget {
               const  SizedBox(
                   height: 20,
                 ),
-             TextFieldWidget(label: 'Password', controller: password,),
+                SizedBox(
+                   width: 0.4*width,
+                   height: 40,
+                   child:  TextField(
+                     controller: password,
+                     obscureText: true,
+                     decoration: const InputDecoration(
+                       label: Text('Password'),
+                       border: OutlineInputBorder()
+                     ),
+                   ),
+                 ),
+            //  TextFieldWidget(label: 'Password', controller: password,),
             const  SizedBox(
                   height: 20,
                 ),

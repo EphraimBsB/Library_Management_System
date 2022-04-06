@@ -35,9 +35,11 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.category,
+        required this.acc_num,
+        required this.subjects,
         required this.copies,
         required this.status,
+        required this.pub_year,
         required this.image,
         required this.updatedAt,
         required this.createdAt,
@@ -47,10 +49,12 @@ class Book {
     String title;
     String author;
     String ddc;
+    String acc_num;
     String description;
-    String category;
+    String subjects;
     String copies;
     String status;
+    String pub_year;
     String image;
     DateTime updatedAt;
     DateTime createdAt;
@@ -61,12 +65,14 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        category: json["category"],
+        acc_num: json["acc_num"],
+        subjects: json["subjects"],
         copies: json["copies"],
         status: json["status"],
+        pub_year: json["pub_year"],
         image: json["image"],
         updatedAt: DateTime.parse(json["updatedAt"]),
-        createdAt: DateTime.parse(json["createdAt"]),
+        createdAt: DateTime.parse(json["createdAt"]),  
     );
 
     Map<String, dynamic> toJson() => {
@@ -75,9 +81,11 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "category": category,
+        "acc_num": acc_num,
+        "subjects": subjects,
         "copies": copies,
         "status": status,
+        "pub_year": pub_year,
         "image": image,
         "updatedAt": updatedAt.toIso8601String(),
         "createdAt": createdAt.toIso8601String(),

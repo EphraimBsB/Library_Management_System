@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:library_magement_sys/views/pages/book.pages/home.page.dart';
-import 'package:library_magement_sys/views/pages/user.pages/login.page.dart';
 
 class AppBarwidget extends StatelessWidget {
   const AppBarwidget({ Key? key }) : super(key: key);
@@ -16,10 +14,10 @@ class AppBarwidget extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.only(top: 30),
                 width: 200,
-                height: 50,
+                height: 80,
                 decoration: const BoxDecoration(
                     image: DecorationImage(
-                  image: AssetImage('assets/isbat.png'),
+                  image: AssetImage('assets/EurekaLMS_logo.png'),
                   fit: BoxFit.contain,
                 )),
               ),

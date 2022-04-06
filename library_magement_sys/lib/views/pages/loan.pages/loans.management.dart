@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:library_magement_sys/controllers/books/book.controller.dart';
-import 'package:library_magement_sys/controllers/books/book.management.controller.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
 
@@ -108,10 +106,16 @@ class LoansManagement extends StatelessWidget {
                           }
                            },
                           cells: <DataCell>[
-                             DataCell(Text(
-                              loan.book.title,
-                              style: const TextStyle(fontSize: 16),
-                            )),
+                             DataCell(SizedBox(
+                                    height: 50,
+                                    width: 150,
+                                    child: Text(
+                                      loan.book.title,
+                                      style: const TextStyle(fontSize: 16),
+                                      overflow: TextOverflow.ellipsis,
+                                      maxLines: 1,
+                                    ),
+                                  )),
                              DataCell(Text(
                               loan.book.author,
                               style: const TextStyle(fontSize: 16),

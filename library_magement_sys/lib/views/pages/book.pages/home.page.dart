@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
     bool fourthButtonState = false;
     bool fithButtonState = false;
     bool sixthButtonState = false;
+    bool seventhButtonState = false;
     
   @override
   Widget build(BuildContext context) {
@@ -35,153 +36,156 @@ class _HomePageState extends State<HomePage> {
     double height = MediaQuery.of(context).size.height;
     
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const AppBarwidget(),
-              Container(height: height*0.1,),
-              const Text(
-                'Find a Book',
-                style: TextStyle(
-                  fontSize: 40,
+      body: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 1024),
+          // padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const AppBarwidget(),
+                Container(height: height*0.1,),
+                const Text(
+                  'Find a Book',
+                  style: TextStyle(
+                    fontSize: 40,
+                  ),
                 ),
-              ),
-              
-              const  SizedBox(
-                  height: 20,
-                ),
-             Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                   SizedBox(
-                     width: 0.4*width,
-                     height: 40,
-                     child:  TextField(
-                       controller: searchTextController,
-                       decoration: const InputDecoration(
-                         hintText: "search book title, author.............................................",
-                         hintStyle: TextStyle(
-                              fontStyle: FontStyle.italic,
-                              fontSize: 14
-                            ),
-                         border: OutlineInputBorder()
+                
+                const  SizedBox(
+                    height: 20,
+                  ),
+               Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     SizedBox(
+                       width: 0.4*width,
+                       height: 40,
+                       child:  TextField(
+                         controller: searchTextController,
+                         decoration: const InputDecoration(
+                           hintText: "search book title, author.............................................",
+                           hintStyle: TextStyle(
+                                fontStyle: FontStyle.italic,
+                                fontSize: 14
+                              ),
+                           border: OutlineInputBorder()
+                         ),
+                         onSubmitted: (text) {
+                           if(text.isEmpty) {
+                            Get.snackbar("", "Wrong Input",snackPosition: SnackPosition.TOP);
+                          }else {
+                            Get.toNamed("/search", arguments: text);
+                          }
+                          },
                        ),
-                       onSubmitted: (text) {
-                         if(text.isEmpty) {
-                          Get.snackbar("", "Wrong Input",snackPosition: SnackPosition.TOP);
-                        }else {
-                          Get.toNamed("/search", arguments: text);
-                        }
-                        },
                      ),
-                   ),
-                   ButtonWidget('Search', searchButtonState, searchButtonFunct),
-        
+                     ButtonWidget('Search', searchButtonState, searchButtonFunct),
+          
+                    ],
+                  ),
+
+                  const  SizedBox(
+                    height: 10,
+                  ),
+                const Text(
+                  'Today a reader, Tomorrow a leader',
+                  style: TextStyle(
+                    fontSize: 18
+                  ),
+                ),
+                const  SizedBox(
+                    height: 5,
+                  ),
+                Container(
+                  width: 750,
+                  child: const Text(
+                    'library_management_system - find a book by title or by author, borrow a book, find book location in the library. Everything you need for better future and success has already been writen.',
+                    style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                        fontSize: 15
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+
+                  const  SizedBox(
+                    height: 50,
+                  ),
+                    Row(
+                      children: [
+                         Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left:20),
+                          child: TextButton(
+                            onPressed: (){
+                              filterBooks.clear();
+                              setState(() {
+                              firstButtonState = false;
+                              secondButtonState = false;
+                              thirdButtonState = false;
+                              fourthButtonState = false;
+                              fithButtonState = false;
+                              sixthButtonState = false;
+                              });
+                              
+                            },
+                            child: const Text(
+                            'All Books',
+                            style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black
+                           ),
+                          ),
+                          ),
+                        ),
+                  ),
+                  const SizedBox(width: 20,),
+                   ButtonWidget('Business', firstButtonState, firstButtonFunct),
+                   ButtonWidget('Computer', secondButtonState, secondButtonFunct),
+                   ButtonWidget('Engineering', thirdButtonState, thirdButtonFunct),
+                   ButtonWidget('Health Science', seventhButtonState, seventhButtonFunct),
+                   ButtonWidget('General', fourthButtonState, fourthButtonFunct),
+                   ButtonWidget('Asian', fithButtonState, fithButtonFunct),
+                   ButtonWidget('Projects', sixthButtonState, sixthButtonFunct),
+                   
                   ],
                 ),
-
-                const  SizedBox(
-                  height: 10,
-                ),
-              const Text(
-                'Today a reader, Tomorrow a leader',
-                style: TextStyle(
-                  // fontStyle: FontStyle.italic,
-                  fontSize: 18
-                ),
-              ),
-              const  SizedBox(
-                  height: 5,
-                ),
-              Container(
-                width: 750,
-                child: const Text(
-                  'library_management_system - find a book by title or by author, borrow a book, find book location in the library. Everything you need for better future and success has already been writen.',
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                      fontSize: 15
+                         const  SizedBox(
+                    height: 20,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-
-                const  SizedBox(
-                  height: 50,
-                ),
-                  Row(
-                    children: [
-                       Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left:20),
-                        child: TextButton(
-                          onPressed: (){
-                            filterBooks.clear();
-                            setState(() {
-                            firstButtonState = false;
-                            secondButtonState = false;
-                            thirdButtonState = false;
-                            fourthButtonState = false;
-                            fithButtonState = false;
-                            sixthButtonState = false;
-                            });
-                            
-                          },
-                          child: const Text(
-                          'All Books',
-                          style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black
-                         ),
-                        ),
-                        ),
-                      ),
-                ),
-                const SizedBox(width: 20,),
-                 ButtonWidget('Business', firstButtonState, firstButtonFunct),
-                 ButtonWidget('Computer', secondButtonState, secondButtonFunct),
-                 ButtonWidget('Engineering', thirdButtonState, thirdButtonFunct),
-                 ButtonWidget('General', fourthButtonState, fourthButtonFunct),
-                 ButtonWidget('Asia', fithButtonState, fithButtonFunct),
-                 ButtonWidget('Projects', sixthButtonState, sixthButtonFunct),
-                 
+                   Obx(() {
+                    if(bookControllerManag!.isLoading.value) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return filterBooks.isNotEmpty ? StaggeredGridView.countBuilder(
+                     shrinkWrap: true,
+                     crossAxisCount: ResponsiveSizedScreen.isLargeScreen(context)?6:4,
+                     itemCount: filterBooks.length,
+                     crossAxisSpacing: 10,
+                     mainAxisSpacing: 10,
+                     itemBuilder: (context, index){
+                       return BookTile(filterBooks[index]);
+                     }, 
+                     staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
+                     ):StaggeredGridView.countBuilder(
+                      shrinkWrap: true,
+                     crossAxisCount: ResponsiveSizedScreen.isLargeScreen(context)?6:4,
+                     itemCount: bookControllerManag!.allbookslist.length,
+                     crossAxisSpacing: 10,
+                     mainAxisSpacing: 10,
+                     itemBuilder: (context, index){
+                       return BookTile(bookControllerManag!.allbookslist[index]);
+                     }, 
+                     staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
+                     );
+                  } ),
+                  
                 ],
-              ),
-                       const  SizedBox(
-                  height: 20,
-                ),
-                 Obx(() {
-                  if(bookControllerManag!.isLoading.value) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return filterBooks.isNotEmpty ? StaggeredGridView.countBuilder(
-                   shrinkWrap: true,
-                   crossAxisCount: ResponsiveSizedScreen.isLargeScreen(context)?6:4,
-                   itemCount: filterBooks.length,
-                   crossAxisSpacing: 10,
-                   mainAxisSpacing: 10,
-                   itemBuilder: (context, index){
-                     return BookTile(filterBooks[index]);
-                   }, 
-                   staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
-                   ):StaggeredGridView.countBuilder(
-                    shrinkWrap: true,
-                   crossAxisCount: ResponsiveSizedScreen.isLargeScreen(context)?6:4,
-                   itemCount: bookControllerManag!.allbookslist.length,
-                   crossAxisSpacing: 10,
-                   mainAxisSpacing: 10,
-                   itemBuilder: (context, index){
-                     return BookTile(bookControllerManag!.allbookslist[index]);
-                   }, 
-                   staggeredTileBuilder: (index) => const StaggeredTile.fit(1),
-                   );
-                } ),
-                
-              ],
+            ),
           ),
         ),
       ),
@@ -199,7 +203,7 @@ class _HomePageState extends State<HomePage> {
    firstButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('Business')){
+                          if(book.subjects.contains('Business')){
                             filterBooks.add(book)
                           }
                         });
@@ -210,12 +214,13 @@ class _HomePageState extends State<HomePage> {
                         fourthButtonState = false;
                         fithButtonState = false;
                         sixthButtonState = false;
+                        seventhButtonState = false;
                       });
                     }
     secondButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('Computer')){
+                          if(book.subjects.contains('Computer')){
                             filterBooks.add(book)
                           }
                         });
@@ -226,12 +231,13 @@ class _HomePageState extends State<HomePage> {
                         fourthButtonState = false;
                         fithButtonState = false;
                         sixthButtonState = false;
+                        seventhButtonState = false;
                       });
                     }
     thirdButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('Engineering')){
+                          if(book.subjects.contains('Engineering')){
                             filterBooks.add(book)
                           }
                         });
@@ -242,12 +248,13 @@ class _HomePageState extends State<HomePage> {
                         fourthButtonState = false;
                         fithButtonState = false;
                         sixthButtonState = false;
+                        seventhButtonState = false;
                       });
                     }
     fourthButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('General')){
+                          if(book.subjects.contains('General')){
                             filterBooks.add(book)
                           }
                         });
@@ -258,12 +265,13 @@ class _HomePageState extends State<HomePage> {
                         fourthButtonState = true;
                         fithButtonState = false;
                         sixthButtonState = false;
+                        seventhButtonState = false;
                       });
                     }
     fithButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('Indian')){
+                          if(book.subjects.contains('Asian')){
                             filterBooks.add(book)
                           }
                         });
@@ -274,12 +282,13 @@ class _HomePageState extends State<HomePage> {
                         fourthButtonState = false;
                         fithButtonState = true;
                         sixthButtonState = false;
+                        seventhButtonState = false;
                       });
                     }
     sixthButtonFunct(){
                         filterBooks.clear();
                         bookControllerManag!.allbookslist.forEach((book) =>{
-                          if(book.category.contains('Projects')){
+                          if(book.subjects.contains('Projects')){
                             filterBooks.add(book)
                           }
                         });
@@ -290,6 +299,24 @@ class _HomePageState extends State<HomePage> {
                         fourthButtonState = false;
                         fithButtonState = false;
                         sixthButtonState = true;
+                        seventhButtonState = false;
+                        });
+                    }
+    seventhButtonFunct(){
+                        filterBooks.clear();
+                        bookControllerManag!.allbookslist.forEach((book) =>{
+                          if(book.subjects.contains('Health')){
+                            filterBooks.add(book)
+                          }
+                        });
+                        setState((){
+                        firstButtonState = false;
+                        secondButtonState = false;
+                        thirdButtonState = false;
+                        fourthButtonState = false;
+                        fithButtonState = false;
+                        sixthButtonState = false;
+                        seventhButtonState = true;
                         });
                     }
 }

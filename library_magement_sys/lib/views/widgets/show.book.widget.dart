@@ -26,9 +26,10 @@ class ShowBookWidget extends StatelessWidget {
                mainAxisAlignment: MainAxisAlignment.center,
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-                 SizedBox(
-                   height: 550,
-                   width: 250,
+                 Container(
+                   constraints: const BoxConstraints(
+                       maxWidth: 300,
+                   ),
                    child: Column(
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: <Widget>[
@@ -70,7 +71,7 @@ class ShowBookWidget extends StatelessWidget {
                        ),
                        const SizedBox(height: 5),
                       Text(
-                        'Category: ${book.category}',
+                        'Subject: ${book.subjects}',
                         maxLines: 2,
                         style: const TextStyle(
                              fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
@@ -132,15 +133,13 @@ class ShowBookWidget extends StatelessWidget {
                    height: 30,
                  ),
                Text(
-                    'To : Block ${book.location.block},  Column : ${book.location.column},  Section: ${book.location.section},  Row : ${book.location.row},  DDC : ${book.location.ddc}',
+                    'To : Block ${book.location.shelf}, Side : ${book.location.side},  Column : ${book.location.column},  Section: ${book.location.section},  Row : ${book.location.row},  DDC : ${book.location.ddc}',
                     style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red),
                   ),
                     ],
                   ),
                ],
              ),
-             
-              
          ],
          );
   }

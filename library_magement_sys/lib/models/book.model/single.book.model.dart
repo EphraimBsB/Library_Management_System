@@ -31,7 +31,7 @@ class SingleBook {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.category,
+        required this.subjects,
         required this.copies,
         required this.stock,
         required this.status,
@@ -44,7 +44,7 @@ class SingleBook {
     String author;
     String description;
     String ddc;
-    String category;
+    String subjects;
     String copies;
     String stock;
     String status;
@@ -57,7 +57,7 @@ class SingleBook {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        category: json["category"],
+        subjects: json["subjects"],
         copies: json["copies"],
         stock: json["stock"],
         status: json["status"],
@@ -71,7 +71,7 @@ class SingleBook {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "category": category,
+        "subjects": subjects,
         "copies": copies,
         "stock": stock,
         "status": status,
@@ -82,21 +82,24 @@ class SingleBook {
 
 class Location {
     Location({
-        required this.block,
+        required this.shelf,
+        required this.side,
         required this.column,
         required this.section,
         required this.row,
         required this.ddc,
     });
 
-    int block;
+    String shelf;
+    String side;
     int column;
     String section;
     int row;
     String ddc;
 
     factory Location.fromJson(Map<String, dynamic> json) => Location(
-        block: json["block"],
+        shelf: json["shelf"],
+        side: json["side"],
         column: json["column"],
         section: json["section"],
         row: json["row"],
@@ -104,7 +107,8 @@ class Location {
     );
 
     Map<String, dynamic> toJson() => {
-        "block": block,
+        "shelf": shelf,
+        "side": side,
         "column": column,
         "section": section,
         "row": row,
