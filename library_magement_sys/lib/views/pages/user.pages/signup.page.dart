@@ -43,154 +43,159 @@ class _SignupPageState extends State<SignupPage> {
     return  Scaffold(
       body: Container(
       padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const AppBarwidget(),
-            Container(height: 10,),
-             const Text(
-                'Register',
-                style: TextStyle(
-                  fontSize: 40,
-                ),
-              ),
-              const  SizedBox(
-                  height: 20,
-                ),
-            TextFieldWidget(label: 'Name', controller: name,),
-              const  SizedBox(
-                  height: 15,
-                ),
-              TextFieldWidget(label: 'Last-Name', controller: lastName,),
-             const  SizedBox(
-                  height: 15,
-                ),
-              TextFieldWidget(label: 'Roll-Number', controller: rollNumber,),
-             const  SizedBox(
-                  height: 15,
-                ),
-               TextFieldWidget(label: 'Course', controller: course,),
-             const  SizedBox(
-                  height: 15,
-                ),
-              SizedBox(
-                  width: 0.4*width,
-                  height: 40,
-                  child: FormField<String>(
-                  builder: (FormFieldState<String> state) {
-                  return InputDecorator(
-                  decoration: InputDecoration(
-                  labelText: 'Degree',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-                  isEmpty: _degreeSelectedValue == '',
-                  child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                  value: _degreeSelectedValue,
-                  isDense: true,
-                  onChanged: ( newValue) {
-                    setState(() {
-                      _degreeSelectedValue = newValue;
-                      state.didChange(newValue);
-                    });
-                  },
-                  items: _degrees.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                      }).toList(),
+        child: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const AppBarwidget(),
+                Container(height: 5,),
+                 const Text(
+                    'Register',
+                    style: TextStyle(
+                      fontSize: 40,
                     ),
                   ),
-                );
-              },
-            ),
-                ),
-                const  SizedBox(
-                  height: 15,
-                ),
-              TextFieldWidget(label: 'Email', controller: email,),
-              const  SizedBox(
-                  height: 15,
-                ), 
-              TextFieldWidget(label: 'Phone Number', controller: phoneNumber,),
-              const  SizedBox(
-                  height: 15,
-                ),
-              TextFieldWidget(label: 'Password', controller: password,),
-              const  SizedBox(
-                  height: 15,
-                ),  
-               SizedBox(
-                  width: 0.4*width,
-                  height: 40,
-                  child: FormField<String>(
-                  builder: (FormFieldState<String> state) {
-                  return InputDecorator(
-                  decoration: InputDecoration(
-                  labelText: 'Role',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-                  isEmpty: _currentSelectedValue == '',
-                  child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                  value: _currentSelectedValue,
-                  isDense: true,
-                  onChanged: ( newValue) {
-                    setState(() {
-                      _currentSelectedValue = newValue;
-                      state.didChange(newValue);
-                    });
-                  },
-                  items: _roles.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                      }).toList(),
+                  const  SizedBox(
+                      height: 20,
                     ),
-                  ),
-                );
-              },
-            ),
-                ),     
-            const  SizedBox(
-                  height: 20,
-                ),
-             TextButton(
-                      onPressed: (){
-                        String nameText = name.text.trim();
-                        String lastNameText = lastName.text.trim();
-                        String rollNumberText = rollNumber.text.trim();
-                        String degreeText = _degreeSelectedValue;
-                        String courseText = course.text.trim();
-                        String emailText = email.text.trim();
-                        String phoneNumberText = phoneNumber.text.trim();
-                        String passwordText = password.text.trim();
-                        String roleText = _currentSelectedValue;
-                        if(
-                          nameText.isEmpty || lastNameText.isEmpty || rollNumberText.isEmpty || courseText.isEmpty ||
-                          emailText.isEmpty || phoneNumberText.isEmpty || passwordText.isEmpty ||roleText.isEmpty
-                        ){
-                          Snackbar.dialog('Please, Fill out all the form', Colors.red);
-                        }
-                          userController.userSignupController(nameText, lastNameText, rollNumberText, courseText, degreeText, emailText, phoneNumberText, passwordText, roleText);
-                          
-                      }, 
-                      child: Container(
-                      alignment: Alignment.center,
-                      width: 100,
+                TextFieldWidget(label: 'Name', controller: name,),
+                  const  SizedBox(
+                      height: 15,
+                    ),
+                  TextFieldWidget(label: 'Last-Name', controller: lastName,),
+                 const  SizedBox(
+                      height: 15,
+                    ),
+                  TextFieldWidget(label: 'Roll-Number', controller: rollNumber,),
+                 const  SizedBox(
+                      height: 15,
+                    ),
+                   TextFieldWidget(label: 'Course', controller: course,),
+                 const  SizedBox(
+                      height: 15,
+                    ),
+                  SizedBox(
+                      width: 0.4*width,
                       height: 40,
-                      decoration: const BoxDecoration(
-                        color: Color.fromRGBO(5, 38, 154, 5),
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
+                      child: FormField<String>(
+                      builder: (FormFieldState<String> state) {
+                      return InputDecorator(
+                      decoration: InputDecoration(
+                      labelText: 'Degree',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                      isEmpty: _degreeSelectedValue == '',
+                      child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                      value: _degreeSelectedValue,
+                      isDense: true,
+                      onChanged: ( newValue) {
+                        setState(() {
+                          _degreeSelectedValue = newValue;
+                          state.didChange(newValue);
+                        });
+                      },
+                      items: _degrees.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                          }).toList(),
+                        ),
                       ),
-                      child: const Text('Register',
-                      style: TextStyle(
-                              color: Colors.white
-                            ),),
-                      )
-                   ),
-          ]
+                    );
+                  },
+                ),
+                    ),
+                    const  SizedBox(
+                      height: 15,
+                    ),
+                  TextFieldWidget(label: 'Email', controller: email,),
+                  const  SizedBox(
+                      height: 15,
+                    ), 
+                  TextFieldWidget(label: 'Phone Number', controller: phoneNumber,),
+                  const  SizedBox(
+                      height: 15,
+                    ),
+                  TextFieldWidget(label: 'Password', controller: password,),
+                  const  SizedBox(
+                      height: 15,
+                    ),  
+                   SizedBox(
+                      width: 0.4*width,
+                      height: 40,
+                      child: FormField<String>(
+                      builder: (FormFieldState<String> state) {
+                      return InputDecorator(
+                      decoration: InputDecoration(
+                      labelText: 'Role',
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
+                      isEmpty: _currentSelectedValue == '',
+                      child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                      value: _currentSelectedValue,
+                      isDense: true,
+                      onChanged: ( newValue) {
+                        setState(() {
+                          _currentSelectedValue = newValue;
+                          state.didChange(newValue);
+                        });
+                      },
+                      items: _roles.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                          }).toList(),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                    ),     
+                const  SizedBox(
+                      height: 20,
+                    ),
+                 TextButton(
+                          onPressed: (){
+                            String nameText = name.text.trim();
+                            String lastNameText = lastName.text.trim();
+                            String rollNumberText = rollNumber.text.trim();
+                            String degreeText = _degreeSelectedValue;
+                            String courseText = course.text.trim();
+                            String emailText = email.text.trim();
+                            String phoneNumberText = phoneNumber.text.trim();
+                            String passwordText = password.text.trim();
+                            String roleText = _currentSelectedValue;
+                            if(
+                              nameText.isEmpty || lastNameText.isEmpty || rollNumberText.isEmpty || courseText.isEmpty ||
+                              emailText.isEmpty || phoneNumberText.isEmpty || passwordText.isEmpty ||roleText.isEmpty
+                            ){
+                              Snackbar.dialog('Please, Fill out all the form', Colors.red);
+                            }
+                              userController.userSignupController(nameText, lastNameText, rollNumberText, courseText, degreeText, emailText, phoneNumberText, passwordText, roleText);
+                              
+                          }, 
+                          child: Container(
+                          alignment: Alignment.center,
+                          width: 100,
+                          height: 40,
+                          decoration: const BoxDecoration(
+                            color: Color.fromRGBO(5, 38, 154, 5),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                          child: const Text('Register',
+                          style: TextStyle(
+                                  color: Colors.white
+                                ),),
+                          )
+                       ),
+              ]
+            ),
+          ),
         ),
       ),
     );

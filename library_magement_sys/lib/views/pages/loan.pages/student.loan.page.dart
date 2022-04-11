@@ -29,8 +29,6 @@ class StudentLoanPage extends StatelessWidget {
                     fontSize: 40,
                   ),
                 ),
-              //  Container(height: height*0.1,),
-
                ListView.builder(
                  shrinkWrap: true,
                  itemCount:loanController.studentLoans.length ,

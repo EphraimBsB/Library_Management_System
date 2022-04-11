@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/models/book.model/single.book.model.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ShowBookWidget extends StatelessWidget {
 
   final SingleBook book;
+  var id = 0;
   
    ShowBookWidget(this.book);
    
@@ -41,56 +42,88 @@ class ShowBookWidget extends StatelessWidget {
                          fit: BoxFit.cover,
                        ),
                        ),
-                       const SizedBox(
-                         height: 10,
-                       ),
-                        Text(
-                         'Title: ${book.title}',
-                         maxLines: 2,
-                         style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                             overflow: TextOverflow.ellipsis,
-                       ),
-                       const SizedBox(
-                         height: 5,
-                       ),
-                        Text(
-                         'Author: ${book.author}',
-                         maxLines: 2,
-                         style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                             overflow: TextOverflow.ellipsis,
-                       ),
-                       const SizedBox(
-                         height: 5,
-                       ),
-                        Text(
-                         'DDC: ${book.ddc}',
-                         style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                       ),
+                       const SizedBox(height: 10,),
+                       RichText(
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            text: TextSpan(
+                            style: const TextStyle(
+                                  fontSize: 18.0,
+                                  color: Colors.black,
+                                ),
+                            children: <TextSpan>[
+                              const TextSpan(text: 'Title: '),
+                              TextSpan(text: book.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                            ],
+                          )),
+                       const SizedBox(height: 5,),
+                       RichText(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                          style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black,
+                              ),
+                          children: <TextSpan>[
+                            const TextSpan(text: 'Author: '),
+                            TextSpan(text: book.author, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        )),
+                       const SizedBox(height: 5,),
+                       RichText(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                          style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black,
+                              ),
+                          children: <TextSpan>[
+                            const TextSpan(text: 'DDC: '),
+                            TextSpan(text: book.ddc, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        )),
                        const SizedBox(height: 5),
-                      Text(
-                        'Subject: ${book.subjects}',
-                        maxLines: 2,
-                        style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                      ),
+                       RichText(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                          style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black,
+                              ),
+                          children: <TextSpan>[
+                            const TextSpan(text: 'Subject: '),
+                            TextSpan(text: book.subjects, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        )),
                       const SizedBox(height: 5),
-                      Text(
-                        'Copies: ${book.stock}',
-                        maxLines: 2,
-                        style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                      ),
-                        const SizedBox(
-                     height: 20,
-                   ),
-                   book.status == 'Borrowed'? Text(
-                         'Status: ${book.status}',
-                         style: const TextStyle(
-                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
-                       ): Container(
+                      RichText(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                          style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black,
+                              ),
+                          children: <TextSpan>[
+                            const TextSpan(text: 'Copies: '),
+                            TextSpan(text: book.copies, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        )),
+                        const SizedBox(height: 20,),
+                   book.status == 'Borrowed'? RichText(
+                          text: TextSpan(
+                          style: const TextStyle(
+                                fontSize: 18.0,
+                                color: Colors.black,
+                              ),
+                          children: <TextSpan>[
+                            const TextSpan(text: 'Status: '),
+                            TextSpan(text: book.status, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        )): Container(
                    alignment: Alignment.center,
                       width: 100,
                       height: 40,
@@ -99,10 +132,10 @@ class ShowBookWidget extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                       ),
                    child: TextButton(
-                      onPressed: (){
-                        LoanController loanController = Get.put(LoanController());
+                      onPressed: ()async{
+                        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+                         sharedPreferences.setInt("bookId", book.id);
                         Get.toNamed("/login");
-                        loanController.createaLoan(book.id);
                       }, 
                       child: const Text('Borrow',
                       style: TextStyle(
@@ -132,10 +165,29 @@ class ShowBookWidget extends StatelessWidget {
                   const SizedBox(
                    height: 30,
                  ),
-               Text(
-                    'To : Block ${book.location.shelf}, Side : ${book.location.side},  Column : ${book.location.column},  Section: ${book.location.section},  Row : ${book.location.row},  DDC : ${book.location.ddc}',
-                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.red),
-                  ),
+                 RichText(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          text: TextSpan(
+                          style:  TextStyle(
+                                fontSize: 24.0,
+                                color: Colors.red[700],
+                              ),
+                          children: <TextSpan>[
+                            const TextSpan(text: 'To Block: '),
+                            TextSpan(text: book.location.shelf, style: const TextStyle(fontWeight: FontWeight.bold)),
+                            const TextSpan(text: '   ,Side: '),
+                            TextSpan(text: book.location.side, style: const TextStyle(fontWeight: FontWeight.bold)),
+                            const TextSpan(text: '   ,Column: '),
+                            TextSpan(text: '${book.location.column}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                            const TextSpan(text: '   ,Section: '),
+                            TextSpan(text: book.location.section, style: const TextStyle(fontWeight: FontWeight.bold)),
+                            const TextSpan(text: '   ,Row: '),
+                            TextSpan(text: '${book.location.row}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                            const TextSpan(text: '   ,DDC: '),
+                            TextSpan(text: book.location.ddc, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          ],
+                        )),
                     ],
                   ),
                ],

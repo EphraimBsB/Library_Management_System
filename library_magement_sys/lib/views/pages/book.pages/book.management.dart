@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
+import 'package:library_magement_sys/controllers/books/book.controller.dart';
 import 'package:library_magement_sys/controllers/books/book.management.controller.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
 import 'package:library_magement_sys/constants/text.field.dart';
@@ -16,6 +16,7 @@ class BooksManagement extends StatefulWidget {
 
 class _BooksManagementState extends State<BooksManagement> {
   final BookManagementController bookController = Get.put(BookManagementController());
+  final BookController Controller = Get.put(BookController());
 
   TextEditingController title = TextEditingController();
   TextEditingController author = TextEditingController();
@@ -52,7 +53,6 @@ class _BooksManagementState extends State<BooksManagement> {
     
     return Center(
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 100),
         padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
         child: Scaffold(
           appBar: AppBar(
@@ -433,6 +433,7 @@ class _BooksManagementState extends State<BooksManagement> {
                   Obx(() => SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: DataTable(
+                      showCheckboxColumn: false,
                             columns: const <DataColumn>[
                               DataColumn(
                                 label: Text(
@@ -488,20 +489,14 @@ class _BooksManagementState extends State<BooksManagement> {
                                   style: TextStyle(fontSize: 18),
                                 ),
                               ),
-                              DataColumn(
-                                label: Text(
-                                  'Pub Year',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  'Options',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                              ),
                             ],
                             rows: bookController.allbookslist.map((book) =>  DataRow(
+                              onSelectChanged: (bool? selected) {
+                               if (selected!) {
+                                  Get.toNamed("/books/single_book/${book.id}");
+                                  Controller.findOneBook();
+                               }
+                                 },
                                 cells: <DataCell>[
                                   DataCell(
                                     Padding(
@@ -562,43 +557,40 @@ class _BooksManagementState extends State<BooksManagement> {
                                     style: const TextStyle(fontSize: 16),
                                   )),
                                    DataCell(Text(
-                                    book.pub_year,
+                                    book.status,
                                     style: const TextStyle(fontSize: 16),
                                   )),
-                                   DataCell(
-                                     Text(
-                                    DateFormat.yMMMd().format(book.createdAt),
-                                    style: const TextStyle(fontSize: 16),
-                                  )),
-                                    DataCell(
-                                      Row(
-                                        children: [
-                                          IconButton(
-                                     icon: const Icon(Icons.edit),
-                                     color: Colors.blue[700],
-                                     onPressed: () {},
-                                  ),
-                                  IconButton(
-                                     icon: const Icon(Icons.delete),
-                                     color: Colors.red[700],
-                                     onPressed: () {
-                                       Get.defaultDialog(
-                                          middleText: 'Are you sure you want to delete',
-                                          textConfirm: 'Delete',
-                                          confirmTextColor: Colors.white,
-                                          onConfirm: (){
-                                             bookController.deleteABook(book.id);
-                                            setState(() {
-                                              bookController;
-                                            });
-                                          },
-                                          buttonColor: Colors.red
-                                        );
+                                   
+                                  //   DataCell(
+                                  //     Row(
+                                  //       children: [
+                                  //         IconButton(
+                                  //    icon: const Icon(Icons.edit),
+                                  //    color: Colors.blue[700],
+                                  //    onPressed: () {},
+                                  // ),
+                                  // IconButton(
+                                  //    icon: const Icon(Icons.delete),
+                                  //    color: Colors.red[700],
+                                  //    onPressed: () {
+                                  //      Get.defaultDialog(
+                                  //         middleText: 'Are you sure you want to delete',
+                                  //         textConfirm: 'Delete',
+                                  //         confirmTextColor: Colors.white,
+                                  //         onConfirm: (){
+                                  //            bookController.deleteABook(book.id);
+                                  //           setState(() {
+                                  //             bookController;
+                                  //           });
+                                  //         },
+                                  //         buttonColor: Colors.red
+                                  //       );
                                       
-                                     },
-                                  ),
-                                        ],
-                                      )),
+                                  //    },
+                                  // ),
+                                  //       ],
+                                  //     )
+                                  //     ),
                                 ],
                               ),).toList()
                           ),

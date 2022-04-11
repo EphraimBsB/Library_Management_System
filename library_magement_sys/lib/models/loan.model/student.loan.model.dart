@@ -49,9 +49,10 @@ class Loan {
         required this.id,
         required this.userId,
         required this.bookId,
+        required this.bookAccNo,
         required this.issueDate,
         required this.dueDate,
-        this.returnDate,
+        required this.returnDate,
         required this.status,
         required this.book,
     });
@@ -59,6 +60,7 @@ class Loan {
     int id;
     int userId;
     int bookId;
+    String bookAccNo;
     DateTime issueDate;
     DateTime dueDate;
     dynamic returnDate;
@@ -69,6 +71,7 @@ class Loan {
         id: json["id"],
         userId: json["userId"],
         bookId: json["bookId"],
+        bookAccNo: json["bookAccNo"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
         returnDate: json["returnDate"] == null ? null : DateTime.parse(json["returnDate"]),
@@ -80,6 +83,7 @@ class Loan {
         "id": id,
         "userId": userId,
         "bookId": bookId,
+        "bookAccNo": bookAccNo,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
         "returnDate": returnDate == null ? null : returnDate.toIso8601String(),
@@ -94,7 +98,7 @@ class Book {
         required this.title,
         required this.author,
         required this.ddc,
-        required this.category,
+        required this.subjects,
         required this.status,
         required this.image,
     });
@@ -103,7 +107,7 @@ class Book {
     String title;
     String author;
     String ddc;
-    String category;
+    String subjects;
     String status;
     String image;
 
@@ -112,7 +116,7 @@ class Book {
         title: json["title"],
         author: json["author"],
         ddc: json["ddc"],
-        category: json["category"],
+        subjects: json["subjects"],
         status: json["status"],
         image: json["image"],
     );
@@ -122,7 +126,7 @@ class Book {
         "title": title,
         "author": author,
         "ddc": ddc,
-        "category": category,
+        "subjects": subjects,
         "status": status,
         "image": image,
     };

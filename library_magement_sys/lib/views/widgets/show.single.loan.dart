@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/constants/app.bar.dart';
+import 'package:library_magement_sys/constants/text.field.dart';
 import 'package:library_magement_sys/controllers/loans/loan.controller.dart';
 import 'package:library_magement_sys/models/loan.model/single.loan.model.dart';
 
@@ -12,6 +13,7 @@ class ShowSingleLoanWidget extends StatelessWidget {
      this.loan,
      this.callback,
   ) ;
+  TextEditingController access = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +73,14 @@ class ShowSingleLoanWidget extends StatelessWidget {
                        const SizedBox(
                          height: 5,
                        ),
-                         
+                       Text(
+                         'Book Acc No: ${loan.bookAccNo}',
+                         style: const TextStyle(
+                             fontSize: 18, color: Color.fromRGBO(0, 0, 0, 5)),
+                       ),
+                       const SizedBox(
+                         height: 5,
+                       ),
                         Text(
                          'Student: ${loan.user.name}'' ${loan.user.lastName}',
                          style: const TextStyle(
@@ -124,26 +133,33 @@ class ShowSingleLoanWidget extends StatelessWidget {
                      const SizedBox(
                    height: 150,
                  ),
-                     Container(
-                   alignment: Alignment.center,
-                      width: 100,
-                      height: 40,
-                      decoration: const BoxDecoration(
-                        color: Color.fromRGBO(5, 38, 154, 5),
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                      ),
-                   child: TextButton(
-                      onPressed: (){
-                        action = 'return';
-                        loanController.singleLoanController(action);
-                        callback();
-                      }, 
-                      child: const Text('Return Book',
-                      style: TextStyle(
-                              color: Colors.white
-                            ),)
+                     Column(
+                       children: [
+                         TextFieldWidget(label: 'Input Book access number', controller: access,),
+                         const SizedBox(height: 20,),
+                         Container(
+                        alignment: Alignment.center,
+                          width: 100,
+                          height: 40,
+                          decoration: const BoxDecoration(
+                            color: Color.fromRGBO(5, 38, 154, 5),
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                          ),
+                        child: TextButton(
+                          onPressed: (){
+                            String accessText = access.text.trim();
+                            action = 'return';
+                            loanController.singleLoanController(action, accessText);
+                            callback();
+                          }, 
+                          child: const Text('Return Book',
+                          style: TextStyle(
+                                  color: Colors.white
+                                ),)
                    ),
              ),
+                       ],
+                     ),
                    ],
                  ),
                  

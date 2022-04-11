@@ -15,7 +15,7 @@ class _SingleLoanState extends State<SingleLoan> {
   @override
   void initState() {
     super.initState();
-    loanController.singleLoanController('');
+    loanController.singleLoanController('', '000');
   }
   @override
   Widget build(BuildContext context) {

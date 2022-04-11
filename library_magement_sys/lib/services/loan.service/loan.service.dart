@@ -11,7 +11,7 @@ import 'package:jwt_decode/jwt_decode.dart';
 class LoanService{
   static var client = http.Client();
 
- static Future<LoanModel?>createLoan(bookId) async {
+ static Future<LoanModel?>createLoan(bookId, accNo) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     Map<String, dynamic> payload = Jwt.parseJwt(token!);
@@ -19,12 +19,15 @@ class LoanService{
    Map  body = {
       'userId':'$userId',
       'bookId':'$bookId',
+      'bookAccNo': '$accNo'
     };
 
    var response = await client.post(Uri.parse("http://localhost:5000/loan/"), headers: {'Access-Control-Allow-Origin': '*', HttpHeaders.authorizationHeader:"Bearer $token"},body: body);
    if(response.statusCode == 201){
      String jsonString = response.body;
+     print('LOAN $jsonString');
     var loan = loanModelFromJson(jsonString);
+    
     return loan;
    }else{
      return null;
@@ -64,11 +67,12 @@ class LoanService{
 
   }
 
-  static Future<SingleLoanModel?> singleLoan(id, act)async{
+  static Future<SingleLoanModel?> singleLoan(id, act, acc)async{
      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString("token");
     Map  body = {
       'action': act,
+      'bookAccNo': acc
     };
     var response = await client.patch(Uri.parse("http://localhost:5000/loan/loans/$id"), headers: {'Access-Control-Allow-Origin': '*', HttpHeaders.authorizationHeader:"Bearer $token"}, body: body);
 

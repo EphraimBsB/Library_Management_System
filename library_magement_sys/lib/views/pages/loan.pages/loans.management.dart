@@ -102,7 +102,7 @@ class LoansManagement extends StatelessWidget {
                           onSelectChanged: (bool? selected) {
                           if (selected!) {
                             Get.toNamed("/loans_management/loan/${loan.id}");
-                            loanController.singleLoanController('');
+                            loanController.singleLoanController('', '000');
                           }
                            },
                           cells: <DataCell>[

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:library_magement_sys/controllers/books/book.controller.dart';
-import 'package:library_magement_sys/views/widgets/show.book.widget.dart';
+import 'package:library_magement_sys/views/widgets/single.book.widget.dart';
 
-class SearchedBook extends StatelessWidget {
-    SearchedBook({ Key? key, }) : super(key: key);
+class SingleBook extends StatelessWidget {
+    SingleBook({ Key? key, }) : super(key: key);
 
   final BookController bookController = Get.put(BookController());
 
@@ -16,7 +16,7 @@ class SearchedBook extends StatelessWidget {
         child: Obx(() => ListView.builder(
           itemCount:bookController.showBook.length ,
           itemBuilder: (context, index){
-                     return ShowBookWidget(bookController.showBook[index]);
+                     return SingleBookWidget(bookController.showBook[index]);
                    },   
           ), ),
       )

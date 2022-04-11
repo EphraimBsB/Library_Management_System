@@ -36,37 +36,45 @@ class BookTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
-                'Title: ${bookModel.title}',
-                maxLines: 2,
-                style:
-                const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
-                overflow: TextOverflow.ellipsis,
-              ),
+              RichText(
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    text: TextSpan(
+                    style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                    children: <TextSpan>[
+                      const TextSpan(text: 'Title: '),
+                      TextSpan(text: bookModel.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                  )),
               const SizedBox(height: 8),
-               Text(
-                'Author: ${bookModel.author}',
-                maxLines: 2,
-                style:
-                const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
-                overflow: TextOverflow.ellipsis,
-              ),
+              RichText(
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  text: TextSpan(
+                  style: const TextStyle(
+                        // fontSize: 18.0,
+                        color: Colors.black,
+                      ),
+                  children: <TextSpan>[
+                    const TextSpan(text: 'Author: '),
+                    TextSpan(text: bookModel.author, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  ],
+                )),
               const SizedBox(height: 8),
-              bookModel.status == 'Available'?
-              Text(
-                'Status: ${bookModel.status}(${bookModel.stock})',
-                maxLines: 2,
-                style:
-                const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
-                overflow: TextOverflow.ellipsis,
-              ):
-               Text(
-                'Status: ${bookModel.status}(${bookModel.stock})',
-                maxLines: 2,
-                style:
-                const TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
-                overflow: TextOverflow.ellipsis,
-              ),
+              RichText(
+                    text: TextSpan(
+                    style: const TextStyle(
+                          // fontSize: 18.0,
+                          color: Colors.black,
+                        ),
+                    children: <TextSpan>[
+                      const TextSpan(text: 'Status:   '),
+                      TextSpan(text: '${bookModel.status}(${bookModel.stock})', style: const TextStyle(fontWeight: FontWeight.bold)),
+                    ],
+                  )),
             ],
           ),
         ),

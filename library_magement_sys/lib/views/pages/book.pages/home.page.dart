@@ -36,10 +36,10 @@ class _HomePageState extends State<HomePage> {
     double height = MediaQuery.of(context).size.height;
     
     return Scaffold(
-      body: Center(
-        child: Container(
-          constraints: const BoxConstraints(maxWidth: 1024),
-          // padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+      body: Container(
+        padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
+        child: ScrollConfiguration(
+          behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
           
                     ],
                   ),
-
+        
                   const  SizedBox(
                     height: 10,
                   ),
@@ -110,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-
+        
                   const  SizedBox(
                     height: 50,
                   ),

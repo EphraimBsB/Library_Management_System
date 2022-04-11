@@ -29,21 +29,22 @@ class AllLoan {
         required this.id,
         required this.userId,
         required this.bookId,
+        required this.bookAccNo,
         required this.issueDate,
         required this.dueDate,
-        required this.returnDate,
+        this.returnDate,
         required this.status,
         required this.book,
-        required this.user,
+        required this.user
     });
 
     int id;
     int userId;
     int bookId;
+    String bookAccNo;
     DateTime issueDate;
     DateTime dueDate;
-    dynamic
-     returnDate;
+    dynamic returnDate;
     String status;
     Book book;
     User user;
@@ -52,6 +53,7 @@ class AllLoan {
         id: json["id"],
         userId: json["userId"],
         bookId: json["bookId"],
+        bookAccNo: json["bookAccNo"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
         returnDate: json["returnDate"] == null ? null : DateTime.parse(json["returnDate"]),
@@ -64,6 +66,7 @@ class AllLoan {
         "id": id,
         "userId": userId,
         "bookId": bookId,
+        "bookAccNo": bookAccNo,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
         "returnDate": returnDate == null ? null : returnDate.toIso8601String(),
@@ -80,7 +83,7 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.category,
+        required this.subjects,
         required this.copies,
         required this.status,
         required this.image,
@@ -91,7 +94,7 @@ class Book {
     String author;
     String description;
     String ddc;
-    String category;
+    String subjects;
     String copies;
     String status;
     String image;
@@ -102,7 +105,7 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        category: json["category"],
+        subjects: json["subjects"],
         copies: json["copies"],
         status: json["status"],
         image: json["image"],
@@ -114,7 +117,7 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "category": category,
+        "subjects": subjects,
         "copies": copies,
         "status": status,
         "image": image,

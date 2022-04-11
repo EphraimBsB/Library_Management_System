@@ -31,7 +31,7 @@ class AppBarwidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 40),
                 child: TextButton(onPressed: (){
-                  Get.toNamed('/login');
+                  Get.toNamed('/signin');
                 }, child: const Text("Student"),),
               )
                

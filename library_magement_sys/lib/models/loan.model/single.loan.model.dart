@@ -29,6 +29,7 @@ class SingleLoans {
         required this.id,
         required this.userId,
         required this.bookId,
+        required this.bookAccNo,
         required this.issueDate,
         required this.dueDate,
         this.returnDate,
@@ -41,6 +42,7 @@ class SingleLoans {
     int id;
     int userId;
     int bookId;
+    String bookAccNo;
     DateTime issueDate;
     DateTime dueDate;
     dynamic returnDate;
@@ -53,6 +55,7 @@ class SingleLoans {
         id: json["id"],
         userId: json["userId"],
         bookId: json["bookId"],
+        bookAccNo: json["bookAccNo"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
         returnDate: json["returnDate"],
@@ -66,6 +69,7 @@ class SingleLoans {
         "id": id,
         "userId": userId,
         "bookId": bookId,
+        "bookAccNo": bookAccNo,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
         "returnDate": returnDate,
@@ -83,7 +87,7 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.category,
+        required this.subjects,
         required this.status,
         required this.image,
     });
@@ -93,7 +97,7 @@ class Book {
     String author;
     String description;
     String ddc;
-    String category;
+    String subjects;
     String status;
     String image;
 
@@ -103,7 +107,7 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        category: json["category"],
+        subjects: json["subjects"],
         status: json["status"],
         image: json["image"],
     );
@@ -114,7 +118,7 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "category": category,
+        "subjects": subjects,
         "status": status,
         "image": image,
     };

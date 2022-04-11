@@ -29,6 +29,7 @@ class Loan {
         required this.id,
         required this.userId,
         required this.bookId,
+        required this.bookAccNo,
         required this.issueDate,
         required this.dueDate,
         this.returnDate,
@@ -40,6 +41,7 @@ class Loan {
     int id;
     String userId;
     String bookId;
+    String bookAccNo;
     DateTime issueDate;
     DateTime dueDate;
     dynamic returnDate;
@@ -51,6 +53,7 @@ class Loan {
         id: json["id"],
         userId: json["userId"],
         bookId: json["bookId"],
+        bookAccNo: json["bookAccNo"],
         issueDate: DateTime.parse(json["issueDate"]),
         dueDate: DateTime.parse(json["dueDate"]),
         returnDate: json["returnDate"],
@@ -63,6 +66,7 @@ class Loan {
         "id": id,
         "userId": userId,
         "bookId": bookId,
+        "bookAccNo": bookAccNo,
         "issueDate": issueDate.toIso8601String(),
         "dueDate": dueDate.toIso8601String(),
         "returnDate": returnDate,

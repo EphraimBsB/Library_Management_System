@@ -104,6 +104,12 @@ class StudentLoanWidget extends StatelessWidget {
                         ),
                         DataColumn(
                           label: Text(
+                            'Acc No',
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
+                        DataColumn(
+                          label: Text(
                             'Issue Date',
                             style: TextStyle(fontSize: 20),
                           ),
@@ -151,6 +157,10 @@ class StudentLoanWidget extends StatelessWidget {
                             )),
                              DataCell(Text(
                               loan.book.ddc,
+                              style: const TextStyle(fontSize: 16),
+                            )),
+                            DataCell(Text(
+                              loan.bookAccNo,
                               style: const TextStyle(fontSize: 16),
                             )),
                              DataCell(Text(
