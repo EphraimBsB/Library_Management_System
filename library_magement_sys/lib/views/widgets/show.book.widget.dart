@@ -27,23 +27,43 @@ class ShowBookWidget extends StatelessWidget {
                mainAxisAlignment: MainAxisAlignment.center,
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
+                Container(
+                      height: 330,
+                      width: 250,
+                      child: Image.network(
+                      book.image,
+                      fit: BoxFit.cover,
+                    ),
+                    ),
+                 const SizedBox(width: 20,),
                  Container(
-                   constraints: const BoxConstraints(
-                       maxWidth: 300,
-                   ),
-                   child: Column(
-                     crossAxisAlignment: CrossAxisAlignment.start,
-                     children: <Widget>[
-                       SizedBox(
-                         height: 330,
-                         width: 250,
-                         child: Image.network(
-                         book.image,
-                         fit: BoxFit.cover,
+                       width: 700,
+                       height: 330,
+                       child: ScrollConfiguration(
+                         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                         child: SingleChildScrollView(
+                           scrollDirection: Axis.vertical,
+                           child: Text(
+                             book.description,
+                             style: const TextStyle(
+                               fontSize: 18,
+                             ),
+                           ),
+                         ),
                        ),
-                       ),
-                       const SizedBox(height: 10,),
-                       RichText(
+                 ),
+               ],
+             ),
+             const SizedBox(height: 20,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  width: 500,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                     RichText(
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             text: TextSpan(
@@ -142,56 +162,80 @@ class ShowBookWidget extends StatelessWidget {
                               color: Colors.white
                             ),)
                    ),
-             ),
-                     ],
-                   ),
                  ),
-                  const SizedBox(
-                   width: 20,
-                 ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                       width: 700,
-                       height: 430,
-                       child: Text(
-                         book.description,
-                         style: const TextStyle(
-                           fontSize: 18,
-                         ),
-                       ),
-                 ),
-                  const SizedBox(
-                   height: 30,
-                 ),
-                 RichText(
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          text: TextSpan(
-                          style:  TextStyle(
-                                fontSize: 24.0,
-                                color: Colors.red[700],
-                              ),
-                          children: <TextSpan>[
-                            const TextSpan(text: 'To Block: '),
-                            TextSpan(text: book.location.shelf, style: const TextStyle(fontWeight: FontWeight.bold)),
-                            const TextSpan(text: '   ,Side: '),
-                            TextSpan(text: book.location.side, style: const TextStyle(fontWeight: FontWeight.bold)),
-                            const TextSpan(text: '   ,Column: '),
-                            TextSpan(text: '${book.location.column}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                            const TextSpan(text: '   ,Section: '),
-                            TextSpan(text: book.location.section, style: const TextStyle(fontWeight: FontWeight.bold)),
-                            const TextSpan(text: '   ,Row: '),
-                            TextSpan(text: '${book.location.row}', style: const TextStyle(fontWeight: FontWeight.bold)),
-                            const TextSpan(text: '   ,DDC: '),
-                            TextSpan(text: book.location.ddc, style: const TextStyle(fontWeight: FontWeight.bold)),
-                          ],
-                        )),
                     ],
                   ),
-               ],
-             ),
+                ),
+                Container(
+                  width: 470,
+                  padding: const EdgeInsets.only(left: 50),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                        style: TextStyle(
+                              fontSize: 24.0,
+                                color: Colors.red[700],
+                            ),
+                        children: <TextSpan>[
+                          const TextSpan(text: 'Shelf:   '),
+                          TextSpan(text: book.location.shelf+',', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      )),
+                 const SizedBox(height: 5,),
+                 RichText(
+                        text: TextSpan(
+                        style:  TextStyle(
+                              fontSize: 24.0,
+                                color: Colors.red[700],
+                            ),
+                        children: <TextSpan>[
+                          const TextSpan(text: 'Side:   '),
+                          TextSpan(text: book.location.side+',', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      )),
+                 const SizedBox(height: 5,),
+                 RichText(
+                        text: TextSpan(
+                        style: TextStyle(
+                              fontSize: 24.0,
+                                color: Colors.red[700],
+                            ),
+                        children: <TextSpan>[
+                          const TextSpan(text: 'Column:   '),
+                          TextSpan(text: '${book.location.column},', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      )),
+                 const SizedBox(height: 5),
+                 RichText(
+                        text: TextSpan(
+                        style: TextStyle(
+                              fontSize: 24.0,
+                                color: Colors.red[700],
+                            ),
+                        children: <TextSpan>[
+                          const TextSpan(text: 'Section:   '),
+                          TextSpan(text: book.location.section + ',', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      )),
+                    const SizedBox(height: 5),
+                    RichText(
+                        text: TextSpan(
+                        style:  TextStyle(
+                              fontSize: 24.0,
+                                color: Colors.red[700],
+                            ),
+                        children: <TextSpan>[
+                          const TextSpan(text: 'Row:   '),
+                          TextSpan(text: '${book.location.row},', style: const TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      )),
+                    ],
+                  ),
+                ),
+              ],
+            ), 
          ],
          );
   }

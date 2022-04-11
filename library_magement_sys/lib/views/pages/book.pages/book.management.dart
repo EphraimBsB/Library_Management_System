@@ -38,7 +38,7 @@ class _BooksManagementState extends State<BooksManagement> {
     "Computer",
     "Engineering",
     "Business",
-    "Health"
+    "Health",
     "General",
     "Projects",
     "Asian"
@@ -87,18 +87,16 @@ class _BooksManagementState extends State<BooksManagement> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextFieldWidget(label: 'Title', controller: title,),
-                    TextFieldWidget(label: 'ACC Number', controller: acc,),
+                    TextFieldWidget(label: 'Copies', controller: copies),
                   ],
                 ),
                   
-                  const  SizedBox(
-                      height: 20,
-                    ),
+                  const  SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextFieldWidget(label: 'Author', controller: author,),
-                    TextFieldWidget(label: 'Copies', controller: copies,),
+                    TextFieldWidget(label: 'Acc Number', controller: acc,),
                   ],
                 ),
                   const  SizedBox(

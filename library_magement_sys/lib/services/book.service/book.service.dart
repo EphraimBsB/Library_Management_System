@@ -42,7 +42,7 @@ class BookService {
   static Future createLocation(bookId,side, block, column, row) async {
      Map  body = {
       'bookId': '$bookId',
-      'block':block,
+      'shelf':block,
       'side': side,
       'column': column,
       'row': row,

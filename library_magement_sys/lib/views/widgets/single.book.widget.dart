@@ -38,11 +38,17 @@ class SingleBookWidget extends StatelessWidget {
                  const SizedBox(width: 20,),
                  Container(
                        width: 700,
-                      //  height: 430,
-                       child: Text(
-                         book.description,
-                         style: const TextStyle(
-                           fontSize: 18,
+                       height: 330,
+                       child: ScrollConfiguration(
+                         behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+                         child: SingleChildScrollView(
+                           scrollDirection: Axis.vertical,
+                           child: Text(
+                             book.description,
+                             style: const TextStyle(
+                               fontSize: 18,
+                             ),
+                           ),
                          ),
                        ),
                  ),
