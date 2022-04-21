@@ -36,19 +36,11 @@ class BookTile extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              RichText(
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    text: TextSpan(
-                    style: const TextStyle(
-                          // fontSize: 18.0,
-                          color: Colors.black,
-                        ),
-                    children: <TextSpan>[
-                      const TextSpan(text: 'Title: '),
-                      TextSpan(text: bookModel.title, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  )),
+              Text(
+                   bookModel.title,
+                   maxLines: 2,
+                   overflow: TextOverflow.ellipsis,
+                   style: const TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 8),
               RichText(
                   maxLines: 2,
@@ -59,22 +51,15 @@ class BookTile extends StatelessWidget {
                         color: Colors.black,
                       ),
                   children: <TextSpan>[
-                    const TextSpan(text: 'Author: '),
+                    const TextSpan(text: 'by: '),
                     TextSpan(text: bookModel.author, style: const TextStyle(fontWeight: FontWeight.bold)),
                   ],
                 )),
               const SizedBox(height: 8),
-              RichText(
-                    text: TextSpan(
-                    style: const TextStyle(
-                          // fontSize: 18.0,
-                          color: Colors.black,
-                        ),
-                    children: <TextSpan>[
-                      const TextSpan(text: 'Status:   '),
-                      TextSpan(text: '${bookModel.status}(${bookModel.stock})', style: const TextStyle(fontWeight: FontWeight.bold)),
-                    ],
-                  )),
+              Text(
+                '${bookModel.status}(${bookModel.stock})',
+                 style: const TextStyle(fontWeight: FontWeight.bold)
+              ),
             ],
           ),
         ),

@@ -172,6 +172,8 @@ class ShowBookWidget extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Text('Book Location', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                      const SizedBox(height: 5,),
                       RichText(
                         text: TextSpan(
                         style: TextStyle(
