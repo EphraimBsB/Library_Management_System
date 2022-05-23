@@ -141,11 +141,14 @@ class StudentLoanWidget extends StatelessWidget {
                                 child: SizedBox(
                             height: 90,
                             width: 50,
-                            child: Image.network(
-                            loan.book.image,
-                            fit: BoxFit.cover,
-                          ),
-                          ),
+                            child: loan.book.image.contains('uploaded_files')?Image.network(
+                              'http://192.168.56.1:5000/${loan.book.image}',
+                              fit: BoxFit.cover,
+                            ):Image.network(
+                              loan.book.image,
+                              fit: BoxFit.cover,
+                            ),
+                           ),
                               ),),
                              DataCell(Text(
                               loan.book.title,

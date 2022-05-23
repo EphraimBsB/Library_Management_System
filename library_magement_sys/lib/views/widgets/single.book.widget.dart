@@ -20,50 +20,7 @@ class SingleBookWidget extends StatefulWidget {
 class _SingleBookWidgetState extends State<SingleBookWidget> {
   var id = 0;
 
-   TextEditingController title = TextEditingController();
-
-  TextEditingController author = TextEditingController();
-
-  TextEditingController description = TextEditingController();
-
-  TextEditingController ddc = TextEditingController();
-
-  TextEditingController acc = TextEditingController();
-
-  TextEditingController copies = TextEditingController();
-
-  TextEditingController pubyear = TextEditingController();
-
-  TextEditingController imageUrl = TextEditingController();
-
-  TextEditingController block = TextEditingController();
-
-  TextEditingController side = TextEditingController();
-
-  TextEditingController column = TextEditingController();
-
-  TextEditingController row = TextEditingController();
-
-  var buttonState = false;
-
-  var loanbuttonState = false;
-
-  var _currentSelectedValue;
-
-  var  selectedSide;
-
-  final _categories = [
-    "Computer",
-    "Engineering",
-    "Business",
-    "Health",
-    "General",
-    "Projects",
-    "Asian"
-  ];
-
-  final _sides = ["Front", "Back"];
-
+   
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -81,10 +38,13 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                  Container(
                    height: 330,
                    width: 250,
-                   child: Image.network(
-                   widget.book.image,
-                   fit: BoxFit.cover,
-                 ),
+                   child: widget.book.image.contains('uploaded_files')?Image.network(
+                  'http://192.168.56.1:5000/${widget.book.image}',
+                  fit: BoxFit.cover,
+                ):Image.network(
+                  widget.book.image,
+                  fit: BoxFit.cover,
+                ),
                  ),
                  const SizedBox(width: 20,),
                  Container(
@@ -178,6 +138,19 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                           TextSpan(text: widget.book.copies, style: const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )),
+                      const SizedBox(height: 5),
+                    RichText(
+                        maxLines: 2,
+                        text:  TextSpan(
+                        style: const TextStyle(
+                              fontSize: 18.0,
+                              color: Colors.black,
+                            ),
+                        children: <TextSpan>[
+                           const TextSpan(text: 'Ebook:   '),
+                          widget.book.ebook == null?const TextSpan(text: 'Not Available', style: TextStyle(fontWeight: FontWeight.bold)):const TextSpan(text: 'Available', style: TextStyle(fontWeight: FontWeight.bold)),
+                        ],
+                      )),
                     ],
                   ),
                 ),
@@ -195,7 +168,7 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                             ),
                         children: <TextSpan>[
                           const TextSpan(text: 'Shelf:   '),
-                          TextSpan(text: widget.book.location.shelf, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: widget.book.shelf, style: const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )),
                  const SizedBox(height: 5,),
@@ -208,7 +181,7 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                             ),
                         children: <TextSpan>[
                           const TextSpan(text: 'Side:   '),
-                          TextSpan(text: widget.book.location.side, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: widget.book.side, style: const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )),
                  const SizedBox(height: 5,),
@@ -221,7 +194,7 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                             ),
                         children: <TextSpan>[
                           const TextSpan(text: 'Column:   '),
-                          TextSpan(text: '${widget.book.location.column}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: '${widget.book.column}', style: const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )),
                  const SizedBox(height: 5),
@@ -234,7 +207,7 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                             ),
                         children: <TextSpan>[
                           const TextSpan(text: 'Section:   '),
-                          TextSpan(text: widget.book.location.section, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: widget.book.subjects, style: const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )),
                     const SizedBox(height: 5),
@@ -247,7 +220,7 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                             ),
                         children: <TextSpan>[
                           const TextSpan(text: 'Row:   '),
-                          TextSpan(text: '${widget.book.location.row}', style: const TextStyle(fontWeight: FontWeight.bold)),
+                          TextSpan(text: '${widget.book.row}', style: const TextStyle(fontWeight: FontWeight.bold)),
                         ],
                       )),
                     ],
@@ -260,7 +233,7 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
                       TextButton(
                   onPressed: (){
                   var showdial = BookDialog();
-                  showdial.editBookDialog(context, subjectDropMenu(), locationSideDropMenu(), _currentSelectedValue, selectedSide);
+                  showdial.addBookDialog('Edit Book',context);
                   }, 
                   child: Container(
                   alignment: Alignment.center,
@@ -303,78 +276,5 @@ class _SingleBookWidgetState extends State<SingleBookWidget> {
   }
 
 
-  subjectDropMenu(){
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return SizedBox(
-              width: width*0.4,
-              height: 50,
-              child: FormField<String>(
-              builder: (FormFieldState<String> state) {
-              return InputDecorator(
-              decoration: InputDecoration(
-              labelText: 'Subjects',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-              isEmpty: _currentSelectedValue == '',
-              child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-              value: _currentSelectedValue,
-              isDense: true,
-              onChanged: ( newValue) {
-                setState(() {
-                  _currentSelectedValue = newValue;
-                  state.didChange(newValue);
-                });
-              },
-              items: _categories.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-                  }).toList(),
-                ),
-                ),
-                );
-              },
-              ),
-            );
-          }
-  
-  locationSideDropMenu(){
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return  SizedBox(
-                  width: 0.1*width,
-                  height: 45,
-                  child: FormField<String>(
-                  builder: (FormFieldState<String> state) {
-                  return InputDecorator(
-                  decoration: InputDecoration(
-                  labelText: 'Side',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-                  isEmpty: selectedSide == '',
-                  child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                  value: selectedSide,
-                  isDense: true,
-                  onChanged: ( newValue) {
-                    setState(() {
-                      selectedSide = newValue;
-                      state.didChange(newValue);
-                    });
-                  },
-                  items: _sides.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                      }).toList(),
-                    ),
-                    ),
-                   );
-                  },
-                 ),
-                );
-            }
   
 }

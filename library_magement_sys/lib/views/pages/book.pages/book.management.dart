@@ -1,3 +1,4 @@
+import 'package:file_picker/_internal/file_picker_web.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,18 +21,7 @@ class _BooksManagementState extends State<BooksManagement> {
 
   var buttonState = false;
   var loanbuttonState = false;
-  var _currentSelectedValue ;
-  var  selectedSide;
-  final _categories = [
-    "Computer",
-    "Engineering",
-    "Business",
-    "Health",
-    "General",
-    "Projects",
-    "Asian"
-  ];
-  final _sides = ["Front", "Back"];
+  
   @override
   Widget build(BuildContext context) {
     bookController;
@@ -66,7 +56,7 @@ class _BooksManagementState extends State<BooksManagement> {
                     TextButton(
                      onPressed: (){
                        var showDial = BookDialog();
-                       showDial.addBookDialog(context, subjectDropMenu(), locationSideDropMenu(), _currentSelectedValue, selectedSide);
+                       showDial.addBookDialog('Add Book',context);
                      },
                      child: Container(
                      alignment: Alignment.center,
@@ -100,6 +90,42 @@ class _BooksManagementState extends State<BooksManagement> {
                   const  SizedBox(
                      width: 60,
                    ),
+                   TextButton(
+                     onPressed: ()async{
+                      final books = await FilePickerWeb.platform.pickFiles();
+                           if(books == null) return;
+                           final file = books.files.first;
+                           print('Name ${file.name}');
+                     }, 
+                     child: Container(
+                     alignment: Alignment.center,
+                     width: 140,
+                     height: 40,
+                     decoration:  BoxDecoration(
+                       color: Colors.green.shade400,
+                       borderRadius: const BorderRadius.all(Radius.circular(5)),
+                     ),
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children:  const [
+                          Icon(
+                           Icons.arrow_downward,
+                           color: Colors.white,
+                           size: 20,
+                         ),
+                         SizedBox(
+                           width: 5,
+                         ),
+                         Text(
+                           'Import Excel',
+                           style: TextStyle(
+                             color: Colors.white 
+                            ),),
+                       ],
+                     ),
+                     ),
+                  ),
+                  const SizedBox(width: 60,),
                   TextButton(
                      onPressed: (){
                        bookController.exportExcel();
@@ -263,10 +289,13 @@ class _BooksManagementState extends State<BooksManagement> {
                                     child: SizedBox(
                                 height: 90,
                                 width: 50,
-                                child: Image.network(
-                                book.image,
-                                fit: BoxFit.cover,
-                              ),
+                                child: book.image.contains('uploaded_files')?Image.network(
+                                  'http://192.168.56.1:5000/${book.image}',
+                                  fit: BoxFit.cover,
+                                ):Image.network(
+                                  book.image,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                                   ),),
                                  DataCell(SizedBox(
@@ -401,77 +430,5 @@ class _BooksManagementState extends State<BooksManagement> {
       ),
     );
   }
-  subjectDropMenu(){
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return SizedBox(
-              width: width*0.4,
-              height: 50,
-              child: FormField<String>(
-              builder: (FormFieldState<String> state) {
-              return InputDecorator(
-              decoration: InputDecoration(
-              labelText: 'Subjects',
-              border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-              isEmpty: _currentSelectedValue == '',
-              child: DropdownButtonHideUnderline(
-              child: DropdownButton<String>(
-              value: _currentSelectedValue,
-              isDense: true,
-              onChanged: ( newValue) {
-                setState(() {
-                  _currentSelectedValue = newValue;
-                  state.didChange(newValue);
-                });
-              },
-              items: _categories.map((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-                  }).toList(),
-                ),
-                ),
-                );
-              },
-              ),
-            );
-          }
-  
-  locationSideDropMenu(){
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-    return  SizedBox(
-                  width: 0.1*width,
-                  height: 45,
-                  child: FormField<String>(
-                  builder: (FormFieldState<String> state) {
-                  return InputDecorator(
-                  decoration: InputDecoration(
-                  labelText: 'Side',
-                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(5.0))),
-                  isEmpty: selectedSide == '',
-                  child: DropdownButtonHideUnderline(
-                  child: DropdownButton<String>(
-                  value: selectedSide,
-                  isDense: true,
-                  onChanged: ( newValue) {
-                    setState(() {
-                      selectedSide = newValue;
-                      state.didChange(newValue);
-                    });
-                  },
-                  items: _sides.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                      }).toList(),
-                    ),
-                    ),
-                   );
-                  },
-                 ),
-                );
-            }
+
 }

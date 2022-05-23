@@ -30,14 +30,13 @@ class ShowSingleLoanWidget extends StatelessWidget {
                mainAxisAlignment: MainAxisAlignment.center,
                crossAxisAlignment: CrossAxisAlignment.start,
                children: [
-                 Container(
-                   height: 330,
-                   width: 250,
-                   child: Image.network(
-                   loan.book.image,
-                   fit: BoxFit.cover,
-                 ),
-                 ),
+                loan.book.image.contains('uploaded_files')?Image.network(
+                  'http://192.168.56.1:5000/${loan.book.image}',
+                  fit: BoxFit.cover,
+                ):Image.network(
+                  loan.book.image,
+                  fit: BoxFit.cover,
+                ),
                  const SizedBox(width: 20,),
                  Container(
                        width: 700,

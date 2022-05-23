@@ -30,39 +30,57 @@ class SingleBook {
         required this.title,
         required this.author,
         required this.description,
+        required this.pub_year,
         required this.ddc,
+        required this.acc_num,
         required this.subjects,
         required this.copies,
         required this.stock,
-        required this.status,
+        this.ebook,
         required this.image,
-        required this.location,
+        required this.status,
+        required this.shelf,
+        required this.side,
+        required this.column,
+        required this.row,
     });
 
     int id;
     String title;
     String author;
     String description;
+    String pub_year;
     String ddc;
+    String acc_num;
     String subjects;
     String copies;
     String stock;
-    String status;
+    dynamic ebook;
     String image;
-    Location location;
+    String status;
+    String shelf;
+    String side;
+    int column;
+    int row;
 
     factory SingleBook.fromJson(Map<String, dynamic> json) => SingleBook(
         id: json["id"],
         title: json["title"],
         author: json["author"],
         description: json["description"],
+        pub_year: json["pub_year"],
         ddc: json["ddc"],
+        acc_num: json["acc_num"],
         subjects: json["subjects"],
         copies: json["copies"],
         stock: json["stock"],
-        status: json["status"],
+        ebook: json["ebook"] ?? null,
         image: json["image"],
-        location: Location.fromJson(json["Location"]),
+        status: json["status"],
+        shelf: json["shelf"],
+        side: json["side"],
+        column: json["column"],
+        row: json["row"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -70,48 +88,18 @@ class SingleBook {
         "title": title,
         "author": author,
         "description": description,
+        "pub_year": pub_year,
         "ddc": ddc,
+        "acc_num": acc_num,
         "subjects": subjects,
         "copies": copies,
         "stock": stock,
-        "status": status,
+        "ebook": ebook ?? null,
         "image": image,
-        "Location": location.toJson(),
-    };
-}
-
-class Location {
-    Location({
-        required this.shelf,
-        required this.side,
-        required this.column,
-        required this.section,
-        required this.row,
-        required this.ddc,
-    });
-
-    String shelf;
-    String side;
-    int column;
-    String section;
-    int row;
-    String ddc;
-
-    factory Location.fromJson(Map<String, dynamic> json) => Location(
-        shelf: json["shelf"],
-        side: json["side"],
-        column: json["column"],
-        section: json["section"],
-        row: json["row"],
-        ddc: json["ddc"],
-    );
-
-    Map<String, dynamic> toJson() => {
+        "status": status,
         "shelf": shelf,
         "side": side,
         "column": column,
-        "section": section,
         "row": row,
-        "ddc": ddc,
     };
 }

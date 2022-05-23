@@ -35,12 +35,17 @@ class Book {
         required this.author,
         required this.description,
         required this.ddc,
-        required this.acc_num,
-        required this.subjects,
+        required this.accNum,
         required this.copies,
-        required this.status,
-        required this.pub_year,
+        required this.stock,
+        required this.subjects,
+        required this.pubYear,
         required this.image,
+        this.ebook,
+        required this.shelf,
+        required this.side,
+        required this.column,
+        required this.row,
         required this.updatedAt,
         required this.createdAt,
     });
@@ -48,14 +53,19 @@ class Book {
     int id;
     String title;
     String author;
-    String ddc;
-    String acc_num;
     String description;
-    String subjects;
+    String ddc;
+    String accNum;
     String copies;
-    String status;
-    String pub_year;
+    String stock;
+    String subjects;
+    String pubYear;
     String image;
+    dynamic ebook;
+    String shelf;
+    String side;
+    String column;
+    String row;
     DateTime updatedAt;
     DateTime createdAt;
 
@@ -65,14 +75,19 @@ class Book {
         author: json["author"],
         description: json["description"],
         ddc: json["ddc"],
-        acc_num: json["acc_num"],
-        subjects: json["subjects"],
+        accNum: json["acc_num"],
         copies: json["copies"],
-        status: json["status"],
-        pub_year: json["pub_year"],
+        stock: json["stock"],
+        subjects: json["subjects"],
+        pubYear: json["pub_year"],
         image: json["image"],
+        ebook: json["ebook"] ?? null,
+        shelf: json["shelf"],
+        side: json["side"],
+        column: json["column"],
+        row: json["row"],
         updatedAt: DateTime.parse(json["updatedAt"]),
-        createdAt: DateTime.parse(json["createdAt"]),  
+        createdAt: DateTime.parse(json["createdAt"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -81,12 +96,17 @@ class Book {
         "author": author,
         "description": description,
         "ddc": ddc,
-        "acc_num": acc_num,
-        "subjects": subjects,
+        "acc_num": accNum,
         "copies": copies,
-        "status": status,
-        "pub_year": pub_year,
+        "stock": stock,
+        "subjects": subjects,
+        "pub_year": pubYear,
         "image": image,
+        "ebook": ebook ?? null,
+        "shelf": shelf,
+        "side": side,
+        "column": column,
+        "row": row,
         "updatedAt": updatedAt.toIso8601String(),
         "createdAt": createdAt.toIso8601String(),
     };

@@ -30,7 +30,10 @@ class BookTile extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: Image.network(
+                child:bookModel.image.contains('uploaded_files')?Image.network(
+                  'http://192.168.56.1:5000/${bookModel.image}',
+                  fit: BoxFit.cover,
+                ):Image.network(
                   bookModel.image,
                   fit: BoxFit.cover,
                 ),

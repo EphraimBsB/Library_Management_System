@@ -15,6 +15,7 @@ import 'package:library_magement_sys/views/pages/user.pages/login.page.dart';
 import 'package:library_magement_sys/views/pages/user.pages/profile.login.view.dart';
 import 'package:library_magement_sys/views/pages/user.pages/signup.page.dart';
 import 'package:library_magement_sys/views/pages/user.pages/user.management.dart';
+import 'package:library_magement_sys/views/widgets/ebook.reader.dart';
 
 void main() {
   runApp(const LibraryManagementSystem());
@@ -43,6 +44,7 @@ class LibraryManagementSystem extends StatelessWidget {
         GetPage(name: '/users_management', page: () => UserManagement()),
         GetPage(name: '/student_loans', page: () => StudentLoanPage()),
         GetPage(name: '/books_management', page: () => BooksManagement()),
+        GetPage(name: '/book/read_ebook', page: () =>  EbookReader()),
         GetPage(name: '/loans_management', page: () => LoansManagement()),
         GetPage(name: '/loans_management/loan/:id', page: () => SingleLoan()),
       ],
